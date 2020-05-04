@@ -1,0 +1,78 @@
+> NIM_VIOS_HC    (/home/travis/.ansible/plugins/modules/nim_vios_hc.py)
+
+        Check if a pair of Virtual I/O Servers can be updated.
+
+  * This module is maintained by The Ansible Community
+OPTIONS (= is mandatory):
+
+= action
+        Specifies the operation to perform.
+        `health_check' to perform a health check.
+        (Choices: health_check)
+        type: str
+
+= targets
+        NIM target.
+        To perform a health check on dual VIOSes, specify the list as
+        a tuple with the following format: "(vios1, vios2) (vios3,
+        vios4)".
+        To specify a single VIOS, use the following format: "(vios1)".
+
+        type: str
+
+- vars
+        Specifies additional parameters.
+        [Default: (null)]
+        suboptions:
+          log_file:
+            default: /tmp/ansible_vios_check_debug.log
+            description:
+            - Specifies path to log file.
+            type: str
+        
+        type: dict
+
+
+NOTES:
+      * Requires vioshc.py as a prerequisite.
+      * vioshc.py is available at
+        https://github.com/aixoss/vios-health-checker.
+
+
+REQUIREMENTS:  AIX >= 7.1 TL3, Python >= 2.7
+
+AUTHOR: AIX Development Team (@pbfinley1911)
+        METADATA:
+          status:
+          - preview
+          supported_by: community
+        
+
+EXAMPLES:
+
+- name: Perform a health check on VIOSes vios1 and vios2
+  nim_vios_hc:
+    targets: "(vios1, vios2)"
+    action: health_check
+
+
+RETURN VALUES:
+
+msg:
+    description: Status information.
+    returned: always
+    type: str
+targets:
+    description: List of VIOS tuples.
+    returned: always
+    type: list
+    elements: str
+nim_node:
+    description: NIM node info.
+    returned: always
+    type: dict
+status:
+    description: Status for each VIOS (dicionnary key).
+    returned: always
+    type: dict
+

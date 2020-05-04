@@ -1,0 +1,74 @@
+> NIM_SUMA    (/home/travis/.ansible/plugins/modules/nim_suma.py)
+
+        Creates a task to automate the download of technology levels
+        and service packs from a fix server.
+
+  * This module is maintained by The Ansible Community
+OPTIONS (= is mandatory):
+
+- action
+        Controls what is performed.
+        `download' to download fixes.
+        `preview'.
+        `list'.
+        `edit'.
+        `unschedule'.
+        `delete'.
+        `config'.
+        `default'.
+        (Choices: download, preview, list, edit, unschedule, delete,
+        config, default)[Default: preview]
+        type: str
+
+- description
+        Display name for SUMA task.
+        [Default: (null)]
+        type: str
+
+- location
+        NIM location.
+        [Default: (null)]
+        type: str
+
+- oslevel
+        Operating System level.
+        [Default: (null)]
+        type: str
+
+- sched_time
+        Schedule time.
+        [Default: (null)]
+        type: str
+
+- targets
+        NIM targets.
+        [Default: (null)]
+        type: str
+
+- task_id
+        SUMA task.
+        [Default: (null)]
+        type: str
+
+
+REQUIREMENTS:  AIX >= 7.1 TL3, Python >= 2.7
+
+AUTHOR: AIX Development Team (@pbfinley1911)
+        METADATA:
+          status:
+          - preview
+          supported_by: community
+        
+
+EXAMPLES:
+
+- name: Check for, and install, system updates
+  nim_suma:
+    targets: nimclient01
+    location: default
+    oslevel: latest
+    download_dir: /usr/sys/inst.images
+
+
+RETURN VALUES:
+ # 

@@ -1,0 +1,95 @@
+> NIM_FLRTVC    (/home/travis/.ansible/plugins/modules/nim_flrtvc.py)
+
+        Generate flrtvc report, download and install efix.
+
+  * This module is maintained by The Ansible Community
+OPTIONS (= is mandatory):
+
+- apar
+        Type of APAR to check or download.
+        `sec' Security vulnerabilities.
+        `hiper' Corrections to High Impact PERvasive threats.
+        `all' Same behavior as None, both `sec' and `hiper'
+        vulnerabilities.
+        (Choices: sec, hiper, all, None)[Default: (null)]
+        type: str
+
+- check_only
+        Specifies to only check if fixes are already applied on the
+        targets. No download or install operations.
+        [Default: False]
+        type: bool
+
+- clean
+        Cleanup working directory with all downloaded files at the end
+        of execution.
+        [Default: False]
+        type: bool
+
+- csv
+        Path to a APAR CSV file containing the description of the
+        `sec' and `hiper' fixes.
+        This file is usually transferred from the fix server; this
+        rather big transfer can be avoided by specifying an already
+        transferred file.
+        [Default: (null)]
+        type: str
+
+- download_only
+        Specifies to perform check and download operation, do not
+        install anything.
+        [Default: False]
+        type: bool
+
+- filesets
+        Filter filesets for specific phrase. Only fixes on the
+        filesets specified will be checked and updated.
+        [Default: (null)]
+        type: str
+
+- force
+        Specifies to remove currently installed ifix before running
+        the FLRTVC script.
+        [Default: False]
+        type: bool
+
+- path
+        Specifies the working directory used for temporary files. It
+        will contain FLRTVC reports, previously installed filesets and
+        fixes lists and downloaded fixes.
+        [Default: (null)]
+        type: str
+
+= targets
+        NIM targets.
+
+        type: str
+
+- verbose
+        Generate full FLRTVC reporting (verbose mode).
+        [Default: False]
+        type: bool
+
+
+REQUIREMENTS:  AIX >= 7.1 TL3, Python >= 2.7
+
+AUTHOR: AIX Development Team (@pbfinley1911)
+        METADATA:
+          status:
+          - preview
+          supported_by: community
+        
+
+EXAMPLES:
+
+- name: Download patches for security vulnerabilities
+  nim_flrtvc:
+    targets: nimclient01
+    path: /usr/sys/inst.images
+    verbose: yes
+    apar: sec
+    download_only: yes
+
+
+RETURN VALUES:
+ # 
