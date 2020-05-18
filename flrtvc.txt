@@ -27,8 +27,8 @@ OPTIONS (= is mandatory):
         type: bool
 
 - clean
-        Cleanup working directory with all downloaded files at the end
-        of execution.
+        Cleanup working directory '`path'/work' with all temporary and
+        downloaded files at the end of execution.
         [Default: False]
         type: bool
 
@@ -68,11 +68,18 @@ OPTIONS (= is mandatory):
         type: bool
 
 - path
-        Specifies the working directory used for temporary files. It
-        will contain FLRTVC reports, previously installed filesets and
-        fixes lists and downloaded fixes.
-        [Default: /var/adm/ansible/work]
+        Specifies the directory to save the FLRTVC report. All
+        temporary files such as previously installed filesets, fixes
+        lists and downloaded fixes files will be stored in the working
+        subdirectory named '`path'/work'.
+        [Default: /var/adm/ansible]
         type: str
+
+- save_report
+        Specifies to save the FLRTVC report in file
+        '`path'/flrtvc.txt'.
+        [Default: False]
+        type: bool
 
 - verbose
         Generate full FLRTVC reporting (verbose mode).
