@@ -13,29 +13,22 @@ OPTIONS (= is mandatory):
 
 = targets
         NIM target.
-        To perform a health check on dual VIOSes, specify the list as
-        a tuple with the following format: "(vios1, vios2) (vios3,
-        vios4)".
-        To specify a single VIOS, use the following format: "(vios1)".
+        To perform a health check on dual VIOSes specify a tuple with
+        the following format: "vios1,vios2".
 
-        type: str
+        elements: str
+        type: list
 
 - vars
         Specifies additional parameters.
         [Default: (null)]
-        suboptions:
-          log_file:
-            default: /tmp/ansible_vios_check_debug.log
-            description:
-            - Specifies path to log file.
-            type: str
+        suboptions: null
         
         type: dict
 
 
 NOTES:
-      * Requires vioshc.py as a prerequisite.
-      * vioshc.py is available at
+      * Requires vioshc.py available at
         https://github.com/aixoss/vios-health-checker.
 
 
@@ -50,9 +43,11 @@ AUTHOR: AIX Development Team (@pbfinley1911)
 
 EXAMPLES:
 
-- name: Perform a health check on VIOSes vios1 and vios2
+- name: Perform a health check on dual VIOSes vios1,vios2 and on VIOS vios3
   nim_vios_hc:
-    targets: "(vios1, vios2)"
+    targets:
+    - vios1,vios2
+    - vios3
     action: health_check
 
 
@@ -72,7 +67,7 @@ nim_node:
     returned: always
     type: dict
 status:
-    description: Status for each VIOS (dicionnary key).
+    description: Status for each VIOS (dictionary key).
     returned: always
     type: dict
 

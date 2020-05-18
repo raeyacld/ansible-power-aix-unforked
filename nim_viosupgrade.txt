@@ -98,12 +98,7 @@ OPTIONS (= is mandatory):
 - vars
         Specifies additional parameters.
         [Default: (null)]
-        suboptions:
-          log_file:
-            default: /tmp/ansible_upgradeios_debug.log
-            description:
-            - Specifies path to log file.
-            type: str
+        suboptions: null
         
         type: dict
 

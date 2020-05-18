@@ -55,13 +55,6 @@ OPTIONS (= is mandatory):
 - vars
         Specifies additional parameters.
         [Default: (null)]
-        suboptions:
-          log_file:
-            default: /tmp/ansible_vios_alt_disk_debug.log
-            description:
-            - Specifies path to log file.
-            type: str
-        
         type: dict
 
 - vios_status

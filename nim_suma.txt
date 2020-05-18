@@ -1,52 +1,112 @@
 > NIM_SUMA    (/home/travis/.ansible/plugins/modules/nim_suma.py)
 
-        Creates a task to automate the download of technology levels
-        and service packs from a fix server.
+        Creates a task to automate the download of technology level
+        (TL) and service pack (SP) from a fix server using the Service
+        Update Management Assistant (SUMA). Log file is
+        /var/adm/ansible/nim_suma_debug.log.
 
   * This module is maintained by The Ansible Community
 OPTIONS (= is mandatory):
 
 - action
         Controls what is performed.
-        `download' to download fixes.
-        `preview'.
-        `list'.
-        `edit'.
-        `unschedule'.
-        `delete'.
-        `config'.
-        `default'.
+        `download' to download fixes and define the NIM resource.
+        `preview'  to execute all the checks without downloading the
+        fixes.
+        `list' to list all SUMA tasks.
+        `edit' to edit an exiting SUMA task.
+        `unschedule' to remove any scheduling information for the
+        specified SUMA task.
+        `delete' to delete a SUMA task and remove any schedules for
+        this task.
+        `config' to list global SUMA configuration settings.
+        `default' to list default SUMA tasks.
         (Choices: download, preview, list, edit, unschedule, delete,
         config, default)[Default: preview]
         type: str
 
 - description
         Display name for SUMA task.
+        If not set the will be labelled '`action' request for oslevel
+        `oslevel''
+        Can be used for `action=download' or `action=preview'.
         [Default: (null)]
         type: str
 
-- location
-        NIM location.
+- download_dir
+        Absolute directory path where to download the packages on the
+        NIM server.
+        If not set it looks for existing NIM ressource mattching
+        `lpp_source_name' and use its location.
+        If no NIM ressource is found, the path is set to
+        /usr/sys/inst.images
+        Can be used if `action=download' or `action=preview'.
+        [Default: (null)]
+        type: path
+
+- download_only
+        Download only. Do not create the NIM resource.
+        Can be used if `action=download'
+        [Default: False]
+        type: bool
+
+- extend_fs
+        Specifies to automatically extends the filesystem if needed.
+        If no is specified and additional space is required for the
+        download, no download occurs.
+        Can be used if `action=download' or `action=preview'.
+        [Default: True]
+        type: bool
+
+- lpp_source_name
+        Name of the lpp_source NIM resource.
+        Required when `action=download' or `action=preview'.
         [Default: (null)]
         type: str
+
+- metadata_dir
+        Directory where metadata files are downloaded.
+        Can be used if `action=download' or `action=preview' when
+        `last_sp=yes' or `oslevel' is not exact, for example
+        `oslevel=Latest'.
+        [Default: /var/adm/ansible/metadata]
+        type: path
 
 - oslevel
-        Operating System level.
-        [Default: (null)]
+        Specifies the Operating System level to update to;
+        `Latest' indicates the latest SP suma can update the targets
+        to.
+        `xxxx-xx(-00-0000') sepcifies a TL.
+        `xxxx-xx-xx-xxxx' or `xxxx-xx-xx' specifies a SP.
+        Required when `action=download' or `action=preview'.
+        [Default: Latest]
         type: str
 
 - sched_time
-        Schedule time.
+        Schedule time. Specifying an empty or space filled string
+        results in unscheduling the task. If not set, it saves the
+        task.
+        Can be used if `action=edit'.
         [Default: (null)]
         type: str
 
 - targets
-        NIM targets.
+        Specifies the NIM clients to perform the action on.
+        `foo*' designates all the NIM clients with name starting by
+        `foo'.
+        `foo[2:4]' designates the NIM clients among foo2, foo3 and
+        foo4.
+        `*' or `all' designates all the NIM clients.
         [Default: (null)]
-        type: str
+        elements: str
+        type: list
 
 - task_id
-        SUMA task.
+        SUMA task identification number.
+        Can be used if `action=list' or `action=edit' or
+        `action=delete' or `action=unschedule'.
+        Required when `action=edit' or `action=delete' or
+        `action=unschedule'.
         [Default: (null)]
         type: str
 
@@ -64,11 +124,31 @@ EXAMPLES:
 
 - name: Check for, and install, system updates
   nim_suma:
+    action: download
     targets: nimclient01
-    location: default
     oslevel: latest
     download_dir: /usr/sys/inst.images
 
 
 RETURN VALUES:
- # 
+
+meta:
+    description: Detailed information on the module execution.
+    returned: always
+    type: dict
+    contains:
+        messages:
+            description: Details on errors/warnings/inforamtion
+            returned: always
+            type: list
+            elements: str
+            sample: "Unavailable client: nimclient02"
+    sample:
+        "meta": {
+            "messages": [
+                "Unavailable client: nimclient02",
+                "The latest SP of 7200-02 is: 7200-02-01-1732",
+                ...,
+            ]
+        }
+

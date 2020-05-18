@@ -4,8 +4,7 @@
         epkg command and maintains a database containing interim fix
         information. It can perform the following operations install,
         commit, check, mount, unmount, remove, list interim fix and
-        view package locks. It uses its own log file,
-        /var/adm/ras/emgr.log.
+        view package locks.
 
   * This module is maintained by The Ansible Community
 OPTIONS (= is mandatory):
@@ -141,7 +140,10 @@ OPTIONS (= is mandatory):
         Perform a mount installation. When and interim fix is mount-
         installed, the interim fix files are mounted over the target
         files.
-        Can be used if `action=install'.
+        This option is not supported for interim fix packages that
+        require rebooting.
+        Can be used if `action=install'. Cannot be set when
+        `from_epkg=no'.
         [Default: False]
         type: bool
 

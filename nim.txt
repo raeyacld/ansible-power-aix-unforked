@@ -6,7 +6,7 @@
 OPTIONS (= is mandatory):
 
 = action
-        Specifies the operation to perform on the NIM client.
+        Specifies the action to perform.
         `update' to update NIM clients with a specified `lpp_source'.
         `master_setup' to setup a NIM master.
         `check' to retrieve the `Cstate' of each NIM client.
@@ -33,6 +33,11 @@ OPTIONS (= is mandatory):
         starting the installation of another NIM client.
         [Default: False]
         type: bool
+
+- description
+        Describes the NIM operation (informational only).
+        [Default: (null)]
+        type: str
 
 - device
         The device (or directory) where to find the lpp source to
@@ -79,14 +84,15 @@ OPTIONS (= is mandatory):
         type: str
 
 - targets
-        Specifies the NIM clients to update.
+        Specifies the NIM clients to perform the action on.
         `foo*' designates all the NIM clients with name starting by
         `foo'.
         `foo[2:4]' designates the NIM clients among foo2, foo3 and
         foo4.
         `*' or `ALL' designates all the NIM clients.
         [Default: (null)]
-        type: str
+        elements: str
+        type: list
 
 
 REQUIREMENTS:  AIX >= 7.1 TL3, Python >= 2.7
@@ -106,6 +112,23 @@ EXAMPLES:
     targets: nimclient01
     group: basic_res_grp
 
+- name: Check the Cstate of all NIM clients
+  nim:
+    action: check
+
+- name: Define a script resource on NIM master
+  nim:
+    action: define_script
+    resource: myscript
+    location: /tmp/myscript.sh
+
+- name: Execute a script on all NIM clients synchronously
+  nim:
+    action: script
+    script: myscript
+    asynchronous: no
+    targets: all
+
 
 RETURN VALUES:
 
@@ -117,4 +140,48 @@ nim_output:
     description: Output from nim commands.
     returned: always
     type: str
+nim_node:
+    description: NIM node info.
+    returned: always
+    type: dict
+    contains:
+        lpp_source:
+            description: List of lpp sources.
+            returned: always
+            type: dict
+        master:
+            description: NIM master.
+            returned: always
+            type: dict
+        standalone:
+            description: List of standalone NIM resources.
+            returned: always
+            type: dict
+        vios:
+            description: List of VIOS NIM resources.
+            returned: always
+            type: dict
+    sample:
+        "nim_node": {
+            "lpp_source": {
+                "723lpp_res": "/export/nim/lpp_source/723lpp_res"
+            },
+            "master": {
+                "cstate": "ready for a NIM operation",
+                "type": "master"
+            },
+            "standalone": {
+                "nimclient01": {
+                    "cstate": "ready for a NIM operation",
+                    "ip": "nimclient01.mydomain.com",
+                    "type": "standalone"
+                },
+                "nimclient02": {
+                    "cstate": "ready for a NIM operation",
+                    "ip": "nimclient02.mydomain.com",
+                    "type": "standalone"
+                }
+            },
+            "vios": {}
+        }
 

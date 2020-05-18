@@ -2,8 +2,7 @@
 
         Creates a task to automate the download and installation of
         technology level (TL) and service packs (SP) from a fix server
-        using the Service Update Management Assistant (SUMA). Log file
-        is /var/adm/ansible/suma_debug.log.
+        using the Service Update Management Assistant (SUMA).
 
   * This module is maintained by The Ansible Community
 OPTIONS (= is mandatory):
@@ -23,13 +22,14 @@ OPTIONS (= is mandatory):
         `config' to list global SUMA configuration settings.
         `default' to list default SUMA tasks.
         (Choices: download, preview, list, edit, run, unschedule,
-        delete, config, default)[Default: download]
+        delete, config, default)[Default: preview]
         type: str
 
 - description
         Display name for SUMA task.
         If not set the will be labelled '`action' request for oslevel
         `oslevel''
+        Can be used for `action=download' or `action=preview'.
         [Default: (null)]
         type: str
 
@@ -118,11 +118,13 @@ EXAMPLES:
 
 - name: Check, download and install system updates for the current oslevel of the system
   suma:
+    action: download
     oslevel: Latest
     download_dir: /usr/sys/inst.images
 
 - name: Check and download required to update to SP 7.2.3.2
   suma:
+    action: download
     oslevel: '7200-03-02'
     download_only: yes
     download_dir: /tmp/dl_updt_7200-03-02
@@ -130,12 +132,14 @@ EXAMPLES:
 
 - name: Check, download and install to latest SP of TL 7.2.4
   suma:
+    action: download
     oslevel: '7200-04'
     last_sp: yes
     extend_fs: no
 
 - name: Check, download and install to TL 7.2.3
   suma:
+    action: download
     oslevel: '7200-03'
 
 
@@ -151,7 +155,7 @@ meta:
             returned: always
             type: list
             elements: str
-            sample: "Parameter last_sp={} is ignored when oslevel is a TL 7200-02-00"
+            sample: "Parameter last_sp=yes is ignored when oslevel is a TL 7200-02-00"
     sample:
         "meta": {
             "messages": [

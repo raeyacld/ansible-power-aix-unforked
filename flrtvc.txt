@@ -51,7 +51,7 @@ OPTIONS (= is mandatory):
         Specifies to increase filesystem size of the working directory
         if needed.
         If set a filesystem of the host could have increased even if
-        ansible return `changed=False'.
+        it returns `changed=False'.
         [Default: True]
         type: bool
 
@@ -119,7 +119,7 @@ meta:
             returned: always
             type: list
             elements: str
-            sample:
+            sample: see below
         0.report:
             description: Output of the FLRTVC script, report or details on flrtvc error if any.
             returned: if the FLRTVC script run succeeds
