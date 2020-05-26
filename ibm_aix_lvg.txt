@@ -101,11 +101,11 @@ OPTIONS (= is mandatory):
         [Default: (null)]
         type: bool
 
-= state
+- state
         Specifies the action to be performed on a VG. `present' -
         Create/Extends/Modifies VG, `absent' - Reduce/Remove VG,
         `varyon' - Varyon VG, `varyoff' - Varyoff VG
-        (Choices: absent, present, varyoff, varyon)
+        (Choices: absent, present, varyoff, varyon)[Default: present]
         type: str
 
 - sysstart_avail
