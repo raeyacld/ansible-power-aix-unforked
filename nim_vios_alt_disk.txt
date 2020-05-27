@@ -40,10 +40,11 @@ OPTIONS (= is mandatory):
         NIM target.
         Use a tuple format with the 1st element the VIOS and the 2nd
         element the disk used for the alternate disk copy.
-        "(vios1,disk1,vios2,disk2)" for dual VIOSes. "(vios1,disk1)"
-        for single VIOS.
+        "vios1,disk1,vios2,disk2" for dual VIOSes. "vios1,disk1" for
+        single VIOS.
 
-        type: str
+        elements: str
+        type: list
 
 - time_limit
         Before starting the action, the actual date is compared to
@@ -87,7 +88,7 @@ EXAMPLES:
 
 - name: Perform an alternate disk copy of the rootvg to hdisk1
   nim_vios_alt_disk:
-    targets: "(nimvios01,hdisk1)"
+    targets: "nimvios01,hdisk1"
     action: alt_disk_copy
 
 
