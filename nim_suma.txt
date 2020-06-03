@@ -72,14 +72,14 @@ OPTIONS (= is mandatory):
         [Default: Latest]
         type: str
 
-- targets
+= targets
         Specifies the NIM clients to perform the action on.
         `foo*' designates all the NIM clients with name starting by
         `foo'.
         `foo[2:4]' designates the NIM clients among foo2, foo3 and
         foo4.
         `*' or `all' designates all the NIM clients.
-        [Default: (null)]
+
         elements: str
         type: list
 
