@@ -1,4 +1,4 @@
-> IBM_AIX_LVG    (/home/travis/.ansible/plugins/modules/ibm_aix_lvg.py)
+> LVG    (/home/travis/.ansible/plugins/modules/lvg.py)
 
         This module facilitates a. Creation of a volume group b.
         Modification of attributes of an existing volume group c.
@@ -137,13 +137,13 @@ AUTHOR: AIX Development Team (@pbfinley1911)
 EXAMPLES:
 
 - name: Extend a volume group
-  ibm_aix_lvg:
+  lvg:
     pvs=hdisk1
     vg_name=datavg
     state=present
 
 - name: Varyon a volume group
-  ibm_aix_lvg:
+  lvg:
     vg_name=datavg
     state=varyon
 
