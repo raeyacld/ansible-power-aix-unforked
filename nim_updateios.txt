@@ -43,8 +43,6 @@ OPTIONS (= is mandatory):
         Allows to pass along NIM node info from a task to another so
         that it discovers NIM info only one time for all tasks.
         [Default: (null)]
-        suboptions: null
-        
         type: dict
 
 - preview
@@ -67,19 +65,11 @@ OPTIONS (= is mandatory):
 - vars
         Specifies additional parameters.
         [Default: (null)]
-        suboptions:
-          log_file:
-            description:
-            - Specifies path to log file.
-            type: str
-        
         type: dict
 
 - vios_status
         Specifies the result of a previous operation.
         [Default: (null)]
-        suboptions: null
-        
         type: dict
 
 
