@@ -1,15 +1,18 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>suma – Download/Install fixes, SP or TL on an AIX server. &mdash; IBM POWER AIX collection 0.4.1 documentation</title>
+  <title>suma – Download/Install fixes, SP or TL on an AIX server. &mdash; IBM Power Systems AIX 1.0.0-beta1 documentation</title>
   
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
 
   
   
@@ -19,25 +22,23 @@
   
 
   
-  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Playbooks" href="../playbooks.html" />
+    <link rel="next" title="user – Create new users or change/remove attributes of users on AIX." href="user.html" />
     <link rel="prev" title="nim_viosupgrade – Perform an upgrade with the viosupgrade tool" href="nim_viosupgrade.html" /> 
 </head>
 
@@ -52,7 +53,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> IBM POWER AIX collection
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> IBM Power Systems AIX
           
 
           
@@ -75,6 +76,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -116,6 +118,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#status">Status</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="user.html">user – Create new users or change/remove attributes of users on AIX.</a></li>
 </ul>
 </li>
 </ul>
@@ -139,6 +142,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -148,7 +152,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">IBM POWER AIX collection</a>
+          <a href="../index.html">IBM Power Systems AIX</a>
         
       </nav>
 
@@ -177,7 +181,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../index.html">Docs</a> &raquo;</li>
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="../modules.html">Modules</a> &raquo;</li>
         
@@ -248,16 +252,16 @@
 <p>Required when <em>action=download</em> or <em>action=preview</em>.</p>
 </dd>
 <dt>download_dir (optional, path, /usr/sys/inst.images)</dt><dd><p>Directory where updates are downloaded.</p>
-<p>Can be used if <em>action=download</em> or <code class="docutils literal notranslate"><span class="pre">action=preview</span></code>.</p>
+<p>Can be used if <em>action=download</em> or <em>action=preview</em>.</p>
 </dd>
 <dt>download_only (optional, bool, False)</dt><dd><p>Download only. Do not perform installation of updates.</p>
-<p>Can be used if <em>action=download</em> or <code class="docutils literal notranslate"><span class="pre">action=preview</span></code>.</p>
+<p>Can be used if <em>action=download</em> or <em>action=preview</em>.</p>
 </dd>
 <dt>last_sp (optional, bool, False)</dt><dd><p>Specifies to download the last SP of the TL specified in <em>oslevel</em>. If no is specified only the TL is downloaded.</p>
-<p>Can be used if <em>action=download</em> or <code class="docutils literal notranslate"><span class="pre">action=preview</span></code>.</p>
+<p>Can be used if <em>action=download</em> or <em>action=preview</em>.</p>
 </dd>
 <dt>extend_fs (optional, bool, True)</dt><dd><p>Specifies to automatically extends the filesystem if needed. If no is specified and additional space is required for the download, no download occurs.</p>
-<p>Can be used if <em>action=download</em> or <code class="docutils literal notranslate"><span class="pre">action=preview</span></code>.</p>
+<p>Can be used if <em>action=download</em> or <em>action=preview</em>.</p>
 </dd>
 <dt>task_id (optional, str, None)</dt><dd><p>SUMA task identification number.</p>
 <p>Can be used if <em>action=list</em> or <em>action=edit</em> or <em>action=delete</em> or <em>action=run</em> or <em>action=unschedule</em>.</p>
@@ -267,7 +271,7 @@
 <p>Can be used if <em>action=edit</em>.</p>
 </dd>
 <dt>save_task (optional, bool, False)</dt><dd><p>Saves the SUMA task. The task is saved, allowing scheduling information to be added later.</p>
-<p>Can be used if <em>action=download</em> or <code class="docutils literal notranslate"><span class="pre">action=preview</span></code>.</p>
+<p>Can be used if <em>action=download</em> or <em>action=preview</em>.</p>
 <p>If <em>oslevel</em> is a TL and <em>last_sp=yes</em> the task is saved with the last SP available at the saving time.</p>
 </dd>
 <dt>description (optional, str, None)</dt><dd><p>Display name for SUMA task.</p>
@@ -275,7 +279,7 @@
 <p>Can be used for <em>action=download</em> or <em>action=preview</em>.</p>
 </dd>
 <dt>metadata_dir (optional, path, /var/adm/ansible/metadata)</dt><dd><p>Directory where metadata files are downloaded.</p>
-<p>Can be used if <em>action=download</em> or <code class="docutils literal notranslate"><span class="pre">action=preview</span></code> when <em>last_sp=yes</em> or <em>oslevel</em> is not exact, for example <em>oslevel=Latest</em>.</p>
+<p>Can be used if <em>action=download</em> or <em>action=preview</em> when <em>last_sp=yes</em> or <em>oslevel</em> is not exact, for example <em>oslevel=Latest</em>.</p>
 </dd>
 </dl>
 </div></blockquote>
@@ -350,7 +354,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../playbooks.html" class="btn btn-neutral float-right" title="Playbooks" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="user.html" class="btn btn-neutral float-right" title="user – Create new users or change/remove attributes of users on AIX." accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="nim_viosupgrade.html" class="btn btn-neutral float-left" title="nim_viosupgrade – Perform an upgrade with the viosupgrade tool" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -362,6 +366,7 @@
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2020, IBM
 
     </p>
@@ -376,7 +381,6 @@
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {
