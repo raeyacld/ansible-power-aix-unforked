@@ -238,12 +238,12 @@
 <blockquote>
 <div><dl>
 <dt>action (True, str, None)</dt><dd><p>Controls what is performed.</p>
-<p><code class="docutils literal notranslate"><span class="pre">bakcup</span></code> performs an backup operation on targets trough NIM master</p>
+<p><code class="docutils literal notranslate"><span class="pre">backup</span></code> performs an backup operation on targets trough NIM master</p>
 <p><code class="docutils literal notranslate"><span class="pre">restore</span></code> restores a backup on targets trough NIM master</p>
 <p><code class="docutils literal notranslate"><span class="pre">list</span></code> lists backups for targets on the NIM master</p>
 </dd>
 <dt>targets (False, list, None)</dt><dd><p>Specifies the NIM clients to perform the action on.</p>
-<p>Required if <em>action=bakcup</em> and <em>action=restore</em>.</p>
+<p>Required if <em>action=backup</em> and <em>action=restore</em>.</p>
 <p>If <em>action=list</em> it filters the results on the source_image attribute of the NIM resource.</p>
 </dd>
 <dt>nim_node (optional, dict, None)</dt><dd><p>Allows to pass along NIM node info from a task to another so that it discovers NIM info only one time for all tasks.</p>

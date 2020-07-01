@@ -35,7 +35,7 @@ Parameters
   action (True, str, None)
     Controls what is performed.
 
-    ``bakcup`` performs an backup operation on targets trough NIM master
+    ``backup`` performs an backup operation on targets trough NIM master
 
     ``restore`` restores a backup on targets trough NIM master
 
@@ -45,7 +45,7 @@ Parameters
   targets (False, list, None)
     Specifies the NIM clients to perform the action on.
 
-    Required if *action=bakcup* and *action=restore*.
+    Required if *action=backup* and *action=restore*.
 
     If *action=list* it filters the results on the source_image attribute of the NIM resource.
 
