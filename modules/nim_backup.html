@@ -248,8 +248,8 @@
 </dd>
 <dt>nim_node (optional, dict, None)</dt><dd><p>Allows to pass along NIM node info from a task to another so that it discovers NIM info only one time for all tasks.</p>
 </dd>
-<dt>location (optional, path, None)</dt><dd><p>Specifies where ot put the backup files on the NIM master.</p>
-<p>If not specified default for LPAR targets is <em>location=/export/mksysb</em> and for VIOS targets it is <em>location=/export/nim/ios_backup</em>.</p>
+<dt>location (optional, path, None)</dt><dd><p>Specifies where to put the backup files on the NIM master.</p>
+<p>If not specified default for LPAR targets is <em>location=/export/nim/mksysb</em> and for VIOS targets it is <em>location=/export/nim/ios_backup</em>.</p>
 <p>Required if <em>action=backup</em> and <em>action=restore</em>.</p>
 </dd>
 <dt>name (optional, str, None)</dt><dd><p>Exact name of the backup NIM resource to act on.</p>
@@ -257,11 +257,13 @@
 </dd>
 <dt>name_prefix (optional, str, None)</dt><dd><p>Prefix of the backup NIM resource name to act on.</p>
 <p>The name format will be <em>&lt;prefix&gt;&lt;target_name&gt;&lt;postfix&gt;</em>.</p>
+<p>Used only if <code class="docutils literal notranslate"><span class="pre">name</span></code> is not specified.</p>
 <p>If <em>action=list</em> it filters the results on the name of the NIM resource.</p>
 </dd>
 <dt>name_postfix (optional, str, None)</dt><dd><p>Specifies the postfix of the backup NIM resource name to act on.</p>
-<p>If not specified default for LAPR targets is <em>name_postfix=_sysb</em> and for VIOS targets it is <em>name_postfix=_iosb</em>.</p>
+<p>If not specified default for LPAR targets is <em>name_postfix=_sysb</em> and for VIOS targets it is <em>name_postfix=_iosb</em>.</p>
 <p>The name format will be <em>&lt;prefix&gt;&lt;target_name&gt;&lt;postfix&gt;</em>.</p>
+<p>Used only if <code class="docutils literal notranslate"><span class="pre">name</span></code> is not specified.</p>
 <p>If <em>action=list</em> it filters the results on the name of the NIM resource.</p>
 </dd>
 <dt>group (optional, str, None)</dt><dd><p>Specifies the resource group to use for restoration.</p>
@@ -272,14 +274,15 @@
 </dd>
 <dt>spot_prefix (optional, str, None)</dt><dd><p>Specifies the prefix of SPOT resource name created to restore the backup on a standalone client.</p>
 <p>The SPOT name format will be <em>&lt;spot_prefix&gt;&lt;target_name&gt;&lt;spot_postfix&gt;</em>.</p>
+<p>Used only if <code class="docutils literal notranslate"><span class="pre">spot_name</span></code> is not specified.</p>
 <p>Can be used on a standalone client if <em>action=restore</em>.</p>
 </dd>
-<dt>spot_postfix (optional, str, None)</dt><dd><p>Specifies the prostfix of SPOT resource name created to restore the backup on a standalone client.</p>
-<p>If not specified default is <em>spot_postfix=_spot</em>.</p>
+<dt>spot_postfix (optional, str, _spot)</dt><dd><p>Specifies the prostfix of SPOT resource name created to restore the backup on a standalone client.</p>
 <p>The SPOT name format will be <em>&lt;spot_prefix&gt;&lt;target_name&gt;&lt;spot_postfix&gt;</em>.</p>
+<p>Used only if <code class="docutils literal notranslate"><span class="pre">spot_name</span></code> is not specified.</p>
 <p>Can be used on a standalone client if <em>action=restore</em>.</p>
 </dd>
-<dt>spot_location (optional, path, None)</dt><dd><p>Specifies the location of SPOT resource on the NIM master created to restore the backup on a standalone client.</p>
+<dt>spot_location (optional, path, /export/nim/spot)</dt><dd><p>Specifies the location of SPOT resource on the NIM master created to restore the backup on a standalone client.</p>
 <p>If not specified default is <em>spot_location=/export/spot</em>.</p>
 <p>Can be used on a standalone client if <em>action=restore</em>.</p>
 </dd>
@@ -287,6 +290,7 @@
 <p>Can be used if <em>action=list</em>.</p>
 </dd>
 <dt>remove_spot (optional, bool, True)</dt><dd><p>Specifies to remove the SPOT resource created to restore the backup on a standalone client.</p>
+<p>Can be used on a standalone client if <em>action=restore</em>.</p>
 </dd>
 <dt>remove_backup (optional, bool, False)</dt><dd><p>Specifies to remove the backup resource created on the NIM master.</p>
 <p>Can be used on a standalone client if <em>action=restore</em>.</p>
@@ -314,7 +318,14 @@
     <span class="nt">action</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">backup</span>
     <span class="nt">targets</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nimmclient1</span>
     <span class="nt">name_postfix</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">_mksysb</span>
+
+<span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Restore a mksysb backup on a LPAR</span>
+  <span class="nt">nim_backup</span><span class="p">:</span>
+    <span class="nt">action</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">backup</span>
+    <span class="nt">targets</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nimmclient1</span>
+    <span class="nt">name_postfix</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">_mksysb</span>
     <span class="nt">spot_postfix</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">_spot</span>
+    <span class="nt">remove_backup</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">yes</span>
     <span class="nt">remove_spot</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">yes</span>
     <span class="nt">boot_target</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">no</span>
     <span class="nt">accept_licenses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">yes</span>
@@ -328,7 +339,11 @@
 </dd>
 <dt>targets (always, list, [‘nimclient01’, ‘nimclient02’, ‘…’])</dt><dd><p>List of VIOSes.</p>
 </dd>
-<dt>status (always, dict, )</dt><dd><p>Satus of the operation for each <code class="docutils literal notranslate"><span class="pre">target</span></code>. It can be empty, SUCCESS or FAILURE.</p>
+<dt>status (always, dict, { nimclient01: ‘SUCCESS’, nimclient02: ‘FAILURE’ })</dt><dd><p>Satus of the operation for each <code class="docutils literal notranslate"><span class="pre">target</span></code>. It can be empty, SUCCESS or FAILURE.</p>
+<dl class="simple">
+<dt>&lt;target&gt; (when target is actually a NIM client, str, SUCCESS)</dt><dd><p>Status of the execution on the &lt;target&gt;.</p>
+</dd>
+</dl>
 </dd>
 <dt>backup_info (if I(action=list), dict, {‘backup_info’: {‘ansible_img’: {‘Rstate’: ‘ready for use’, ‘alloc_count’: ‘0’, ‘arch’: ‘power’, ‘class’: ‘resources’, ‘creation_date’: ‘Mon Feb 3 20:55:28 2020’, ‘location’: ‘/export/nim/mksysb/ansible.sysb’, ‘mod’: ‘3’, ‘oslevel_r’: ‘7200-03’, ‘oslevel_s’: ‘7200-03-02-1845’, ‘prev_state’: ‘unavailable for use’, ‘release’: ‘2’, ‘server’: ‘master’, ‘source_image’: ‘nimclient01’, ‘type’: ‘mksysb’, ‘version’: ‘7’}, ‘nimclient2_sysb’: {‘class’: ‘resources’, ‘type’: ‘mksysb’, ‘creation_date’: ‘Sun May 3 15:54:44 2020’, ‘source_image’: ‘nimclient2’, ‘arch’: ‘power’, ‘Rstate’: ‘ready for use’, ‘prev_state’: ‘unavailable for use’, ‘location’: ‘/export/nim/mksysb/nimclient2_ansible.sysb’, ‘version’: ‘7’, ‘release’: ‘2’, ‘mod’: ‘3’, ‘oslevel_r’: ‘7200-03’, ‘oslevel_s’: ‘7200-03-04-1938’, ‘alloc_count’: ‘0’, ‘server’: ‘master’}}})</dt><dd><p>The backup NIM resource information.</p>
 <dl>
@@ -340,7 +355,7 @@
 </dd>
 </dl>
 </dd>
-<dt>nim_node (always, dict, {‘nim_node’: {‘standalone’: {‘nimclient01’: {‘Cstate’: ‘ready for a NIM operation’, ‘Cstate_result’: ‘success’, ‘Mstate’: ‘currently running’, ‘cable_type1’: ‘N/A’, ‘class’: ‘machines’, ‘comments’: ‘object defined using nimquery -d’, ‘connect’: ‘nimsh’, ‘cpuid’: ‘00F600004C00’, ‘if1’: ‘master_net nimclient01.aus.stglabs.ibm.com AED8E7E90202 ent0’, ‘installed_image’: ‘ansible_img’, ‘mgmt_profile1’: ‘p8-hmc 2 nimclient-cec nimclient-vios1’, ‘netboot_kernel’: ‘64’, ‘platform’: ‘chrp’, ‘prev_state’: ‘customization is being performed’, ‘type’: ‘standalone’}}, ‘vios’: {‘vios1’: {‘Cstate’: ‘ready for a NIM operation’, ‘Cstate_result’: ‘success’, ‘Mstate’: ‘currently running’, ‘cable_type1’: ‘N/A’, ‘class’: ‘management’, ‘connect’: ‘nimsh’, ‘cpuid’: ‘00F600004C00’, ‘if1’: ‘master_net vios1.aus.stglabs.ibm.com 0’, ‘mgmt_profile1’: ‘p8-hmc 1 vios-cec’, ‘netboot_kernel’: ‘64’, ‘platform’: ‘chrp’, ‘prev_state’: ‘alt_disk_install operation is being performed’, ‘type’: ‘vios’}}}})</dt><dd><p>NIM node info. It can contains more information if passed as option <em>nim_node</em>.</p>
+<dt>nim_node (always, dict, {‘nim_node’: {‘standalone’: {‘nimclient01’: {‘Cstate’: ‘ready for a NIM operation’, ‘Cstate_result’: ‘success’, ‘Mstate’: ‘currently running’, ‘cable_type1’: ‘N/A’, ‘class’: ‘machines’, ‘comments’: ‘object defined using nimquery -d’, ‘connect’: ‘nimsh’, ‘cpuid’: ‘00F600004C00’, ‘if1’: ‘master_net nimclient01.aus.stglabs.ibm.com AED8E7E90202 ent0’, ‘installed_image’: ‘ansible_img’, ‘mgmt_profile1’: ‘p8-hmc 2 nimclient-cec nimclient-vios1’, ‘netboot_kernel’: ‘64’, ‘platform’: ‘chrp’, ‘prev_state’: ‘customization is being performed’}}, ‘vios’: {‘vios1’: {‘Cstate’: ‘ready for a NIM operation’, ‘Cstate_result’: ‘success’, ‘Mstate’: ‘currently running’, ‘cable_type1’: ‘N/A’, ‘class’: ‘management’, ‘connect’: ‘nimsh’, ‘cpuid’: ‘00F600004C00’, ‘if1’: ‘master_net vios1.aus.stglabs.ibm.com 0’, ‘mgmt_profile1’: ‘p8-hmc 1 vios-cec’, ‘netboot_kernel’: ‘64’, ‘platform’: ‘chrp’, ‘prev_state’: ‘alt_disk_install operation is being performed’}}}})</dt><dd><p>NIM node info. It can contains more information if passed as option <em>nim_node</em>.</p>
 <dl class="simple">
 <dt>standalone (always, dict, )</dt><dd><p>List of standalone NIM resources.</p>
 </dd>

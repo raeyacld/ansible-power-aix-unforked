@@ -55,9 +55,9 @@ Parameters
 
 
   location (optional, path, None)
-    Specifies where ot put the backup files on the NIM master.
+    Specifies where to put the backup files on the NIM master.
 
-    If not specified default for LPAR targets is *location=/export/mksysb* and for VIOS targets it is *location=/export/nim/ios_backup*.
+    If not specified default for LPAR targets is *location=/export/nim/mksysb* and for VIOS targets it is *location=/export/nim/ios_backup*.
 
     Required if *action=backup* and *action=restore*.
 
@@ -73,15 +73,19 @@ Parameters
 
     The name format will be *<prefix><target_name><postfix>*.
 
+    Used only if ``name`` is not specified.
+
     If *action=list* it filters the results on the name of the NIM resource.
 
 
   name_postfix (optional, str, None)
     Specifies the postfix of the backup NIM resource name to act on.
 
-    If not specified default for LAPR targets is *name_postfix=_sysb* and for VIOS targets it is *name_postfix=_iosb*.
+    If not specified default for LPAR targets is *name_postfix=_sysb* and for VIOS targets it is *name_postfix=_iosb*.
 
     The name format will be *<prefix><target_name><postfix>*.
+
+    Used only if ``name`` is not specified.
 
     If *action=list* it filters the results on the name of the NIM resource.
 
@@ -103,20 +107,22 @@ Parameters
 
     The SPOT name format will be *<spot_prefix><target_name><spot_postfix>*.
 
+    Used only if ``spot_name`` is not specified.
+
     Can be used on a standalone client if *action=restore*.
 
 
-  spot_postfix (optional, str, None)
+  spot_postfix (optional, str, _spot)
     Specifies the prostfix of SPOT resource name created to restore the backup on a standalone client.
-
-    If not specified default is *spot_postfix=_spot*.
 
     The SPOT name format will be *<spot_prefix><target_name><spot_postfix>*.
 
+    Used only if ``spot_name`` is not specified.
+
     Can be used on a standalone client if *action=restore*.
 
 
-  spot_location (optional, path, None)
+  spot_location (optional, path, /export/nim/spot)
     Specifies the location of SPOT resource on the NIM master created to restore the backup on a standalone client.
 
     If not specified default is *spot_location=/export/spot*.
@@ -132,6 +138,8 @@ Parameters
 
   remove_spot (optional, bool, True)
     Specifies to remove the SPOT resource created to restore the backup on a standalone client.
+
+    Can be used on a standalone client if *action=restore*.
 
 
   remove_backup (optional, bool, False)
@@ -177,7 +185,14 @@ Examples
         action: backup
         targets: nimmclient1
         name_postfix: _mksysb
+
+    - name: Restore a mksysb backup on a LPAR
+      nim_backup:
+        action: backup
+        targets: nimmclient1
+        name_postfix: _mksysb
         spot_postfix: _spot
+        remove_backup: yes
         remove_spot: yes
         boot_target: no
         accept_licenses: yes
@@ -195,8 +210,13 @@ targets (always, list, ['nimclient01', 'nimclient02', '...'])
   List of VIOSes.
 
 
-status (always, dict, )
+status (always, dict, { nimclient01: 'SUCCESS', nimclient02: 'FAILURE' })
   Satus of the operation for each ``target``. It can be empty, SUCCESS or FAILURE.
+
+
+  <target> (when target is actually a NIM client, str, SUCCESS)
+    Status of the execution on the <target>.
+
 
 
 backup_info (if I(action=list), dict, {'backup_info': {'ansible_img': {'Rstate': 'ready for use', 'alloc_count': '0', 'arch': 'power', 'class': 'resources', 'creation_date': 'Mon Feb 3 20:55:28 2020', 'location': '/export/nim/mksysb/ansible.sysb', 'mod': '3', 'oslevel_r': '7200-03', 'oslevel_s': '7200-03-02-1845', 'prev_state': 'unavailable for use', 'release': '2', 'server': 'master', 'source_image': 'nimclient01', 'type': 'mksysb', 'version': '7'}, 'nimclient2_sysb': {'class': 'resources', 'type': 'mksysb', 'creation_date': 'Sun May 3 15:54:44 2020', 'source_image': 'nimclient2', 'arch': 'power', 'Rstate': 'ready for use', 'prev_state': 'unavailable for use', 'location': '/export/nim/mksysb/nimclient2_ansible.sysb', 'version': '7', 'release': '2', 'mod': '3', 'oslevel_r': '7200-03', 'oslevel_s': '7200-03-04-1938', 'alloc_count': '0', 'server': 'master'}}})
@@ -213,7 +233,7 @@ backup_info (if I(action=list), dict, {'backup_info': {'ansible_img': {'Rstate':
 
 
 
-nim_node (always, dict, {'nim_node': {'standalone': {'nimclient01': {'Cstate': 'ready for a NIM operation', 'Cstate_result': 'success', 'Mstate': 'currently running', 'cable_type1': 'N/A', 'class': 'machines', 'comments': 'object defined using nimquery -d', 'connect': 'nimsh', 'cpuid': '00F600004C00', 'if1': 'master_net nimclient01.aus.stglabs.ibm.com AED8E7E90202 ent0', 'installed_image': 'ansible_img', 'mgmt_profile1': 'p8-hmc 2 nimclient-cec nimclient-vios1', 'netboot_kernel': '64', 'platform': 'chrp', 'prev_state': 'customization is being performed', 'type': 'standalone'}}, 'vios': {'vios1': {'Cstate': 'ready for a NIM operation', 'Cstate_result': 'success', 'Mstate': 'currently running', 'cable_type1': 'N/A', 'class': 'management', 'connect': 'nimsh', 'cpuid': '00F600004C00', 'if1': 'master_net vios1.aus.stglabs.ibm.com 0', 'mgmt_profile1': 'p8-hmc 1 vios-cec', 'netboot_kernel': '64', 'platform': 'chrp', 'prev_state': 'alt_disk_install operation is being performed', 'type': 'vios'}}}})
+nim_node (always, dict, {'nim_node': {'standalone': {'nimclient01': {'Cstate': 'ready for a NIM operation', 'Cstate_result': 'success', 'Mstate': 'currently running', 'cable_type1': 'N/A', 'class': 'machines', 'comments': 'object defined using nimquery -d', 'connect': 'nimsh', 'cpuid': '00F600004C00', 'if1': 'master_net nimclient01.aus.stglabs.ibm.com AED8E7E90202 ent0', 'installed_image': 'ansible_img', 'mgmt_profile1': 'p8-hmc 2 nimclient-cec nimclient-vios1', 'netboot_kernel': '64', 'platform': 'chrp', 'prev_state': 'customization is being performed'}}, 'vios': {'vios1': {'Cstate': 'ready for a NIM operation', 'Cstate_result': 'success', 'Mstate': 'currently running', 'cable_type1': 'N/A', 'class': 'management', 'connect': 'nimsh', 'cpuid': '00F600004C00', 'if1': 'master_net vios1.aus.stglabs.ibm.com 0', 'mgmt_profile1': 'p8-hmc 1 vios-cec', 'netboot_kernel': '64', 'platform': 'chrp', 'prev_state': 'alt_disk_install operation is being performed'}}}})
   NIM node info. It can contains more information if passed as option *nim_node*.
 
 
