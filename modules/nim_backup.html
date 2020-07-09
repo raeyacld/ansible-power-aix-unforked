@@ -97,6 +97,7 @@
 <li class="toctree-l3"><a class="reference internal" href="emgr.html">emgr – The interim fix manager installs and manages system interim fixes.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="flrtvc.html">flrtvc – Generate FLRTVC report, download and install efix.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="geninstall.html">geninstall – Generic installer for various packaging formats</a></li>
+<li class="toctree-l3"><a class="reference internal" href="group.html">group – Create new group or change/remove attributes of group on AIX</a></li>
 <li class="toctree-l3"><a class="reference internal" href="installp.html">installp – Installs and updates software</a></li>
 <li class="toctree-l3"><a class="reference internal" href="lvg.html">lvg – Create/Modify/Remove a volume group</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mktcpip.html">mktcpip – Sets the required values for starting TCP/IP on a host</a></li>
@@ -113,13 +114,14 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="nim_flrtvc.html">nim_flrtvc – Generate flrtvc report, download and install efix</a></li>
 <li class="toctree-l3"><a class="reference internal" href="nim_suma.html">nim_suma – Download fixes, SP or TL on an AIX server</a></li>
-<li class="toctree-l3"><a class="reference internal" href="nim_updateios.html">nim_updateios – Update a single or a pair of Virtual I/O Servers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nim_updateios.html">nim_updateios – Use NIM to update a single or a pair of Virtual I/O Servers to latest maintenance level.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="nim_upgradeios.html">nim_upgradeios – Perform a VIOS upgrade with NIM</a></li>
 <li class="toctree-l3"><a class="reference internal" href="nim_vios_alt_disk.html">nim_vios_alt_disk – Create/Cleanup an alternate rootvg disk</a></li>
 <li class="toctree-l3"><a class="reference internal" href="nim_vios_hc.html">nim_vios_hc – Check if a pair of VIOSes can be updated</a></li>
 <li class="toctree-l3"><a class="reference internal" href="nim_viosupgrade.html">nim_viosupgrade – Perform an upgrade with the viosupgrade tool</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suma.html">suma – Download/Install fixes, SP or TL on an AIX server.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="user.html">user – Create new users or change/remove attributes of users on AIX.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vios_alt_disk.html">vios_alt_disk – Create/Cleanup an alternate rootvg disk on a VIOS</a></li>
 </ul>
 </li>
 </ul>
@@ -221,9 +223,9 @@
 </div>
 <div class="section" id="synopsis">
 <h2><a class="toc-backref" href="#id1">Synopsis</a><a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
-<p>It uses the NIM define ooperation it creates mksysb or ios_backup resource on the NIM master depending on the type of the client.</p>
-<p>It lists the backup resources available on the NIM master and allows to filter results.</p>
-<p>It uses the NIM bos_inst and viosbr to restore backup on LPAR or VIOS clients.</p>
+<p>Uses the NIM define operation it creates mksysb or ios_backup resource on the NIM master depending on the type of the client.</p>
+<p>Lists the backup resources available on the NIM master and allows to filter results.</p>
+<p>Uses the NIM bos_inst and viosbr to restore backup images on LPAR or VIOS clients.</p>
 </div>
 <div class="section" id="requirements">
 <h2><a class="toc-backref" href="#id2">Requirements</a><a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
@@ -238,22 +240,34 @@
 <blockquote>
 <div><dl>
 <dt>action (True, str, None)</dt><dd><p>Controls what is performed.</p>
-<p><code class="docutils literal notranslate"><span class="pre">backup</span></code> performs an backup operation on targets trough NIM master</p>
-<p><code class="docutils literal notranslate"><span class="pre">restore</span></code> restores a backup on targets trough NIM master</p>
-<p><code class="docutils literal notranslate"><span class="pre">list</span></code> lists backups for targets on the NIM master</p>
+<p><code class="docutils literal notranslate"><span class="pre">create</span></code> performs an backup operation on targets trough NIM master.</p>
+<p><code class="docutils literal notranslate"><span class="pre">restore</span></code> restores a backup on targets trough NIM master.</p>
+<p><code class="docutils literal notranslate"><span class="pre">view</span></code> displays the content of a VIOS backup, only for <em>type=backup</em>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">list</span></code> lists backups for targets on the NIM master.</p>
+</dd>
+<dt>type (optional, str, mksysb)</dt><dd><p>Specifies the type of backup object to operate.</p>
+<p><code class="docutils literal notranslate"><span class="pre">mksysb</span></code> operates on backup of the operating system (that is, the root volume group) of a LPAR or VIOS target.</p>
+<p><code class="docutils literal notranslate"><span class="pre">ios_mksysb</span></code> operates on VIOS backup of the operating system (that is, the root volume group).</p>
+<p><code class="docutils literal notranslate"><span class="pre">ios_backup</span></code> operates on VIOS backup, that is all the relevant data to recover VIOS after a new installation.</p>
+<p>Discarded for <em>action=view</em> as this action only applies to ios_backup.</p>
 </dd>
 <dt>targets (False, list, None)</dt><dd><p>Specifies the NIM clients to perform the action on.</p>
-<p>Required if <em>action=backup</em> and <em>action=restore</em>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">foo*</span></code> designates all the NIM clients with name starting by <code class="docutils literal notranslate"><span class="pre">foo</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">foo[2:4]</span></code> designates the NIM clients among foo2, foo3 and foo4.</p>
+<p><code class="docutils literal notranslate"><span class="pre">*</span></code> or <code class="docutils literal notranslate"><span class="pre">ALL</span></code> designates all the NIM clients.</p>
+<p><code class="docutils literal notranslate"><span class="pre">vios</span></code> or <code class="docutils literal notranslate"><span class="pre">standalone</span></code> designates all the NIM clients of this type.</p>
+<p>Required if <em>action=create</em> and <em>action=restore</em>.</p>
 <p>If <em>action=list</em> it filters the results on the source_image attribute of the NIM resource.</p>
 </dd>
 <dt>nim_node (optional, dict, None)</dt><dd><p>Allows to pass along NIM node info from a task to another so that it discovers NIM info only one time for all tasks.</p>
 </dd>
 <dt>location (optional, path, None)</dt><dd><p>Specifies where to put the backup files on the NIM master.</p>
 <p>If not specified default for LPAR targets is <em>location=/export/nim/mksysb</em> and for VIOS targets it is <em>location=/export/nim/ios_backup</em>.</p>
-<p>Required if <em>action=backup</em> and <em>action=restore</em>.</p>
+<p>Required if <em>action=create</em> and <em>action=restore</em>.</p>
 </dd>
 <dt>name (optional, str, None)</dt><dd><p>Exact name of the backup NIM resource to act on.</p>
 <p>If <em>action=list</em> it filters the results on the name of the NIM resource.</p>
+<p>Required if <em>action=view</em>.</p>
 </dd>
 <dt>name_prefix (optional, str, None)</dt><dd><p>Prefix of the backup NIM resource name to act on.</p>
 <p>The name format will be <em>&lt;prefix&gt;&lt;target_name&gt;&lt;postfix&gt;</em>.</p>
@@ -283,7 +297,6 @@
 <p>Can be used on a standalone client if <em>action=restore</em>.</p>
 </dd>
 <dt>spot_location (optional, path, /export/nim/spot)</dt><dd><p>Specifies the location of SPOT resource on the NIM master created to restore the backup on a standalone client.</p>
-<p>If not specified default is <em>spot_location=/export/spot</em>.</p>
 <p>Can be used on a standalone client if <em>action=restore</em>.</p>
 </dd>
 <dt>oslevel (optional, str, None)</dt><dd><p>Specifies the oslevel to filter results.</p>
@@ -306,29 +319,48 @@
 </div>
 <div class="section" id="examples">
 <h2><a class="toc-backref" href="#id4">Examples</a><a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-yaml+jinja notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">List backup resource targeting nimmclient1 at a specific level and name starting with ansible</span>
+<div class="highlight-yaml+jinja notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">List mksysb targeting nimclient1 at a specific level and name starting with ansible</span>
   <span class="nt">nim_backup</span><span class="p">:</span>
     <span class="nt">action</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">list</span>
-    <span class="nt">targets</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nimmclient1</span>
+    <span class="nt">targets</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nimclient1</span>
     <span class="nt">oslevel</span><span class="p">:</span> <span class="s">&quot;7200-03-02&quot;</span>
     <span class="nt">name_prefix</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ansible</span>
 
 <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Create a mksysb backup of a LPAR</span>
   <span class="nt">nim_backup</span><span class="p">:</span>
-    <span class="nt">action</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">backup</span>
-    <span class="nt">targets</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nimmclient1</span>
+    <span class="nt">action</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">create</span>
+    <span class="nt">targets</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nimclient1</span>
     <span class="nt">name_postfix</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">_mksysb</span>
 
 <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Restore a mksysb backup on a LPAR</span>
   <span class="nt">nim_backup</span><span class="p">:</span>
-    <span class="nt">action</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">backup</span>
-    <span class="nt">targets</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nimmclient1</span>
+    <span class="nt">action</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">restore</span>
+    <span class="nt">targets</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nimclient1</span>
     <span class="nt">name_postfix</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">_mksysb</span>
     <span class="nt">spot_postfix</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">_spot</span>
     <span class="nt">remove_backup</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">yes</span>
     <span class="nt">remove_spot</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">yes</span>
     <span class="nt">boot_target</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">no</span>
     <span class="nt">accept_licenses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">yes</span>
+
+<span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Backup a VIOS configuration</span>
+  <span class="nt">nim_backup</span><span class="p">:</span>
+    <span class="nt">action</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">create</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ios_backup</span>
+    <span class="nt">targets</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">vios1</span>
+    <span class="nt">name_postfix</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">_iosbackup</span>
+
+<span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Get the backup configuration of a VIOS</span>
+  <span class="nt">nim_backup</span><span class="p">:</span>
+    <span class="nt">action</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">view</span>
+    <span class="nt">targets</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">vios1</span>
+
+<span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Restore the backup configuration on a VIOS</span>
+  <span class="nt">nim_backup</span><span class="p">:</span>
+    <span class="nt">action</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">restore</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ios_backup</span>
+    <span class="nt">targets</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">vios1</span>
+    <span class="nt">name_postfix</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">_iosbackup</span>
 </pre></div>
 </div>
 </div>

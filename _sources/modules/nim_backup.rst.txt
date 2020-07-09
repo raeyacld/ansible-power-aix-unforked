@@ -12,11 +12,11 @@ nim_backup -- Use NIM to create, list and restore backup on LPAR and VIOS client
 Synopsis
 --------
 
-It uses the NIM define ooperation it creates mksysb or ios_backup resource on the NIM master depending on the type of the client.
+Uses the NIM define operation it creates mksysb or ios_backup resource on the NIM master depending on the type of the client.
 
-It lists the backup resources available on the NIM master and allows to filter results.
+Lists the backup resources available on the NIM master and allows to filter results.
 
-It uses the NIM bos_inst and viosbr to restore backup on LPAR or VIOS clients.
+Uses the NIM bos_inst and viosbr to restore backup images on LPAR or VIOS clients.
 
 
 
@@ -35,17 +35,39 @@ Parameters
   action (True, str, None)
     Controls what is performed.
 
-    ``backup`` performs an backup operation on targets trough NIM master
+    ``create`` performs an backup operation on targets trough NIM master.
 
-    ``restore`` restores a backup on targets trough NIM master
+    ``restore`` restores a backup on targets trough NIM master.
 
-    ``list`` lists backups for targets on the NIM master
+    ``view`` displays the content of a VIOS backup, only for *type=backup*.
+
+    ``list`` lists backups for targets on the NIM master.
+
+
+  type (optional, str, mksysb)
+    Specifies the type of backup object to operate.
+
+    ``mksysb`` operates on backup of the operating system (that is, the root volume group) of a LPAR or VIOS target.
+
+    ``ios_mksysb`` operates on VIOS backup of the operating system (that is, the root volume group).
+
+    ``ios_backup`` operates on VIOS backup, that is all the relevant data to recover VIOS after a new installation.
+
+    Discarded for *action=view* as this action only applies to ios_backup.
 
 
   targets (False, list, None)
     Specifies the NIM clients to perform the action on.
 
-    Required if *action=backup* and *action=restore*.
+    ``foo*`` designates all the NIM clients with name starting by ``foo``.
+
+    ``foo[2:4]`` designates the NIM clients among foo2, foo3 and foo4.
+
+    ``*`` or ``ALL`` designates all the NIM clients.
+
+    ``vios`` or ``standalone`` designates all the NIM clients of this type.
+
+    Required if *action=create* and *action=restore*.
 
     If *action=list* it filters the results on the source_image attribute of the NIM resource.
 
@@ -59,13 +81,15 @@ Parameters
 
     If not specified default for LPAR targets is *location=/export/nim/mksysb* and for VIOS targets it is *location=/export/nim/ios_backup*.
 
-    Required if *action=backup* and *action=restore*.
+    Required if *action=create* and *action=restore*.
 
 
   name (optional, str, None)
     Exact name of the backup NIM resource to act on.
 
     If *action=list* it filters the results on the name of the NIM resource.
+
+    Required if *action=view*.
 
 
   name_prefix (optional, str, None)
@@ -125,8 +149,6 @@ Parameters
   spot_location (optional, path, /export/nim/spot)
     Specifies the location of SPOT resource on the NIM master created to restore the backup on a standalone client.
 
-    If not specified default is *spot_location=/export/spot*.
-
     Can be used on a standalone client if *action=restore*.
 
 
@@ -173,29 +195,48 @@ Examples
 .. code-block:: yaml+jinja
 
     
-    - name: List backup resource targeting nimmclient1 at a specific level and name starting with ansible
+    - name: List mksysb targeting nimclient1 at a specific level and name starting with ansible
       nim_backup:
         action: list
-        targets: nimmclient1
+        targets: nimclient1
         oslevel: "7200-03-02"
         name_prefix: ansible
 
     - name: Create a mksysb backup of a LPAR
       nim_backup:
-        action: backup
-        targets: nimmclient1
+        action: create
+        targets: nimclient1
         name_postfix: _mksysb
 
     - name: Restore a mksysb backup on a LPAR
       nim_backup:
-        action: backup
-        targets: nimmclient1
+        action: restore
+        targets: nimclient1
         name_postfix: _mksysb
         spot_postfix: _spot
         remove_backup: yes
         remove_spot: yes
         boot_target: no
         accept_licenses: yes
+
+    - name: Backup a VIOS configuration
+      nim_backup:
+        action: create
+        type: ios_backup
+        targets: vios1
+        name_postfix: _iosbackup
+
+    - name: Get the backup configuration of a VIOS
+      nim_backup:
+        action: view
+        targets: vios1
+
+    - name: Restore the backup configuration on a VIOS
+      nim_backup:
+        action: restore
+        type: ios_backup
+        targets: vios1
+        name_postfix: _iosbackup
 
 
 

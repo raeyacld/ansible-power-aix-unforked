@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>devices – Configure/Modify/Unconfigure devices &mdash; IBM Power Systems AIX 1.0.0-beta1 documentation</title>
+  <title>group – Create new group or change/remove attributes of group on AIX &mdash; IBM Power Systems AIX 1.0.0-beta1 documentation</title>
   
 
   
@@ -38,8 +38,8 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="emgr – The interim fix manager installs and manages system interim fixes." href="emgr.html" />
-    <link rel="prev" title="Modules" href="../modules.html" /> 
+    <link rel="next" title="installp – Installs and updates software" href="installp.html" />
+    <link rel="prev" title="geninstall – Generic installer for various packaging formats" href="geninstall.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -93,7 +93,11 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../modules.html">Modules</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../modules.html#module-reference">Module reference</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">devices – Configure/Modify/Unconfigure devices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="devices.html">devices – Configure/Modify/Unconfigure devices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="emgr.html">emgr – The interim fix manager installs and manages system interim fixes.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flrtvc.html">flrtvc – Generate FLRTVC report, download and install efix.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="geninstall.html">geninstall – Generic installer for various packaging formats</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">group – Create new group or change/remove attributes of group on AIX</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#synopsis">Synopsis</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#requirements">Requirements</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
@@ -102,10 +106,6 @@
 <li class="toctree-l4"><a class="reference internal" href="#status">Status</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="emgr.html">emgr – The interim fix manager installs and manages system interim fixes.</a></li>
-<li class="toctree-l3"><a class="reference internal" href="flrtvc.html">flrtvc – Generate FLRTVC report, download and install efix.</a></li>
-<li class="toctree-l3"><a class="reference internal" href="geninstall.html">geninstall – Generic installer for various packaging formats</a></li>
-<li class="toctree-l3"><a class="reference internal" href="group.html">group – Create new group or change/remove attributes of group on AIX</a></li>
 <li class="toctree-l3"><a class="reference internal" href="installp.html">installp – Installs and updates software</a></li>
 <li class="toctree-l3"><a class="reference internal" href="lvg.html">lvg – Create/Modify/Remove a volume group</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mktcpip.html">mktcpip – Sets the required values for starting TCP/IP on a host</a></li>
@@ -188,14 +188,14 @@
         
           <li><a href="../modules.html">Modules</a> &raquo;</li>
         
-      <li>devices – Configure/Modify/Unconfigure devices</li>
+      <li>group – Create new group or change/remove attributes of group on AIX</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
             
-              <a href="https://github.com/IBM/ansible-power-aix/blob/dev-collection/docs/source/modules/devices.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/IBM/ansible-power-aix/blob/dev-collection/docs/source/modules/group.rst" class="fa fa-github"> Edit on GitHub</a>
             
           
         
@@ -209,8 +209,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="devices-configure-modify-unconfigure-devices">
-<span id="devices-module"></span><h1>devices – Configure/Modify/Unconfigure devices<a class="headerlink" href="#devices-configure-modify-unconfigure-devices" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="group-create-new-group-or-change-remove-attributes-of-group-on-aix">
+<span id="group-module"></span><h1>group – Create new group or change/remove attributes of group on AIX<a class="headerlink" href="#group-create-new-group-or-change-remove-attributes-of-group-on-aix" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
 <li><p><a class="reference internal" href="#synopsis" id="id1">Synopsis</a></p></li>
@@ -223,57 +223,54 @@
 </div>
 <div class="section" id="synopsis">
 <h2><a class="toc-backref" href="#id1">Synopsis</a><a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
-<p>This module facilitates a. Configuration of a defined specified device or all devices b. Modification of attributes of a device in ‘Defined/Available’ state c. Unconfigure/stop of a device in ‘Available’ state</p>
+<p>This module facilitates the creation of a new group with provided attributes, the modification of attributes of existing group and the deletion of group.</p>
 </div>
 <div class="section" id="requirements">
 <h2><a class="toc-backref" href="#id2">Requirements</a><a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
 <p>The below requirements are needed on the host that executes this module.</p>
 <ul class="simple">
-<li><p>AIX</p></li>
+<li><p>AIX &gt;= 7.1 TL3</p></li>
+<li><p>Python &gt;= 2.7</p></li>
+<li><p>Root user is required.</p></li>
 </ul>
 </div>
 <div class="section" id="parameters">
 <h2><a class="toc-backref" href="#id3">Parameters</a><a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
 <blockquote>
-<div><dl class="simple">
-<dt>attributes (optional, dict, None)</dt><dd><p>When <em>state=available</em>, specifies the device attribute-value pairs used for changing specific attribute values.</p>
+<div><dl>
+<dt>group_attributes (optional, dict, None)</dt><dd><p>Provides the attributes to be changed or created for the group.</p>
 </dd>
-<dt>device (optional, str, all)</dt><dd><p>Specifies the device logical name in the Customized Devices object class. <em>all</em> - specifies all devices to be configured when <em>state=available</em>.</p>
+<dt>user_list_action (optional, str, None)</dt><dd><p>Provides the action choices of adding or removing the members or admins.</p>
+<p><code class="docutils literal notranslate"><span class="pre">add</span></code> to add members or amdins of the group with provided <em>users_list</em> in group <em>name</em></p>
+<p><code class="docutils literal notranslate"><span class="pre">remove</span></code> to remove members or admins of the group with provided <em>users_list</em> from group <em>name</em></p>
 </dd>
-<dt>force (optional, bool, False)</dt><dd><p>Forces the change/unconfigure operation to take place on a locked device.</p>
+<dt>user_list_type (optional, str, None)</dt><dd><p>Provides the action to be taken for the group members or admins.</p>
+<p><code class="docutils literal notranslate"><span class="pre">members</span></code> for Provided <em>user_list_action</em> choice will be performed on members of the group</p>
+<p><code class="docutils literal notranslate"><span class="pre">admins</span></code> for Provided <em>user_list_action</em> choice will be performed on admins of the group</p>
 </dd>
-<dt>recursive (optional, bool, False)</dt><dd><p>Specifies to unconfigure the device and its children recursively.</p>
+<dt>state (True, str, None)</dt><dd><p>Specifies the action to be performed for the group.</p>
+<p><code class="docutils literal notranslate"><span class="pre">present</span></code> to create group with provided <em>name</em> and <em>group_attributes</em> in the system. If group is already present then attributes specified for the group will be changed with the provided attributes.</p>
+<p><code class="docutils literal notranslate"><span class="pre">absent</span></code> to delete group with provided <em>name</em>. If group is not present then message will be displayed for the same.</p>
 </dd>
-<dt>state (optional, str, available)</dt><dd><p>Specifies the action to be performed on the device. <em>available</em> - If the device is in ‘defined’ state, configure device else change device attributes when in ‘available’ state. <em>defined</em> - If the device is in ‘available’ state, Unconfigure/Stop device else change device attributes when in ‘defined’ state.</p>
+<dt>name (True, str, None)</dt><dd><p>Group name should be specified for which the action is to taken</p>
 </dd>
-<dt>chtype (optional, str, both)</dt><dd><p>Specifies the change type. <em>reboot</em> - Changes are applied to the device when the system is rebooted. <em>current</em> - Changes the current state of the device temporarily. <em>both</em> - Changes are applied both to the current state of the device and the device database.</p>
+<dt>users_list (optional, str, None)</dt><dd><p>Name of the users separated by commas to be added/removed as members/admins of the group.</p>
+<p>Should be used along with <em>user_list_action</em> and <em>user_list_type parameters</em>.</p>
 </dd>
-<dt>parent_device (optional, str, None)</dt><dd><p>While modifying device, specifies the parent device of the device to be updated. For unconfigure/stop operation, specifies the parent device whose children needs to be unconfigured recursively.</p>
-</dd>
-<dt>rmtype (optional, str, unconfigure)</dt><dd><p>Specifies whether to unconfigure/stop the device. <em>unconfigure</em> - Changes are applied to the device when the system is rebooted. <em>stop</em> - Changes the current state of the device temporarily.</p>
+<dt>remove_keystore (optional, bool, True)</dt><dd><p>Specifies if the group’s keystore information should be deleted from the system while performing the delete operation on group.</p>
 </dd>
 </dl>
 </div></blockquote>
 </div>
 <div class="section" id="examples">
 <h2><a class="toc-backref" href="#id4">Examples</a><a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-yaml+jinja notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Configure a device</span>
-  <span class="nt">devices</span><span class="p">:</span>
-    <span class="nt">device</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">proc0</span>
-    <span class="nt">state</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">available</span>
-
-<span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Modify an attribute of a device</span>
-  <span class="nt">devices</span><span class="p">:</span>
-    <span class="nt">device</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">en1</span>
-    <span class="nt">state</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">available</span>
-    <span class="nt">attributes</span><span class="p">:</span>
-      <span class="nt">mtu</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">900</span>
-      <span class="nt">arp</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">off</span>
-
-<span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Unconfigure a device</span>
-  <span class="nt">devices</span><span class="p">:</span>
-    <span class="nt">device</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">proc0</span>
-    <span class="nt">state</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">defined</span>
+<div class="highlight-yaml+jinja notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Change group ansible</span>
+  <span class="nt">group</span><span class="p">:</span>
+    <span class="nt">state</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">present</span>
+    <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ansible</span>
+    <span class="nt">user_list_action</span><span class="p">:</span> <span class="s">&#39;add&#39;</span>
+    <span class="nt">user_list_type</span><span class="p">:</span> <span class="s">&#39;member&#39;</span>
+    <span class="nt">users_list</span><span class="p">:</span> <span class="s">&#39;test1&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -282,11 +279,11 @@
 <dl class="simple">
 <dt>msg (always, str, )</dt><dd><p>The execution message.</p>
 </dd>
-<dt>rc (If the command failed., int, )</dt><dd><p>The return code.</p>
+<dt>rc’ (If the command failed., int, )</dt><dd><p>The return code.</p>
 </dd>
-<dt>stdout (If the command failed., str, )</dt><dd><p>The standard output.</p>
+<dt>stdout’ (If the command failed., str, )</dt><dd><p>The standard output.</p>
 </dd>
-<dt>stderr (If the command failed., str, )</dt><dd><p>The standard error.</p>
+<dt>stderr’ (If the command failed., str, )</dt><dd><p>The standard error.</p>
 </dd>
 </dl>
 </div>
@@ -299,7 +296,7 @@
 <div class="section" id="authors">
 <h3>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p>AIX Development Team (&#64;pbfinley1911)</p></li>
+<li><p>AIX development Team (&#64;pbfinley1911)</p></li>
 </ul>
 </div>
 </div>
@@ -313,10 +310,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="emgr.html" class="btn btn-neutral float-right" title="emgr – The interim fix manager installs and manages system interim fixes." accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="installp.html" class="btn btn-neutral float-right" title="installp – Installs and updates software" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../modules.html" class="btn btn-neutral float-left" title="Modules" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="geninstall.html" class="btn btn-neutral float-left" title="geninstall – Generic installer for various packaging formats" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
