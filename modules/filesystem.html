@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>geninstall – Generic installer for various packaging formats &mdash; IBM Power Systems AIX 1.0.0-beta1 documentation</title>
+  <title>filesystem – Create/Modify/Remove Local and NFS filesystems &mdash; IBM Power Systems AIX 1.0.0-beta1 documentation</title>
   
 
   
@@ -38,8 +38,8 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="group – Create new group or change/remove attributes of group on AIX" href="group.html" />
-    <link rel="prev" title="flrtvc – Generate FLRTVC report, download and install efix." href="flrtvc.html" /> 
+    <link rel="next" title="flrtvc – Generate FLRTVC report, download and install efix." href="flrtvc.html" />
+    <link rel="prev" title="emgr – The interim fix manager installs and manages system interim fixes." href="emgr.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -95,9 +95,7 @@
 <li class="toctree-l2 current"><a class="reference internal" href="../modules.html#module-reference">Module reference</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="devices.html">devices – Configure/Modify/Unconfigure devices</a></li>
 <li class="toctree-l3"><a class="reference internal" href="emgr.html">emgr – The interim fix manager installs and manages system interim fixes.</a></li>
-<li class="toctree-l3"><a class="reference internal" href="filesystem.html">filesystem – Create/Modify/Remove Local and NFS filesystems</a></li>
-<li class="toctree-l3"><a class="reference internal" href="flrtvc.html">flrtvc – Generate FLRTVC report, download and install efix.</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">geninstall – Generic installer for various packaging formats</a><ul>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">filesystem – Create/Modify/Remove Local and NFS filesystems</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#synopsis">Synopsis</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#requirements">Requirements</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
@@ -106,6 +104,8 @@
 <li class="toctree-l4"><a class="reference internal" href="#status">Status</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="flrtvc.html">flrtvc – Generate FLRTVC report, download and install efix.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="geninstall.html">geninstall – Generic installer for various packaging formats</a></li>
 <li class="toctree-l3"><a class="reference internal" href="group.html">group – Create new group or change/remove attributes of group on AIX</a></li>
 <li class="toctree-l3"><a class="reference internal" href="installp.html">installp – Installs and updates software</a></li>
 <li class="toctree-l3"><a class="reference internal" href="lvg.html">lvg – Create/Modify/Remove a volume group</a></li>
@@ -189,14 +189,14 @@
         
           <li><a href="../modules.html">Modules</a> &raquo;</li>
         
-      <li>geninstall – Generic installer for various packaging formats</li>
+      <li>filesystem – Create/Modify/Remove Local and NFS filesystems</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
             
-              <a href="https://github.com/IBM/ansible-power-aix/blob/dev-collection/docs/source/modules/geninstall.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/IBM/ansible-power-aix/blob/dev-collection/docs/source/modules/filesystem.rst" class="fa fa-github"> Edit on GitHub</a>
             
           
         
@@ -210,8 +210,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="geninstall-generic-installer-for-various-packaging-formats">
-<span id="geninstall-module"></span><h1>geninstall – Generic installer for various packaging formats<a class="headerlink" href="#geninstall-generic-installer-for-various-packaging-formats" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="filesystem-create-modify-remove-local-and-nfs-filesystems">
+<span id="filesystem-module"></span><h1>filesystem – Create/Modify/Remove Local and NFS filesystems<a class="headerlink" href="#filesystem-create-modify-remove-local-and-nfs-filesystems" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
 <li><p><a class="reference internal" href="#synopsis" id="id1">Synopsis</a></p></li>
@@ -224,63 +224,79 @@
 </div>
 <div class="section" id="synopsis">
 <h2><a class="toc-backref" href="#id1">Synopsis</a><a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
-<p>A generic installer that installs software products of various packaging formats.</p>
-<p>For example, installp, RPM, SI, and ISMP.</p>
+<p>This module facilitates a. Creation of Local and NFS filesystems b. Modification of filesystems c. Removal of filesystems</p>
 </div>
 <div class="section" id="requirements">
 <h2><a class="toc-backref" href="#id2">Requirements</a><a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
 <p>The below requirements are needed on the host that executes this module.</p>
 <ul class="simple">
-<li><p>AIX &gt;= 7.1 TL3</p></li>
-<li><p>Python &gt;= 2.7</p></li>
+<li><p>AIX</p></li>
 </ul>
 </div>
 <div class="section" id="parameters">
 <h2><a class="toc-backref" href="#id3">Parameters</a><a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
 <blockquote>
-<div><dl>
-<dt>device (optional, str, None)</dt><dd><p>The name of the device or directory.</p>
+<div><dl class="simple">
+<dt>filesystem (True, str, None)</dt><dd><p>Specifies the mount point, which is the directory where the file system will be mounted.</p>
 </dd>
-<dt>install_list (optional, list, [])</dt><dd><p>List of products to install</p>
-<p><code class="docutils literal notranslate"><span class="pre">all</span></code> installs all products</p>
-<p><code class="docutils literal notranslate"><span class="pre">update_all</span></code> updates all products</p>
+<dt>state (optional, str, present)</dt><dd><p>Specifies the action to be performed on the filesystem. <em>present</em> - Specifies to create a filesystem if it doesn’t exist else to change the specified filesystem attributes <em>absent</em> - Specifies to remove a filesystem</p>
 </dd>
-<dt>force (optional, bool, False)</dt><dd><p>Forces action.</p>
+<dt>rm_mount_point (optional, bool, False)</dt><dd><p>When state is <em>state=absent</em>, specifies to remove the mount directory along with the entry in the filesystem.</p>
 </dd>
-<dt>action (optional, str, install)</dt><dd><p>Controls what is performed.</p>
-<p><code class="docutils literal notranslate"><span class="pre">install</span></code> performs an install of the specified software.</p>
-<p><code class="docutils literal notranslate"><span class="pre">uninstall</span></code> performs an uninstall of the specified software.</p>
-<p><code class="docutils literal notranslate"><span class="pre">list</span></code> lists the contents of the media.</p>
+<dt>attributes (optional, list, None)</dt><dd><p>When <em>state=present</em>, specifies comma separated attribute=value pairs used for creation/modification of local filesystem. Refer to ‘crfs’ AIX command documentation for more details on the supported attributes.</p>
 </dd>
-<dt>agree_licenses (optional, bool, False)</dt><dd><p>Agrees to required software license agreements for software to be installed.</p>
+<dt>device (optional, str, None)</dt><dd><p>When <em>state=present</em>, a. For local filesystem, specifies the logical volume to use for filesystem creation. If not specified, a new logical volume will be created. b. For NFS filesystem, specifies the remote export device to use for creation/modification of the filesystem</p>
 </dd>
-<dt>installp_flags (optional, str, None)</dt><dd><p>Specifies the installp flags to use when calling the installp command.</p>
+<dt>vg (optional, str, None)</dt><dd><p>When <em>state=present</em>, specifies an existing volume group</p>
+</dd>
+<dt>account_subsystem (optional, bool, None)</dt><dd><p>When <em>state=present</em>, for local filesystems, specifies whether the file system is to be processed by the accounting subsystem If not specified, a default value of ‘false’ will be used for filesystem creation</p>
+</dd>
+<dt>fs_type (optional, str, jfs2)</dt><dd><p>Specifies the virtual filesystem type for local filesystem creation If not specified, creates jfs2 filesystem by default.</p>
+</dd>
+<dt>auto_mount (optional, bool, None)</dt><dd><p>Specifies whether to automatically mount the filesystem at system restart while creation/updation of any filesystem. If not specified, default value for filesystem creation will be ‘false’</p>
+</dd>
+<dt>permissions (optional, str, None)</dt><dd><p>Specifies file system permissions while creation/updation of any filesystem <em>rw</em> - specifies read-write mode <em>ro</em> - specifies read-only mode If not specified, default value of ‘rw’ will be used for filesystem creation</p>
+</dd>
+<dt>mount_group (optional, str, None)</dt><dd><p>Specifies the mount group to be set/modified for a filesystem</p>
+</dd>
+<dt>nfs_server (optional, str, None)</dt><dd><p>Specifies a Network File System (NFS) server for NFS filesystem</p>
 </dd>
 </dl>
 </div></blockquote>
 </div>
 <div class="section" id="examples">
 <h2><a class="toc-backref" href="#id4">Examples</a><a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-yaml+jinja notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Install all the products on a CD media</span>
-  <span class="nt">geninstall</span><span class="p">:</span>
-    <span class="nt">device</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/dev/cd0</span>
-    <span class="nt">install_list</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">all</span>
-
-<span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Install an interim fix located in /images/emgr/ppc directory</span>
-  <span class="nt">geninstall</span><span class="p">:</span>
-    <span class="nt">device</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/images</span>
-    <span class="nt">install_list</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">IV12345.160101.epkg.Z</span>
+<div class="highlight-yaml+jinja notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Creation of a JFS2 filesystem</span>
+  <span class="nt">filesystem</span><span class="p">:</span>
+    <span class="nt">state</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">present</span>
+    <span class="nt">filesystem</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/mnt3</span>
+    <span class="nt">fs_type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">jfs2</span>
+    <span class="nt">attributes</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">size=32768,isnapshot=&#39;no&#39;</span>
+    <span class="nt">mount_group</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">test</span>
+    <span class="nt">vg</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rootvg</span>
+<span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Increase size of a filesystem</span>
+  <span class="nt">filesystem</span><span class="p">:</span>
+    <span class="nt">filesystem</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/mnt3</span>
+    <span class="nt">state</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">present</span>
+    <span class="nt">attributes</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">size=+5M</span>
+<span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Remove a NFS filesystem</span>
+  <span class="nt">filesystem</span><span class="p">:</span>
+    <span class="nt">filesystem</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/mnt</span>
+    <span class="nt">state</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">absent</span>
+    <span class="nt">rm_mount_point</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="return-values">
 <h2><a class="toc-backref" href="#id5">Return Values</a><a class="headerlink" href="#return-values" title="Permalink to this headline">¶</a></h2>
 <dl class="simple">
-<dt>msg (always, str, Invalid parameter: install_list cannot be empty)</dt><dd><p>The execution message.</p>
+<dt>msg (always, str, )</dt><dd><p>The execution message.</p>
 </dd>
-<dt>stdout (always, str, bin:bin:::J:::::::bin Product::::nsbin:sbin:::J:::::::sbin Product::::)</dt><dd><p>The standard output</p>
+<dt>rc (If the command failed., int, )</dt><dd><p>The return code.</p>
 </dd>
-<dt>stderr (always, str, 0503-105 geninstall: The device or directory: /dev/cd0 does not exist.)</dt><dd><p>The standard error</p>
+<dt>stdout (If the command failed., str, )</dt><dd><p>The standard output.</p>
+</dd>
+<dt>stderr (If the command failed., str, )</dt><dd><p>The standard error.</p>
 </dd>
 </dl>
 </div>
@@ -307,10 +323,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="group.html" class="btn btn-neutral float-right" title="group – Create new group or change/remove attributes of group on AIX" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="flrtvc.html" class="btn btn-neutral float-right" title="flrtvc – Generate FLRTVC report, download and install efix." accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="flrtvc.html" class="btn btn-neutral float-left" title="flrtvc – Generate FLRTVC report, download and install efix." accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="emgr.html" class="btn btn-neutral float-left" title="emgr – The interim fix manager installs and manages system interim fixes." accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
