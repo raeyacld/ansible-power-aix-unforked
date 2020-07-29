@@ -262,7 +262,8 @@
 <p><code class="docutils literal notranslate"><span class="pre">lower</span></code> disk size less than rootvg disk size but big enough to contain the used PPs.</p>
 <p><code class="docutils literal notranslate"><span class="pre">nearest</span></code></p>
 </dd>
-<dt>force (optional, bool, False)</dt><dd><p>Forces removal of any existing alternate disk copy on target disk.</p>
+<dt>force (optional, bool, False)</dt><dd><p>Forces removal of any existing alternate disk copy on target disks.</p>
+<p>Stops any active rootvg mirroring during the alternate disk copy.</p>
 </dd>
 </dl>
 </div></blockquote>
@@ -273,8 +274,7 @@
 <p class="admonition-title">Note</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">alt_disk_copy</span></code> only backs up mounted file systems. Mount all file systems that you want to back up.</p></li>
-<li><p>copy is performed only on one alternate hdisk even if the rootvg contains multiple hdisks</p></li>
-<li><p>error if several <code class="docutils literal notranslate"><span class="pre">altinst_rootvg</span></code> exist for cleanup operation in automatic mode</p></li>
+<li><p>when no target is specified, copy is performed to only one alternate disk even if the rootvg contains multiple disks</p></li>
 </ul>
 </div>
 </div>
