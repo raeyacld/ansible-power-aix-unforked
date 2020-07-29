@@ -125,16 +125,12 @@ msg (always, str, )
   Status information.
 
 
-targets (always, list, )
-  List of VIOS tuples.
-
-
 nim_node (always, dict, )
   NIM node info.
 
 
 status (always, dict, )
-  Status for each VIOS (dicionnary key).
+  Status for each VIOS tuples (dictionary key).
 
 
 
