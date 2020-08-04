@@ -93,6 +93,7 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../modules.html">Modules</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../modules.html#module-reference">Module reference</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="backup.html">backup – Manage data or system volume group backup on a LPAR.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="devices.html">devices – Configure/Modify/Unconfigure devices</a></li>
 <li class="toctree-l3"><a class="reference internal" href="emgr.html">emgr – The interim fix manager installs and manages system interim fixes.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="filesystem.html">filesystem – Create/Modify/Remove Local and NFS filesystems</a></li>
@@ -310,7 +311,7 @@
 </dd>
 <dt>stderr (always, str, )</dt><dd><p>The standard error.</p>
 </dd>
-<dt>status (always, dict, {‘status’: {‘vios1-vios2’: ‘SUCCESS-UPDT2’, ‘vios3’: ‘SUCCESS-ALTDC’, ‘vios4-vios5’: ‘FAILURE-SSP’, ‘vios6-vios7’: ‘FAILURE-UPDT1’}})</dt><dd><p>Status of the execution on each target &lt;tuple&gt;.</p>
+<dt>status (always, dict, {‘status’: {‘vios1-vios2’: ‘SUCCESS-UPDT’, ‘vios3’: ‘SUCCESS-ALTDC’, ‘vios4-vios5’: ‘FAILURE-SSP’, ‘vios6-vios7’: ‘FAILURE-UPDT1’}})</dt><dd><p>Status of the execution on each target &lt;tuple&gt;.</p>
 <p>If the operation status is not avalaible, the <em>vios_status</em> passed in parameter is returned.</p>
 <dl>
 <dt>&lt;tuple&gt; (when tuple are actually a NIM client and reachable with c_rsh., str, SUCCESS-UPDT)</dt><dd><p>Status of the execution on the &lt;tuple&gt;.</p>
