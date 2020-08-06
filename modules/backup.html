@@ -296,7 +296,7 @@
 <dt>extend_fs (optional, bool, False)</dt><dd><p>Specifies to extend the filesystem if needed.</p>
 <p>Can be used if <code class="docutils literal notranslate"><span class="pre">action=create</span></code> and <code class="docutils literal notranslate"><span class="pre">os_backup=no</span></code>.</p>
 </dd>
-<dt>minimal_lv_size (optional, bool, False)</dt><dd><p>Specifies to create the logical volumes with minimum size possible to accomodate the file system.</p>
+<dt>minimize_lv_size (optional, bool, False)</dt><dd><p>Specifies to create the logical volumes with minimum size possible to accomodate the file system.</p>
 <p>Can be used if <code class="docutils literal notranslate"><span class="pre">action=restore</span></code> and <code class="docutils literal notranslate"><span class="pre">os_backup=no</span></code>.</p>
 </dd>
 <dt>verbose (optional, bool, False)</dt><dd><p>Specifies to run the operation in verbose mode.</p>
@@ -322,7 +322,7 @@
     <span class="nt">action</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">create</span>
     <span class="nt">os_backup</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">no</span>
     <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rootvg</span>
-    <span class="nt">location</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/dev/hdisk1</span>
+    <span class="nt">location</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/dav/rmt1</span>
     <span class="nt">exclude_data</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">no</span>
     <span class="nt">exclude_files</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">no</span>
     <span class="nt">exclude_fs</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/tmp/exclude_fs_list</span>
@@ -335,7 +335,7 @@
     <span class="nt">action</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">create</span>
     <span class="nt">os_backup</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">no</span>
     <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">datavg</span>
-    <span class="nt">location</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/dev/hdisk2</span>
+    <span class="nt">location</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/tmp/backup_datavg</span>
     <span class="nt">exclude_data</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">yes</span>
     <span class="nt">exclude_files</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">yes</span>
     <span class="nt">create_data_file</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">yes</span>
@@ -345,18 +345,34 @@
     <span class="nt">action</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">view</span>
     <span class="nt">os_backup</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">no</span>
     <span class="nt">location</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/dev/hdisk1</span>
+
+<span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">restvg to restore datavg structure only to /dev/hdisk2</span>
+  <span class="nt">backup</span><span class="p">:</span>
+    <span class="nt">action</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">restore</span>
+    <span class="nt">os_backup</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">no</span>
+    <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">datavg</span>
+    <span class="nt">location</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/tmp/backup_datavg</span>
+    <span class="nt">data_file</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/tmp/datavg.mydata</span>
+    <span class="nt">exclude_data</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">yes</span>
+    <span class="nt">minimize_lv_size</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">yes</span>
+    <span class="nt">flags</span><span class="p">:</span> <span class="s">&#39;-n&#39;</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="return-values">
 <h2><a class="toc-backref" href="#id6">Return Values</a><a class="headerlink" href="#return-values" title="Permalink to this headline">¶</a></h2>
+<dl class="simple">
+<dt>msg (always, str, AIX create backup operation successfull.)</dt><dd><p>The execution message.</p>
+</dd>
+<dt>stdout (always, str, hdisk1 lv00 x           11 ./tmp/vgdata/datavg/image.info x          127 ./tmp/vgdata/vgdata.files11928014 x          127 ./tmp/vgdata/vgdata.files x         2320 ./tmp/vgdata/datavg/filesystems x         1530 ./tmp/vgdata/datavg/datavg.data x          278 ./tmp/vgdata/datavg/backup.data total size: 4393)</dt><dd><p>The standard output of the command.</p>
+</dd>
+</dl>
+<p>stderr (always, str, Will create the Volume Group:      datavg Target Disks:      Allocation Policy: Shrink Filesystems:        yes Preserve Physical Partitions for each Logical Volume:       no
+New volume on /tmp/datavg_backup: Cluster 51200 bytes (100 blocks). Volume number 1 Date of backup: Thu Aug  6 03:53:53 2020 Files backed up by name User root files restored: 6)</p>
+<blockquote>
+<div><p>The standard error of the command.</p>
+</div></blockquote>
 <dl>
-<dt>msg (always, str, AIX backup create operation successfull.)</dt><dd><p>The execution message.</p>
-</dd>
-<dt>stdout (always, str, Bootlist is set to the boot disk: hdisk0 blv=hd5)</dt><dd><p>The standard output of the command.</p>
-</dd>
-<dt>stderr (always, str, )</dt><dd><p>The standard error of the command.</p>
-</dd>
 <dt>rc (always, int, )</dt><dd><p>The return code of the command.</p>
 <p>Equal <em>-1</em> when the command has not been run.</p>
 </dd>

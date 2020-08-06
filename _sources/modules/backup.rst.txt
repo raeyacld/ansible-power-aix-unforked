@@ -130,7 +130,7 @@ Parameters
     Can be used if ``action=create`` and ``os_backup=no``.
 
 
-  minimal_lv_size (optional, bool, False)
+  minimize_lv_size (optional, bool, False)
     Specifies to create the logical volumes with minimum size possible to accomodate the file system.
 
     Can be used if ``action=restore`` and ``os_backup=no``.
@@ -166,7 +166,7 @@ Examples
         action: create
         os_backup: no
         name: rootvg
-        location: /dev/hdisk1
+        location: /dav/rmt1
         exclude_data: no
         exclude_files: no
         exclude_fs: /tmp/exclude_fs_list
@@ -179,7 +179,7 @@ Examples
         action: create
         os_backup: no
         name: datavg
-        location: /dev/hdisk2
+        location: /tmp/backup_datavg
         exclude_data: yes
         exclude_files: yes
         create_data_file: yes
@@ -190,21 +190,32 @@ Examples
         os_backup: no
         location: /dev/hdisk1
 
+    - name: restvg to restore datavg structure only to /dev/hdisk2
+      backup:
+        action: restore
+        os_backup: no
+        name: datavg
+        location: /tmp/backup_datavg
+        data_file: /tmp/datavg.mydata
+        exclude_data: yes
+        minimize_lv_size: yes
+        flags: '-n'
 
 
 
 Return Values
 -------------
 
-msg (always, str, AIX backup create operation successfull.)
+msg (always, str, AIX create backup operation successfull.)
   The execution message.
 
 
-stdout (always, str, Bootlist is set to the boot disk: hdisk0 blv=hd5)
+stdout (always, str, hdisk1 lv00 x           11 ./tmp/vgdata/datavg/image.info x          127 ./tmp/vgdata/vgdata.files11928014 x          127 ./tmp/vgdata/vgdata.files x         2320 ./tmp/vgdata/datavg/filesystems x         1530 ./tmp/vgdata/datavg/datavg.data x          278 ./tmp/vgdata/datavg/backup.data total size: 4393)
   The standard output of the command.
 
 
-stderr (always, str, )
+stderr (always, str, Will create the Volume Group:	datavg Target Disks:	  Allocation Policy: Shrink Filesystems:	yes Preserve Physical Partitions for each Logical Volume:	no
+New volume on /tmp/datavg_backup: Cluster 51200 bytes (100 blocks). Volume number 1 Date of backup: Thu Aug  6 03:53:53 2020 Files backed up by name User root files restored: 6)
   The standard error of the command.
 
 
