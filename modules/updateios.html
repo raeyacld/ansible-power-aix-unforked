@@ -248,14 +248,16 @@
 <p><code class="docutils literal notranslate"><span class="pre">update</span></code> to perform an update to the VIOS.</p>
 <p><code class="docutils literal notranslate"><span class="pre">commit</span></code> to commit all uncommitted updates to the VIOS.</p>
 <p><code class="docutils literal notranslate"><span class="pre">cleanup</span></code> to remove all incomplete pieces of the previous installation.</p>
+<p><code class="docutils literal notranslate"><span class="pre">install</span></code> to install a file set from the VIOS installation media.</p>
 <p><code class="docutils literal notranslate"><span class="pre">remove</span></code> to remove the specified file sets from the system.</p>
 <p><code class="docutils literal notranslate"><span class="pre">list</span></code> to list the file sets on the VIOS installation media that are available to be installed.</p>
 </dd>
 <dt>device (optional, str, None)</dt><dd><p>Specifies the device or directory containing the images to install.</p>
+<p>When <em>action=list</em> or <em>action=install</em>, only <code class="docutils literal notranslate"><span class="pre">/dev/cdX</span></code> can be specified.</p>
 </dd>
 <dt>force (optional, bool, False)</dt><dd><p>Forces all uncommitted updates to be committed before applying the new updates.</p>
 </dd>
-<dt>filesets (optional, list, None)</dt><dd><p>When <em>action=update</em>, specifies the name of the file set to be installed from the VIOS installation media.</p>
+<dt>filesets (optional, list, None)</dt><dd><p>When <em>action=install</em>, specifies the name of the file set to be installed from the VIOS installation media.</p>
 <p>When <em>action=remove</em>, specifies the list of file sets to uninstall.</p>
 </dd>
 <dt>install_new (optional, bool, False)</dt><dd><p>Installs new and supported file sets onto the VIOS.</p>
@@ -303,7 +305,7 @@
 
 <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Install a file set from the VIOS installation media</span>
   <span class="nt">updateios</span><span class="p">:</span>
-    <span class="nt">action</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">update</span>
+    <span class="nt">action</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">install</span>
     <span class="nt">filesets</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ILMT-TAD4D-agent</span>
     <span class="nt">device</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/dev/cd1</span>
 </pre></div>

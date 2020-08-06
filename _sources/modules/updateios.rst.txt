@@ -37,6 +37,8 @@ Parameters
 
     ``cleanup`` to remove all incomplete pieces of the previous installation.
 
+    ``install`` to install a file set from the VIOS installation media.
+
     ``remove`` to remove the specified file sets from the system.
 
     ``list`` to list the file sets on the VIOS installation media that are available to be installed.
@@ -45,13 +47,15 @@ Parameters
   device (optional, str, None)
     Specifies the device or directory containing the images to install.
 
+    When *action=list* or *action=install*, only ``/dev/cdX`` can be specified.
+
 
   force (optional, bool, False)
     Forces all uncommitted updates to be committed before applying the new updates.
 
 
   filesets (optional, list, None)
-    When *action=update*, specifies the name of the file set to be installed from the VIOS installation media.
+    When *action=install*, specifies the name of the file set to be installed from the VIOS installation media.
 
     When *action=remove*, specifies the list of file sets to uninstall.
 
@@ -109,7 +113,7 @@ Examples
 
     - name: Install a file set from the VIOS installation media
       updateios:
-        action: update
+        action: install
         filesets: ILMT-TAD4D-agent
         device: /dev/cd1
 
