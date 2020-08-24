@@ -248,11 +248,11 @@
 </dd>
 <dt>targets (optional, list, None)</dt><dd><p>Specifies the target disks.</p>
 </dd>
-<dt>disk_size_policy (optional, str, nearest)</dt><dd><p>When <em>action=copy</em>, specifies how to choose the alternate disk if <em>targets</em> is not specified.</p>
+<dt>disk_size_policy (optional, str, None)</dt><dd><p>When <em>action=copy</em>, specifies how to choose the alternate disk if <em>targets</em> is not specified.</p>
 <p><code class="docutils literal notranslate"><span class="pre">minimize</span></code> smallest disk that can be selected.</p>
 <p><code class="docutils literal notranslate"><span class="pre">upper</span></code> first disk found bigger than the rootvg disk.</p>
 <p><code class="docutils literal notranslate"><span class="pre">lower</span></code> disk size less than rootvg disk size but big enough to contain the used PPs.</p>
-<p><code class="docutils literal notranslate"><span class="pre">nearest</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">nearest</span></code> disk size closest to the rootvg disk.</p>
 </dd>
 <dt>force (optional, bool, False)</dt><dd><p>Forces removal of any existing alternate disk copy on target disks.</p>
 </dd>
