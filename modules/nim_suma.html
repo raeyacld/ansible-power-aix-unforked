@@ -262,20 +262,20 @@
 <dt>download_dir (optional, path, None)</dt><dd><p>Absolute directory path where to download the packages on the NIM server.</p>
 <p>If not set it looks for existing NIM ressource matching <em>lpp_source_name</em> and use its location.</p>
 <p>If no NIM ressource is found, the path is set to /usr/sys/inst.images</p>
-<p>Can be used if <em>action=download</em> or <code class="docutils literal notranslate"><span class="pre">action=preview</span></code>.</p>
+<p>Can be used if <em>action=download</em> or <em>action=preview</em>.</p>
 </dd>
 <dt>download_only (optional, bool, False)</dt><dd><p>Download only. Do not create the NIM resource.</p>
 <p>Can be used if <em>action=download</em></p>
 </dd>
 <dt>extend_fs (optional, bool, True)</dt><dd><p>Specifies to automatically extends the filesystem if needed. If no is specified and additional space is required for the download, no download occurs.</p>
-<p>Can be used if <em>action=download</em> or <code class="docutils literal notranslate"><span class="pre">action=preview</span></code>.</p>
+<p>Can be used if <em>action=download</em> or <em>action=preview</em>.</p>
 </dd>
 <dt>description (optional, str, None)</dt><dd><p>Display name for SUMA task.</p>
 <p>If not set the will be labelled ‘<em>action</em> request for oslevel <em>oslevel</em>’</p>
 <p>Can be used for <em>action=download</em> or <em>action=preview</em>.</p>
 </dd>
 <dt>metadata_dir (optional, path, /var/adm/ansible/metadata)</dt><dd><p>Directory where metadata files are downloaded.</p>
-<p>Can be used if <em>action=download</em> or <code class="docutils literal notranslate"><span class="pre">action=preview</span></code> when <em>oslevel</em> is not exact, for example <em>oslevel=Latest</em>.</p>
+<p>Can be used if <em>action=download</em> or <em>action=preview</em> when <em>oslevel</em> is not exact, for example <em>oslevel=Latest</em>.</p>
 </dd>
 </dl>
 </div></blockquote>
