@@ -39,7 +39,7 @@ Parameters
 
     ``restore`` to restore a backup image.
 
-    ``view`` to get useful information about a backup image; can be used only for *type=savevg*
+    ``view`` to get useful information about a backup image.
 
 
   type (optional, str, savevg)
@@ -79,7 +79,7 @@ Parameters
   location (optional, path, None)
     Specifies the location of the backup files. It can be a device or file path.
 
-    When *type=savevg*, the default device is ``/dev/rmt0``.
+    When *type=savevg* or *action=view*, the default device is ``/dev/rmt0``.
 
     Required if *action=view* or *type=mksysb*.
 
@@ -221,6 +221,7 @@ Notes
 -----
 
 .. note::
+   - ``restore`` ``mksysb`` operation can be long, one can use the default log file /var/adm/ras/alt_disk_inst.log to track progress.
    - ``savevg`` only backs up varied-on volume group. The file systems must be mounted.
    - ``savevg`` backs up all logical volume information and will be recreated. However, only JFS-mounted file system data will be backed up. Raw logical volume data will NOT be backed up using a savevg.
    - ``savevg`` only backs up varied-on volume group. The file systems must be mounted.
@@ -297,6 +298,10 @@ Return Values
 
 msg (always, str, AIX create backup operation successfull.)
   The execution message.
+
+
+cmd (when the command is run., str, /bin/restvg -f /dev/rmt0 -l)
+  The command executed.
 
 
 stdout (always, str, hdisk1 lv00 x           11 ./tmp/vgdata/datavg/image.info x          127 ./tmp/vgdata/vgdata.files11928014 x          127 ./tmp/vgdata/vgdata.files x         2320 ./tmp/vgdata/datavg/filesystems x         1530 ./tmp/vgdata/datavg/datavg.data x          278 ./tmp/vgdata/datavg/backup.data total size: 4393)
