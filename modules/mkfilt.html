@@ -243,6 +243,17 @@
 <h2><a class="toc-backref" href="#id3">Parameters</a><a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div><dl>
+<dt>action (optional, str, add)</dt><dd><p>Specifies the action to perform.</p>
+<p><code class="docutils literal notranslate"><span class="pre">add</span></code> to add filter rules.</p>
+<p><code class="docutils literal notranslate"><span class="pre">check</span></code> to check the syntax of filter rules.</p>
+<p><code class="docutils literal notranslate"><span class="pre">move</span></code> to move a filter rule.</p>
+<p><code class="docutils literal notranslate"><span class="pre">change</span></code> to change a filter rule.</p>
+<p><code class="docutils literal notranslate"><span class="pre">import</span></code> to import filter rules from an export file.</p>
+<p><code class="docutils literal notranslate"><span class="pre">export</span></code> to export filter rules to an export file.</p>
+</dd>
+<dt>directory (optional, str, None)</dt><dd><p>When <em>action=import</em> or <em>action=export</em>, specifies the directory where the text files are to be read.</p>
+<p>When <em>action=export</em>, directory will be created if it does not exist.</p>
+</dd>
 <dt>ipv4 (optional, dict, None)</dt><dd><p>Specifies the IPv4 filter module state and rules.</p>
 <dl>
 <dt>default (optional, str, None)</dt><dd><p>Sets the action of the default filter rule.</p>

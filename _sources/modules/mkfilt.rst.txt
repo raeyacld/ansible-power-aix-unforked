@@ -28,6 +28,28 @@ The below requirements are needed on the host that executes this module.
 Parameters
 ----------
 
+  action (optional, str, add)
+    Specifies the action to perform.
+
+    ``add`` to add filter rules.
+
+    ``check`` to check the syntax of filter rules.
+
+    ``move`` to move a filter rule.
+
+    ``change`` to change a filter rule.
+
+    ``import`` to import filter rules from an export file.
+
+    ``export`` to export filter rules to an export file.
+
+
+  directory (optional, str, None)
+    When *action=import* or *action=export*, specifies the directory where the text files are to be read.
+
+    When *action=export*, directory will be created if it does not exist.
+
+
   ipv4 (optional, dict, None)
     Specifies the IPv4 filter module state and rules.
 
