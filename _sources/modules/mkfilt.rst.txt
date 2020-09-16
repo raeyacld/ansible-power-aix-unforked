@@ -35,8 +35,6 @@ Parameters
 
     ``check`` to check the syntax of filter rules.
 
-    ``move`` to move a filter rule.
-
     ``change`` to change a filter rule.
 
     ``import`` to import filter rules from an export file.
@@ -82,6 +80,10 @@ Parameters
         Specifies the filter rule ID.
 
         ``all`` specifies to remove all user-defined filter rules.
+
+
+      new_id (optional, str, None)
+        When *action=move*, specifies the new filter rule ID.
 
 
       direction (optional, str, both)
@@ -242,6 +244,10 @@ Parameters
         Specifies the filter rule ID.
 
         ``all`` specifies to remove all user-defined filter rules.
+
+
+      new_id (optional, str, None)
+        When *action=move*, specifies the new filter rule ID.
 
 
       direction (optional, str, both)

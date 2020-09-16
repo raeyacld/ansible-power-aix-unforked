@@ -246,7 +246,6 @@
 <dt>action (optional, str, add)</dt><dd><p>Specifies the action to perform.</p>
 <p><code class="docutils literal notranslate"><span class="pre">add</span></code> to add filter rules.</p>
 <p><code class="docutils literal notranslate"><span class="pre">check</span></code> to check the syntax of filter rules.</p>
-<p><code class="docutils literal notranslate"><span class="pre">move</span></code> to move a filter rule.</p>
 <p><code class="docutils literal notranslate"><span class="pre">change</span></code> to change a filter rule.</p>
 <p><code class="docutils literal notranslate"><span class="pre">import</span></code> to import filter rules from an export file.</p>
 <p><code class="docutils literal notranslate"><span class="pre">export</span></code> to export filter rules to an export file.</p>
@@ -270,6 +269,8 @@
 </dd>
 <dt>id (optional, str, None)</dt><dd><p>Specifies the filter rule ID.</p>
 <p><code class="docutils literal notranslate"><span class="pre">all</span></code> specifies to remove all user-defined filter rules.</p>
+</dd>
+<dt>new_id (optional, str, None)</dt><dd><p>When <em>action=move</em>, specifies the new filter rule ID.</p>
 </dd>
 <dt>direction (optional, str, both)</dt><dd><p>Specifies to what packets the rule applies.</p>
 </dd>
@@ -353,6 +354,8 @@
 </dd>
 <dt>id (optional, str, None)</dt><dd><p>Specifies the filter rule ID.</p>
 <p><code class="docutils literal notranslate"><span class="pre">all</span></code> specifies to remove all user-defined filter rules.</p>
+</dd>
+<dt>new_id (optional, str, None)</dt><dd><p>When <em>action=move</em>, specifies the new filter rule ID.</p>
 </dd>
 <dt>direction (optional, str, both)</dt><dd><p>Specifies to what packets the rule applies.</p>
 </dd>
