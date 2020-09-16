@@ -50,6 +50,10 @@ Parameters
     When *action=export*, directory will be created if it does not exist.
 
 
+  rawexport (optional, bool, False)
+    When *action=export*, specifies to export filter rules as is and to not reverse direction on rules.
+
+
   ipv4 (optional, dict, None)
     Specifies the IPv4 filter module state and rules.
 
