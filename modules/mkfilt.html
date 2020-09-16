@@ -306,6 +306,10 @@
 <dt>interface (optional, str, None)</dt><dd><p>Specifies the name of the IP interface to which the filter rule applies.</p>
 </dd>
 <dt>fragment (optional, str, None)</dt><dd><p>Specifies the fragmentation control.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Y</span></code> specifies all packets.</p>
+<p><code class="docutils literal notranslate"><span class="pre">N</span></code> specifies unfragmented packets only.</p>
+<p><code class="docutils literal notranslate"><span class="pre">O</span></code> specifies fragments and fragment headers only.</p>
+<p><code class="docutils literal notranslate"><span class="pre">H</span></code> specifies fragment headers and unfragmented packets only.</p>
 </dd>
 <dt>timeout (optional, str, None)</dt><dd><p>Specifies the expiration time. The expiration time is the amount of time the rule should remain active in seconds.</p>
 </dd>
@@ -321,6 +325,13 @@
 </dd>
 <dt>antivirus (optional, str, None)</dt><dd><p>Specifies the antivirus file name.</p>
 <p>Understands some versions of ClamAV Virus Database.</p>
+<p>Mutually exclusive with <em>pattern</em> and <em>pattern_filename</em>.</p>
+</dd>
+<dt>pattern (optional, str, None)</dt><dd><p>Specifies the quoted character string or pattern.</p>
+<p>Mutually exclusive with <em>antivirus</em> and <em>pattern_filename</em>.</p>
+</dd>
+<dt>pattern_filename (optional, str, None)</dt><dd><p>Specifies the pattern file name.</p>
+<p>Mutually exclusive with <em>antivirus</em> and <em>pattern</em>.</p>
 </dd>
 </dl>
 </dd>
@@ -378,6 +389,10 @@
 <dt>interface (optional, str, None)</dt><dd><p>Specifies the name of the IP interface to which the filter rule applies.</p>
 </dd>
 <dt>fragment (optional, str, None)</dt><dd><p>Specifies the fragmentation control.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Y</span></code> specifies all packets.</p>
+<p><code class="docutils literal notranslate"><span class="pre">N</span></code> specifies unfragmented packets only.</p>
+<p><code class="docutils literal notranslate"><span class="pre">O</span></code> specifies fragments and fragment headers only.</p>
+<p><code class="docutils literal notranslate"><span class="pre">H</span></code> specifies fragment headers and unfragmented packets only.</p>
 </dd>
 <dt>timeout (optional, str, None)</dt><dd><p>Specifies the expiration time. The expiration time is the amount of time the rule should remain active in seconds.</p>
 </dd>
@@ -393,6 +408,13 @@
 </dd>
 <dt>antivirus (optional, str, None)</dt><dd><p>Specifies the antivirus file name.</p>
 <p>Understands some versions of ClamAV Virus Database.</p>
+<p>Mutually exclusive with <em>pattern</em> and <em>pattern_filename</em>.</p>
+</dd>
+<dt>pattern (optional, str, None)</dt><dd><p>Specifies the quoted character string or pattern.</p>
+<p>Mutually exclusive with <em>antivirus</em> and <em>pattern_filename</em>.</p>
+</dd>
+<dt>pattern_filename (optional, str, None)</dt><dd><p>Specifies the pattern file name.</p>
+<p>Mutually exclusive with <em>antivirus</em> and <em>pattern</em>.</p>
 </dd>
 </dl>
 </dd>
@@ -425,6 +447,7 @@
 <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Remove all user-defined and auto-generated filter rules</span>
   <span class="nt">mkfilt</span><span class="p">:</span>
     <span class="nt">ipv4</span><span class="p">:</span>
+      <span class="nt">default</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">permit</span>
       <span class="nt">force</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">yes</span>
       <span class="nt">rules</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="nt">action</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">remove</span>

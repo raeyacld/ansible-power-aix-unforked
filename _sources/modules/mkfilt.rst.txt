@@ -155,6 +155,14 @@ Parameters
       fragment (optional, str, None)
         Specifies the fragmentation control.
 
+        ``Y`` specifies all packets.
+
+        ``N`` specifies unfragmented packets only.
+
+        ``O`` specifies fragments and fragment headers only.
+
+        ``H`` specifies fragment headers and unfragmented packets only.
+
 
       timeout (optional, str, None)
         Specifies the expiration time. The expiration time is the amount of time the rule should remain active in seconds.
@@ -184,6 +192,20 @@ Parameters
         Specifies the antivirus file name.
 
         Understands some versions of ClamAV Virus Database.
+
+        Mutually exclusive with *pattern* and *pattern_filename*.
+
+
+      pattern (optional, str, None)
+        Specifies the quoted character string or pattern.
+
+        Mutually exclusive with *antivirus* and *pattern_filename*.
+
+
+      pattern_filename (optional, str, None)
+        Specifies the pattern file name.
+
+        Mutually exclusive with *antivirus* and *pattern*.
 
 
 
@@ -293,6 +315,14 @@ Parameters
       fragment (optional, str, None)
         Specifies the fragmentation control.
 
+        ``Y`` specifies all packets.
+
+        ``N`` specifies unfragmented packets only.
+
+        ``O`` specifies fragments and fragment headers only.
+
+        ``H`` specifies fragment headers and unfragmented packets only.
+
 
       timeout (optional, str, None)
         Specifies the expiration time. The expiration time is the amount of time the rule should remain active in seconds.
@@ -322,6 +352,20 @@ Parameters
         Specifies the antivirus file name.
 
         Understands some versions of ClamAV Virus Database.
+
+        Mutually exclusive with *pattern* and *pattern_filename*.
+
+
+      pattern (optional, str, None)
+        Specifies the quoted character string or pattern.
+
+        Mutually exclusive with *antivirus* and *pattern_filename*.
+
+
+      pattern_filename (optional, str, None)
+        Specifies the pattern file name.
+
+        Mutually exclusive with *antivirus* and *pattern*.
 
 
 
@@ -361,6 +405,7 @@ Examples
     - name: Remove all user-defined and auto-generated filter rules
       mkfilt:
         ipv4:
+          default: permit
           force: yes
           rules:
           - action: remove
