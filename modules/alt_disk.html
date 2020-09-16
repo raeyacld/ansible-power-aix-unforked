@@ -259,6 +259,16 @@
 </dd>
 <dt>force (optional, bool, False)</dt><dd><p>Forces removal of any existing alternate disk copy on target disks.</p>
 </dd>
+<dt>bootlist (optional, bool, False)</dt><dd><p>When <em>action=copy</em>, specifies to run bootlist after the alternate disk copy.</p>
+</dd>
+<dt>remain_nim_client (optional, bool, False)</dt><dd><p>When <em>action=copy</em>, specifies to copy the <code class="docutils literal notranslate"><span class="pre">/.rhosts</span></code> and <code class="docutils literal notranslate"><span class="pre">/etc/niminfo</span></code> files to the alternate rootvg.</p>
+</dd>
+<dt>device_reset (optional, bool, False)</dt><dd><p>When <em>action=copy</em>, specifies to reset any user-defined device configurations on the target <code class="docutils literal notranslate"><span class="pre">altinst_rootvg</span></code>.</p>
+</dd>
+<dt>first_boot_script (optional, str, None)</dt><dd><p>When <em>action=copy</em>, specifies an optional customization script to run during the initial boot of the alternate rootvg, after all file systems are mounted.</p>
+</dd>
+<dt>resolvconf (optional, str, None)</dt><dd><p>When <em>action=copy</em>, specifies the <code class="docutils literal notranslate"><span class="pre">resolv.conf</span></code> file to replace the existing one after the rootvg has been cloned.</p>
+</dd>
 </dl>
 </div></blockquote>
 </div>
