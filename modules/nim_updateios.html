@@ -325,6 +325,7 @@
 <p>If the operation status is not avalaible, the <em>vios_status</em> passed in parameter is returned.</p>
 <dl>
 <dt>&lt;tuple&gt; (when tuple are actually a NIM client and reachable with c_rsh., str, SUCCESS-UPDT)</dt><dd><p>Status of the execution on the &lt;tuple&gt;.</p>
+<p>The &lt;tuple&gt; elements are sorted to form the key of the dictionary.</p>
 <p><em>SKIPPED-NO-PREV-STATUS</em> when no <em>vios_status</em> value is found for the tuple.</p>
 <p>Previous <em>vios_status</em> when the tuple status does not contains SUCCESS.</p>
 <p><em>SKIPPED-TIMEOUT</em> when the <em>time_limit</em> is reached before updating the 1st VIOS of the tuple.</p>

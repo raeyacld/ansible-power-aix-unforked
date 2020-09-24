@@ -166,6 +166,8 @@ status (always, dict, {'status': {'vios1-vios2': 'SUCCESS-UPDT', 'vios3': 'SUCCE
   <tuple> (when tuple are actually a NIM client and reachable with c_rsh., str, SUCCESS-UPDT)
     Status of the execution on the <tuple>.
 
+    The <tuple> elements are sorted to form the key of the dictionary.
+
     *SKIPPED-NO-PREV-STATUS* when no *vios_status* value is found for the tuple.
 
     Previous *vios_status* when the tuple status does not contains SUCCESS.
