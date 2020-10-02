@@ -38,7 +38,7 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="nim_upgradeios – Perform a VIOS upgrade with NIM" href="nim_upgradeios.html" />
+    <link rel="next" title="nim_upgradeios – Use NIM to update a single or a pair of Virtual I/O Servers." href="nim_upgradeios.html" />
     <link rel="prev" title="nim_suma – Download fixes, SP or TL on an AIX server" href="nim_suma.html" /> 
 </head>
 
@@ -122,7 +122,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#status">Status</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="nim_upgradeios.html">nim_upgradeios – Perform a VIOS upgrade with NIM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nim_upgradeios.html">nim_upgradeios – Use NIM to update a single or a pair of Virtual I/O Servers.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="nim_vios_alt_disk.html">nim_vios_alt_disk – Create/Cleanup an alternate rootvg disk</a></li>
 <li class="toctree-l3"><a class="reference internal" href="nim_vios_hc.html">nim_vios_hc – Check if a pair of VIOSes can be updated</a></li>
 <li class="toctree-l3"><a class="reference internal" href="nim_viosupgrade.html">nim_viosupgrade – Perform an upgrade with the viosupgrade tool</a></li>
@@ -315,7 +315,7 @@
 <dl>
 <dt>msg (always, str, NIM updateios operation completed successfully)</dt><dd><p>The execution message.</p>
 </dd>
-<dt>targets (always, str, [nimclient01, nimclient02, …])</dt><dd><p>The execution message.</p>
+<dt>targets (always, str, [‘vios1’, ‘vios2, vios3’, ‘…’])</dt><dd><p>List of VIOSes actually targeted for the operation.</p>
 </dd>
 <dt>stdout (always, str, )</dt><dd><p>The standard output.</p>
 </dd>
@@ -335,10 +335,8 @@
 </dd>
 </dl>
 </dd>
-<dt>nim_node (always, dict, {‘nim_node’: {‘standalone’: {‘nimclient01’: {‘Cstate’: ‘ready for a NIM operation’, ‘Cstate_result’: ‘success’, ‘Mstate’: ‘currently running’, ‘cable_type1’: ‘N/A’, ‘class’: ‘machines’, ‘comments’: ‘object defined using nimquery -d’, ‘connect’: ‘nimsh’, ‘cpuid’: ‘00F600004C00’, ‘if1’: ‘master_net nimclient01.aus.stglabs.ibm.com AED8E7E90202 ent0’, ‘installed_image’: ‘ansible_img’, ‘mgmt_profile1’: ‘p8-hmc 2 nimclient-cec nimclient-vios1’, ‘netboot_kernel’: ‘64’, ‘platform’: ‘chrp’, ‘prev_state’: ‘customization is being performed’, ‘type’: ‘standalone’, ‘hostname’: ‘nimclient01.aus.stglabs.ibm.com’}}, ‘vios’: {‘vios1’: {‘Cstate’: ‘ready for a NIM operation’, ‘Cstate_result’: ‘success’, ‘Mstate’: ‘currently running’, ‘cable_type1’: ‘N/A’, ‘class’: ‘management’, ‘connect’: ‘nimsh’, ‘cpuid’: ‘00F600004C00’, ‘if1’: ‘master_net vios1.aus.stglabs.ibm.com 0’, ‘mgmt_profile1’: ‘p8-hmc 1 vios-cec’, ‘netboot_kernel’: ‘64’, ‘platform’: ‘chrp’, ‘prev_state’: ‘alt_disk_install operation is being performed’, ‘hostname’: ‘vios1.aus.stglabs.ibm.com’, ‘cluster’: {‘vios1’: {‘repos_state’: ‘’, ‘state’: ‘DOWN’}, ‘vios2’: {‘repos_state’: ‘OK’, ‘state’: ‘OK’}, ‘name’: ‘mycluster’, ‘nodes’: [‘vios1’, ‘vios2’], ‘state’: ‘DEGRADED’}}}}})</dt><dd><p>NIM node info. It can contains more information if passed as option <em>nim_node</em>.</p>
+<dt>nim_node (always, dict, {‘nim_node’: {‘vios’: {‘vios1’: {‘Cstate’: ‘ready for a NIM operation’, ‘Cstate_result’: ‘success’, ‘Mstate’: ‘currently running’, ‘cable_type1’: ‘N/A’, ‘class’: ‘management’, ‘connect’: ‘nimsh’, ‘cpuid’: ‘00F600004C00’, ‘if1’: ‘master_net vios1.aus.stglabs.ibm.com 0’, ‘mgmt_profile1’: ‘p8-hmc 1 vios-cec’, ‘netboot_kernel’: ‘64’, ‘platform’: ‘chrp’, ‘prev_state’: ‘alt_disk_install operation is being performed’, ‘hostname’: ‘vios1.aus.stglabs.ibm.com’, ‘cluster’: {‘vios1’: {‘repos_state’: ‘’, ‘state’: ‘DOWN’}, ‘vios2’: {‘repos_state’: ‘OK’, ‘state’: ‘OK’}, ‘name’: ‘mycluster’, ‘nodes’: [‘vios1’, ‘vios2’], ‘state’: ‘DEGRADED’}}}}})</dt><dd><p>NIM node info. It can contains more information if passed as option <em>nim_node</em>.</p>
 <dl class="simple">
-<dt>standalone (always, dict, )</dt><dd><p>List of standalone NIM resources.</p>
-</dd>
 <dt>vios (always, dict, )</dt><dd><p>List of VIOS NIM resources.</p>
 </dd>
 </dl>
@@ -388,7 +386,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="nim_upgradeios.html" class="btn btn-neutral float-right" title="nim_upgradeios – Perform a VIOS upgrade with NIM" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="nim_upgradeios.html" class="btn btn-neutral float-right" title="nim_upgradeios – Use NIM to update a single or a pair of Virtual I/O Servers." accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="nim_suma.html" class="btn btn-neutral float-left" title="nim_suma – Download fixes, SP or TL on an AIX server" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
