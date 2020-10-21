@@ -252,6 +252,8 @@
 </dd>
 <dt>path (optional, str, None)</dt><dd><p>Specifies an alternate install location.</p>
 </dd>
+<dt>all_updates (optional, bool, False)</dt><dd><p>Returns all updates for a fileset (default is to return the most recent level only).</p>
+</dd>
 <dt>base_levels_only (optional, bool, False)</dt><dd><p>Limits listings to base level filesets (no updates returned).</p>
 </dd>
 </dl>
@@ -294,21 +296,10 @@
 <dl>
 <dt>name (always, str, devices.scsi.disk.rte)</dt><dd><p>Fileset name</p>
 </dd>
-<dt>levels (, dict, )</dt><dd><p>Maps the fileset level to the fileset information.</p>
-<p>vrmf (always, dict, “vrmf”: {</p>
-</dd>
-</dl>
-<p>“fix”: 0,
-“mod”: 3,
-“rel”: 2,
-“ver”: 7</p>
-</dd>
-</dl>
-</dd>
-<dt>})</dt><dd><blockquote>
-<div><p>Fileset vrmf</p>
-</div></blockquote>
+<dt>levels (always, dict, )</dt><dd><p>Maps the fileset level to the fileset information.</p>
 <dl>
+<dt>vrmf (always, dict, “vrmf”: { “fix”: 0, “mod”: 3, “rel”: 2, “ver”: 7 })</dt><dd><p>Fileset vrmf</p>
+</dd>
 <dt>state (always, str, )</dt><dd><p>State of the fileset on the system</p>
 <p><code class="docutils literal notranslate"><span class="pre">applied</span></code> specifies that the fileset is installed on the system.</p>
 <p><code class="docutils literal notranslate"><span class="pre">applying</span></code> specifies that an attempt was made to apply the specified fileset, but it did not complete successfully, and cleanup was not performed.</p>
@@ -332,6 +323,10 @@
 <dt>emgr_locked (always, bool, )</dt><dd><p>Specifies whether fileset is locked by the interim fix manager</p>
 </dd>
 <dt>sources (always, list, [‘/etc/objrepos’])</dt><dd><p>Source paths</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd>

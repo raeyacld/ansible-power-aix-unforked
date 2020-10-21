@@ -42,6 +42,10 @@ Parameters
     Specifies an alternate install location.
 
 
+  all_updates (optional, bool, False)
+    Returns all updates for a fileset (default is to return the most recent level only).
+
+
   base_levels_only (optional, bool, False)
     Limits listings to base level filesets (no updates returned).
 
@@ -100,16 +104,11 @@ ansible_facts (always, complex, )
       Fileset name
 
 
-    levels (, dict, )
+    levels (always, dict, )
       Maps the fileset level to the fileset information.
 
 
-      vrmf (always, dict, "vrmf": {
-    "fix": 0,
-    "mod": 3,
-    "rel": 2,
-    "ver": 7
-})
+      vrmf (always, dict, "vrmf": { "fix": 0, "mod": 3, "rel": 2, "ver": 7 })
         Fileset vrmf
 
 
