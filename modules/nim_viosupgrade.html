@@ -335,6 +335,24 @@
 </dd>
 <dt>stderr (If the command was run., str, )</dt><dd><p>Standard error of the command.</p>
 </dd>
+<dt>meta (always, dict, )</dt><dd><p>Detailed information on the module execution.</p>
+<dl>
+<dt>messages (always, list, see below)</dt><dd><p>Details on errors/warnings not related to a specific tuple.</p>
+</dd>
+<dt>&lt;vios&gt; (when target is actually a NIM client, dict, )</dt><dd><p>Detailed information on the execution on the target vios</p>
+<dl class="simple">
+<dt>messages (always, list, )</dt><dd><p>Details on errors/warnings.</p>
+</dd>
+<dt>cmd (If the command was run., str, )</dt><dd><p>Command exectued.</p>
+</dd>
+<dt>stdout (If the command was run., str, )</dt><dd><p>Standard output of the command.</p>
+</dd>
+<dt>stderr (If the command was run., str, )</dt><dd><p>Standard error of the command.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
 </dl>
 </div>
 <div class="section" id="status">

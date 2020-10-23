@@ -184,6 +184,36 @@ stderr (If the command was run., str, )
   Standard error of the command.
 
 
+meta (always, dict, )
+  Detailed information on the module execution.
+
+
+  messages (always, list, see below)
+    Details on errors/warnings not related to a specific tuple.
+
+
+  <vios> (when target is actually a NIM client, dict, )
+    Detailed information on the execution on the target vios
+
+
+    messages (always, list, )
+      Details on errors/warnings.
+
+
+    cmd (If the command was run., str, )
+      Command exectued.
+
+
+    stdout (If the command was run., str, )
+      Standard output of the command.
+
+
+    stderr (If the command was run., str, )
+      Standard error of the command.
+
+
+
+
 
 
 
