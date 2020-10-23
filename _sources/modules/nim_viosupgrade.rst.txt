@@ -172,6 +172,18 @@ status (always, dict, )
   When ``target_file`` is set, then the key is 'all'.
 
 
+cmd (If the command was run., str, )
+  Command exectued.
+
+
+stdout (If the command was run., str, )
+  Standard output of the command.
+
+
+stderr (If the command was run., str, )
+  Standard error of the command.
+
+
 
 
 

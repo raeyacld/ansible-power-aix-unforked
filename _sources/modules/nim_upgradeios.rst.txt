@@ -34,7 +34,7 @@ The below requirements are needed on the host that executes this module.
 Parameters
 ----------
 
-  action (True, str, None)
+  action (optional, str, migrate)
     Specifies the operation to perform on the target VIOSes.
 
     ``migrate`` to use migvios NIM operation to migrate the system software.
@@ -174,8 +174,8 @@ Parameters
     Can be used with *action=migrate*.
 
 
-  file_res (optional, str, None)
-    TODO document file_res parameter.
+  file_resource (optional, str, None)
+    TODO document file_resource parameter.
 
     Can be used with *action=migrate*.
 
@@ -367,6 +367,10 @@ meta (always, dict, )
 
     <vios> (when target is actually a NIM client., dict, )
       updateios information for a specific vios.
+
+
+      cmd (If the command was run., str, )
+        Command exectued.
 
 
       stdout (If the command was run., str, )

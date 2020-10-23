@@ -248,7 +248,7 @@
 <h2><a class="toc-backref" href="#id3">Parameters</a><a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div><dl>
-<dt>action (True, str, None)</dt><dd><p>Specifies the operation to perform on the target VIOSes.</p>
+<dt>action (optional, str, migrate)</dt><dd><p>Specifies the operation to perform on the target VIOSes.</p>
 <p><code class="docutils literal notranslate"><span class="pre">migrate</span></code> to use migvios NIM operation to migrate the system software.</p>
 <p><code class="docutils literal notranslate"><span class="pre">viosupgrade</span></code> to use the viosupgrade command to upgrade. Not supported yet.</p>
 </dd>
@@ -318,7 +318,7 @@
 <dt>log (optional, str, None)</dt><dd><p>TODO document log parameter.</p>
 <p>Can be used with <em>action=migrate</em>.</p>
 </dd>
-<dt>file_res (optional, str, None)</dt><dd><p>TODO document file_res parameter.</p>
+<dt>file_resource (optional, str, None)</dt><dd><p>TODO document file_resource parameter.</p>
 <p>Can be used with <em>action=migrate</em>.</p>
 </dd>
 <dt>group (optional, str, None)</dt><dd><p>Specifies the NIM resource group that contains NIM resources.</p>
@@ -422,6 +422,8 @@
 </dd>
 <dt>&lt;vios&gt; (when target is actually a NIM client., dict, )</dt><dd><p>updateios information for a specific vios.</p>
 <dl class="simple">
+<dt>cmd (If the command was run., str, )</dt><dd><p>Command exectued.</p>
+</dd>
 <dt>stdout (If the command was run., str, )</dt><dd><p>Standard output of the command.</p>
 </dd>
 <dt>stderr (If the command was run., str, )</dt><dd><p>Standard error of the command.</p>
