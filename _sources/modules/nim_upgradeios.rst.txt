@@ -267,6 +267,11 @@ Parameters
 
 
 
+Notes
+-----
+
+.. note::
+   - Debug on NIM master could be done using the following command **nim -o showlog -a full_log=yes -a log_type=script vios_target**
 
 
 

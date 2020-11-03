@@ -119,6 +119,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#synopsis">Synopsis</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#requirements">Requirements</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#notes">Notes</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#return-values">Return Values</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#status">Status</a></li>
@@ -126,7 +127,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="nim_vios_alt_disk.html">nim_vios_alt_disk – Create/Cleanup an alternate rootvg disk</a></li>
 <li class="toctree-l3"><a class="reference internal" href="nim_vios_hc.html">nim_vios_hc – Check if a pair of VIOSes can be updated</a></li>
-<li class="toctree-l3"><a class="reference internal" href="nim_viosupgrade.html">nim_viosupgrade – Perform an upgrade with the viosupgrade tool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nim_viosupgrade.html">nim_viosupgrade – Use NIM to upgrade VIOS(es) with the viosupgrade tool from a NIM master.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suma.html">suma – Download/Install fixes, SP or TL on an AIX server.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="user.html">user – Create new users or change/remove attributes of users on AIX.</a></li>
 </ul>
@@ -224,9 +225,10 @@
 <li><p><a class="reference internal" href="#synopsis" id="id1">Synopsis</a></p></li>
 <li><p><a class="reference internal" href="#requirements" id="id2">Requirements</a></p></li>
 <li><p><a class="reference internal" href="#parameters" id="id3">Parameters</a></p></li>
-<li><p><a class="reference internal" href="#examples" id="id4">Examples</a></p></li>
-<li><p><a class="reference internal" href="#return-values" id="id5">Return Values</a></p></li>
-<li><p><a class="reference internal" href="#status" id="id6">Status</a></p></li>
+<li><p><a class="reference internal" href="#notes" id="id4">Notes</a></p></li>
+<li><p><a class="reference internal" href="#examples" id="id5">Examples</a></p></li>
+<li><p><a class="reference internal" href="#return-values" id="id6">Return Values</a></p></li>
+<li><p><a class="reference internal" href="#status" id="id7">Status</a></p></li>
 </ul>
 </div>
 <div class="section" id="synopsis">
@@ -366,8 +368,17 @@
 </dl>
 </div></blockquote>
 </div>
+<div class="section" id="notes">
+<h2><a class="toc-backref" href="#id4">Notes</a><a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>Debug on NIM master could be done using the following command <strong>nim -o showlog -a full_log=yes -a log_type=script vios_target</strong></p></li>
+</ul>
+</div>
+</div>
 <div class="section" id="examples">
-<h2><a class="toc-backref" href="#id4">Examples</a><a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id5">Examples</a><a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-yaml+jinja notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Perform a backup of nimvios01</span>
   <span class="nt">nim_upgradeios</span><span class="p">:</span>
     <span class="nt">targets</span><span class="p">:</span> <span class="s">&quot;(nimvios01)&quot;</span>
@@ -376,7 +387,7 @@
 </div>
 </div>
 <div class="section" id="return-values">
-<h2><a class="toc-backref" href="#id5">Return Values</a><a class="headerlink" href="#return-values" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id6">Return Values</a><a class="headerlink" href="#return-values" title="Permalink to this headline">¶</a></h2>
 <dl>
 <dt>msg (always, str, NIM upgradeios operation completed. See status and meta for details.)</dt><dd><p>The execution message.</p>
 </dd>
@@ -437,7 +448,7 @@
 </dl>
 </div>
 <div class="section" id="status">
-<h2><a class="toc-backref" href="#id6">Status</a><a class="headerlink" href="#status" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id7">Status</a><a class="headerlink" href="#status" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>This module is not guaranteed to have a backwards compatible interface. <em>[preview]</em></p></li>
 <li><p>This module is maintained by community.</p></li>
