@@ -250,9 +250,9 @@
 <blockquote>
 <div><dl>
 <dt>action (True, str, None)</dt><dd><p>Specifies the operation to perform.</p>
-<p><code class="docutils literal notranslate"><span class="pre">bosinst</span></code> to perform and bosinst installation.</p>
-<p><code class="docutils literal notranslate"><span class="pre">altdisk</span></code> to perform and alternate disk installation.</p>
 <p><code class="docutils literal notranslate"><span class="pre">get_status</span></code> to get the status of the upgrade.</p>
+<p><code class="docutils literal notranslate"><span class="pre">bosinst</span></code> to perform a new and fresh installation on the current rootvg disk.</p>
+<p><code class="docutils literal notranslate"><span class="pre">altdisk</span></code> to perform a new installation on the alternative disk. The current rootvg disk on the VIOS partition is not impacted by this installation. The VIOS partition that has the current rootvg disk, remains in the running state during the installation of the alternative disk.</p>
 </dd>
 <dt>targets (optional, list, None)</dt><dd><p>Specifies the list of VIOSes NIM targets to update.</p>
 <p>Either <em>targets</em> or <em>target_file</em> must be specified.</p>
@@ -270,13 +270,13 @@
 <p>Valid keys are the follwoing.</p>
 <p><em>ios_mksysb</em>, specifies the ios_mksysb resource name on the NIM Master server for the specified VIOS installation.</p>
 <p><em>spotname</em>, when <code class="docutils literal notranslate"><span class="pre">action=bosinst</span></code> it specifies the resource object name of the Shared Product Object Tree (SPOT) for NIM installation.</p>
-<p><em>rootvg_clone_disk</em>, mandatory if <code class="docutils literal notranslate"><span class="pre">action=altdisk</span></code> this colon-separated list specifies alternative disks to install the selected VIOS image, current rootvg disk on the VIOS partition is not impacted by this installation.</p>
+<p><em>rootvg_clone_disk</em>, mandatory if <code class="docutils literal notranslate"><span class="pre">action=altdisk</span></code> this colon-separated list specifies alternative disks to install the selected VIOS image, current rootvg disk on the VIOS partition is not impacted by this installation. When <code class="docutils literal notranslate"><span class="pre">action=bosinst</span></code>, the provided disks are used to clone the current rootvg. After the completion of the migration process, the current rootvg disk is installed with the provided image. The provided disks are at the VIOS level before the migration process.</p>
 <p><em>skip_rootvg_cloning</em>, when <code class="docutils literal notranslate"><span class="pre">action=bosinst</span></code> boolean (default=no) to skip the cloning of current rootvg disks to alternative disks and continues with the VIOS installation on the current rootvg disk.</p>
 <p><em>rootvg_install_disk</em>, when <code class="docutils literal notranslate"><span class="pre">action=bosinst</span></code> this colon-separated list specifies new rootvg disks where the specified image must be installed instead of the existing rootvg disks, one of <em>rootvg_clone_disk</em> or <em>rootvg_install_disk</em> or <em>skip_rootvg_cloning</em> must be specified.</p>
 <p><em>backup_file_resource</em>, specifies the resource name of the VIOS configuration backup file.</p>
 <p><em>resources</em>, specifies the configuration resources to be applied after the installation, valid values are resolv_conf, script, fb_script, file_res, image_data, and log.</p>
 <p><em>manage_cluster</em>, boolean (default=yes) that specifies that cluster-level backup and restore operations are performed, mandatory for the VIOS that is part of an SSP cluster.</p>
-<p><em>preview</em>, boolean (default=yes) that specifies only validation of VIOS hosts readyness for installation is performed, can be used for preview of the installation image only.</p>
+<p><em>preview</em>, boolean (default=false) that specifies only validation of VIOS hosts readyness for installation is performed, can be used for preview of the installation image only.</p>
 </dd>
 <dt>vios_status (optional, dict, None)</dt><dd><p>Specifies the result of a previous operation.</p>
 <p>If set then the <em>vios_status</em> of a target tuple must contain <em>SUCCESS</em> to attempt update.</p>
@@ -305,16 +305,58 @@
 </div>
 <div class="section" id="examples">
 <h2><a class="toc-backref" href="#id5">Examples</a><a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-yaml+jinja notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Query viosupgrade status</span>
-  <span class="nt">nim_viosupgrade</span><span class="p">:</span>
-    <span class="nt">action</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">get_status</span>
-    <span class="nt">targets</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nimvios01</span>
-
-<span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Perform an altdisk viosupgrade of nimvios01</span>
+<div class="highlight-yaml+jinja notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Validate an altdisk viosupgrade, no change on the vios</span>
   <span class="nt">nim_viosupgrade</span><span class="p">:</span>
     <span class="nt">action</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">altdisk</span>
     <span class="nt">targets</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nimvios01</span>
-    <span class="nt">viosupgrade_params</span><span class="p">:</span> <span class="p p-Indicator">{</span><span class="s">&#39;all&#39;</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">{}}</span>
+    <span class="nt">viosupgrade_params</span><span class="p">:</span>
+      <span class="nt">all</span><span class="p">:</span>
+        <span class="nt">resources</span><span class="p">:</span>              <span class="l l-Scalar l-Scalar-Plain">master_net_conf:logdir</span>
+        <span class="nt">manage_cluster</span><span class="p">:</span>         <span class="l l-Scalar l-Scalar-Plain">False</span>
+        <span class="nt">preview</span><span class="p">:</span>                <span class="l l-Scalar l-Scalar-Plain">True</span>
+      <span class="nt">nimvios01</span><span class="p">:</span>
+        <span class="nt">ios_mksysb</span><span class="p">:</span>             <span class="l l-Scalar l-Scalar-Plain">vios-3-1-1-0_sysb</span>
+        <span class="nt">rootvg_clone_disk</span><span class="p">:</span>      <span class="l l-Scalar l-Scalar-Plain">hdisk1</span>
+        <span class="nt">backup_file_resource</span><span class="p">:</span>   <span class="l l-Scalar l-Scalar-Plain">nimvios01_iosb</span>
+
+<span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Perform an altdisk viosupgrade</span>
+  <span class="nt">nim_viosupgrade</span><span class="p">:</span>
+    <span class="nt">action</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">altdisk</span>
+    <span class="nt">targets</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nimvios01</span>
+    <span class="nt">viosupgrade_params</span><span class="p">:</span>
+      <span class="nt">all</span><span class="p">:</span>
+        <span class="nt">resources</span><span class="p">:</span>              <span class="l l-Scalar l-Scalar-Plain">master_net_conf:logdir</span>
+        <span class="nt">manage_cluster</span><span class="p">:</span>         <span class="l l-Scalar l-Scalar-Plain">False</span>
+        <span class="nt">preview</span><span class="p">:</span>                <span class="l l-Scalar l-Scalar-Plain">False</span>
+      <span class="nt">nimvios01</span><span class="p">:</span>
+        <span class="nt">ios_mksysb</span><span class="p">:</span>             <span class="l l-Scalar l-Scalar-Plain">vios-3-1-1-0_sysb</span>
+        <span class="nt">rootvg_clone_disk</span><span class="p">:</span>      <span class="l l-Scalar l-Scalar-Plain">hdisk1</span>
+        <span class="nt">backup_file_resource</span><span class="p">:</span>   <span class="l l-Scalar l-Scalar-Plain">nimvios01_iosb</span>
+
+<span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Wait for up to an hour for the viosupgrade status to complete</span>
+  <span class="nt">nim_viosupgrade</span><span class="p">:</span>
+    <span class="nt">action</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">get_status</span>
+    <span class="nt">targets</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nimvios01</span>
+  <span class="nt">register</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">result</span>
+  <span class="nt">until</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">result.meta[&#39;nimvios01&#39;].stdout.find(&quot;ready for a NIM operation&quot;) != -1</span>
+  <span class="nt">retries</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">30</span>
+  <span class="nt">delay</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">120</span>
+
+<span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Validate an bosinst viosupgrade, no change on the vios</span>
+  <span class="nt">nim_viosupgrade</span><span class="p">:</span>
+    <span class="nt">action</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">bosinst</span>
+    <span class="nt">targets</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nimvios02</span>
+    <span class="nt">viosupgrade_params</span><span class="p">:</span>
+      <span class="nt">all</span><span class="p">:</span>
+        <span class="nt">resources</span><span class="p">:</span>              <span class="l l-Scalar l-Scalar-Plain">master_net_conf:logdir:my_filebackup_res</span>
+        <span class="nt">manage_cluster</span><span class="p">:</span>         <span class="l l-Scalar l-Scalar-Plain">False</span>
+        <span class="nt">preview</span><span class="p">:</span>                <span class="l l-Scalar l-Scalar-Plain">True</span>
+      <span class="nt">nimvios02</span><span class="p">:</span>
+        <span class="nt">ios_mksysb</span><span class="p">:</span>             <span class="l l-Scalar l-Scalar-Plain">vios-3-1-1-0_sysb</span>
+        <span class="nt">spotname</span><span class="p">:</span>               <span class="l l-Scalar l-Scalar-Plain">vios-3-1-1-0_spot</span>
+        <span class="nt">rootvg_install_disk</span><span class="p">:</span>    <span class="s">&quot;hdisk1:hdisk2&quot;</span>
+        <span class="nt">skip_rootvg_cloning</span><span class="p">:</span>    <span class="l l-Scalar l-Scalar-Plain">True</span>
+        <span class="nt">backup_file_resource</span><span class="p">:</span>   <span class="l l-Scalar l-Scalar-Plain">nimvios02_iosb</span>
 </pre></div>
 </div>
 </div>
