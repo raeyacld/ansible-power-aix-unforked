@@ -264,7 +264,7 @@
 <p>For an SSP cluster, the viosupgrade command must be run on individual nodes. Out of the n number of nodes in the SSP cluster, maximum n-1 nodes can be upgraded at the same time. Hence, you must ensure that at least one node is always active in the cluster and is not part of the upgrade process.</p>
 <p>Only the <em>action</em> and <em>preview</em> parameters will be considered as others should be provided in file.</p>
 </dd>
-<dt>viosupgrade_params (True, dict, None)</dt><dd><p>Specifies the parameters for the viosupgrade command in a dictionary of disctionaries.</p>
+<dt>viosupgrade_params (False, dict, None)</dt><dd><p>Specifies the parameters for the viosupgrade command in a dictionary of disctionaries.</p>
 <p>The keys of this dictionary can be the target name or the specific key ‘all’. Then associated parameters will apply to the target or all of them. When <em>target_file</em> is specified, then you must use the key ‘all’.</p>
 <p>When building the viosugrade command, it will look first if the parameter is present for the target then into the ‘all’ section.</p>
 <p>Valid keys are the follwoing.</p>
@@ -338,7 +338,7 @@
     <span class="nt">action</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">get_status</span>
     <span class="nt">targets</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nimvios01</span>
   <span class="nt">register</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">result</span>
-  <span class="nt">until</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">result.meta[&#39;nimvios01&#39;].stdout.find(&quot;ready for a NIM operation&quot;) != -1</span>
+  <span class="nt">until</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">result.status[&#39;nimvios01&#39;] == &#39;ONGOING&#39;</span>
   <span class="nt">retries</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">30</span>
   <span class="nt">delay</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">120</span>
 

@@ -61,7 +61,7 @@ Parameters
     Only the *action* and *preview* parameters will be considered as others should be provided in file.
 
 
-  viosupgrade_params (True, dict, None)
+  viosupgrade_params (False, dict, None)
     Specifies the parameters for the viosupgrade command in a dictionary of disctionaries.
 
     The keys of this dictionary can be the target name or the specific key 'all'. Then associated parameters will apply to the target or all of them. When *target_file* is specified, then you must use the key 'all'.
@@ -159,7 +159,7 @@ Examples
         action: get_status
         targets: nimvios01
       register: result
-      until: result.meta['nimvios01'].stdout.find("ready for a NIM operation") != -1
+      until: result.status['nimvios01'] == 'ONGOING'
       retries: 30
       delay: 120
 
