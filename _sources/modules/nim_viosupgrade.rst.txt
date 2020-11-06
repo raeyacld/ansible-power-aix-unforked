@@ -46,6 +46,8 @@ Parameters
 
     Either *targets* or *target_file* must be specified.
 
+    For an SSP cluster, the viosupgrade command must be run on individual nodes. Out of the n number of nodes in the SSP cluster, maximum n-1 nodes can be upgraded at the same time. Hence, you must ensure that at least one node is always active in the cluster and is not part of the upgrade process.
+
 
   target_file (optional, str, None)
     Specifies the file name that contains the list of VIOS nodes.
@@ -58,7 +60,7 @@ Parameters
 
     For an SSP cluster, the viosupgrade command must be run on individual nodes. Out of the n number of nodes in the SSP cluster, maximum n-1 nodes can be upgraded at the same time. Hence, you must ensure that at least one node is always active in the cluster and is not part of the upgrade process.
 
-    Only the *action* and *preview* parameters will be considered as others should be provided in file.
+    Only the *action* and *preview* parameters will be considered while others should be provided in file.
 
 
   viosupgrade_params (False, dict, None)
@@ -78,7 +80,7 @@ Parameters
 
     *skip_rootvg_cloning*, when ``action=bosinst`` boolean (default=no) to skip the cloning of current rootvg disks to alternative disks and continues with the VIOS installation on the current rootvg disk.
 
-    *rootvg_install_disk*, when ``action=bosinst`` this colon-separated list specifies new rootvg disks where the specified image must be installed instead of the existing rootvg disks, one of *rootvg_clone_disk* or *rootvg_install_disk* or *skip_rootvg_cloning* must be specified.
+    *rootvg_install_disk*, when ``action=bosinst`` this colon-separated list specifies new rootvg disks where the specified image must be installed instead of the existing rootvg disks, one and only one of *rootvg_clone_disk* or *rootvg_install_disk* or *skip_rootvg_cloning* must be specified.
 
     *backup_file_resource*, specifies the resource name of the VIOS configuration backup file.
 
@@ -159,7 +161,7 @@ Examples
         action: get_status
         targets: nimvios01
       register: result
-      until: result.status['nimvios01'] == 'ONGOING'
+      until: result.status['nimvios01'] != 'ONGOING'
       retries: 30
       delay: 120
 
@@ -176,7 +178,7 @@ Examples
             ios_mksysb:             vios-3-1-1-0_sysb
             spotname:               vios-3-1-1-0_spot
             rootvg_install_disk:    "hdisk1:hdisk2"
-            skip_rootvg_cloning:    True
+            skip_rootvg_cloning:    False
             backup_file_resource:   nimvios02_iosb
 
 

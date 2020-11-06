@@ -1,8 +1,8 @@
-.. _nim_upgradeios_module:
+.. __nim_upgradeios_module:
 
 
-nim_upgradeios -- Use NIM to update a single or a pair of Virtual I/O Servers.
-==============================================================================
+_nim_upgradeios -- Use NIM to update a single or a pair of Virtual I/O Servers.
+===============================================================================
 
 .. contents::
    :local:
@@ -283,7 +283,7 @@ Examples
 
     
     - name: Perform a backup of nimvios01
-      nim_upgradeios:
+      _nim_upgradeios:
         targets: "(nimvios01)"
         action: backup
 
@@ -398,7 +398,7 @@ Status
 
 
 
-- This module is not guaranteed to have a backwards compatible interface. *[preview]*
+- This module is . *[deprecated]*
 
 
 - This module is maintained by community.

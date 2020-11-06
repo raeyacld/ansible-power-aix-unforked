@@ -93,6 +93,7 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../modules.html">Modules</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../modules.html#module-reference">Module reference</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="_nim_upgradeios.html">_nim_upgradeios – Use NIM to update a single or a pair of Virtual I/O Servers.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="aixpert.html">aixpert – System security settings management.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="alt_disk.html">alt_disk – Alternate rootvg disk management.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="backup.html">backup – Data or system volume group backup management.</a></li>
@@ -115,7 +116,6 @@
 <li class="toctree-l3"><a class="reference internal" href="nim_flrtvc.html">nim_flrtvc – Generate flrtvc report, download and install efix</a></li>
 <li class="toctree-l3"><a class="reference internal" href="nim_suma.html">nim_suma – Download fixes, SP or TL on an AIX server</a></li>
 <li class="toctree-l3"><a class="reference internal" href="nim_updateios.html">nim_updateios – Use NIM to update a single or a pair of Virtual I/O Servers to latest maintenance level.</a></li>
-<li class="toctree-l3"><a class="reference internal" href="nim_upgradeios.html">nim_upgradeios – Use NIM to update a single or a pair of Virtual I/O Servers.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="nim_vios_alt_disk.html">nim_vios_alt_disk – Create/Cleanup an alternate rootvg disk</a></li>
 <li class="toctree-l3"><a class="reference internal" href="nim_vios_hc.html">nim_vios_hc – Check if a pair of VIOSes can be updated</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">nim_viosupgrade – Use NIM to upgrade VIOS(es) with the viosupgrade tool from a NIM master.</a><ul>
@@ -256,13 +256,14 @@
 </dd>
 <dt>targets (optional, list, None)</dt><dd><p>Specifies the list of VIOSes NIM targets to update.</p>
 <p>Either <em>targets</em> or <em>target_file</em> must be specified.</p>
+<p>For an SSP cluster, the viosupgrade command must be run on individual nodes. Out of the n number of nodes in the SSP cluster, maximum n-1 nodes can be upgraded at the same time. Hence, you must ensure that at least one node is always active in the cluster and is not part of the upgrade process.</p>
 </dd>
 <dt>target_file (optional, str, None)</dt><dd><p>Specifies the file name that contains the list of VIOS nodes.</p>
 <p>Either <em>targets</em> or <em>target_file</em> must be specified.</p>
 <p>The values and fields in the file must be specified in a particular sequence and format. The details of the format are specified in the /usr/samples/nim/viosupgrade.inst file and they are comma-separated. The maximum number of nodes that can be installed through the -f option is 30.</p>
 <p>The VIOS images are installed on the nodes simultaneously.</p>
 <p>For an SSP cluster, the viosupgrade command must be run on individual nodes. Out of the n number of nodes in the SSP cluster, maximum n-1 nodes can be upgraded at the same time. Hence, you must ensure that at least one node is always active in the cluster and is not part of the upgrade process.</p>
-<p>Only the <em>action</em> and <em>preview</em> parameters will be considered as others should be provided in file.</p>
+<p>Only the <em>action</em> and <em>preview</em> parameters will be considered while others should be provided in file.</p>
 </dd>
 <dt>viosupgrade_params (False, dict, None)</dt><dd><p>Specifies the parameters for the viosupgrade command in a dictionary of disctionaries.</p>
 <p>The keys of this dictionary can be the target name or the specific key ‘all’. Then associated parameters will apply to the target or all of them. When <em>target_file</em> is specified, then you must use the key ‘all’.</p>
@@ -272,7 +273,7 @@
 <p><em>spotname</em>, when <code class="docutils literal notranslate"><span class="pre">action=bosinst</span></code> it specifies the resource object name of the Shared Product Object Tree (SPOT) for NIM installation.</p>
 <p><em>rootvg_clone_disk</em>, mandatory if <code class="docutils literal notranslate"><span class="pre">action=altdisk</span></code> this colon-separated list specifies alternative disks to install the selected VIOS image, current rootvg disk on the VIOS partition is not impacted by this installation. When <code class="docutils literal notranslate"><span class="pre">action=bosinst</span></code>, the provided disks are used to clone the current rootvg. After the completion of the migration process, the current rootvg disk is installed with the provided image. The provided disks are at the VIOS level before the migration process.</p>
 <p><em>skip_rootvg_cloning</em>, when <code class="docutils literal notranslate"><span class="pre">action=bosinst</span></code> boolean (default=no) to skip the cloning of current rootvg disks to alternative disks and continues with the VIOS installation on the current rootvg disk.</p>
-<p><em>rootvg_install_disk</em>, when <code class="docutils literal notranslate"><span class="pre">action=bosinst</span></code> this colon-separated list specifies new rootvg disks where the specified image must be installed instead of the existing rootvg disks, one of <em>rootvg_clone_disk</em> or <em>rootvg_install_disk</em> or <em>skip_rootvg_cloning</em> must be specified.</p>
+<p><em>rootvg_install_disk</em>, when <code class="docutils literal notranslate"><span class="pre">action=bosinst</span></code> this colon-separated list specifies new rootvg disks where the specified image must be installed instead of the existing rootvg disks, one and only one of <em>rootvg_clone_disk</em> or <em>rootvg_install_disk</em> or <em>skip_rootvg_cloning</em> must be specified.</p>
 <p><em>backup_file_resource</em>, specifies the resource name of the VIOS configuration backup file.</p>
 <p><em>resources</em>, specifies the configuration resources to be applied after the installation, valid values are resolv_conf, script, fb_script, file_res, image_data, and log.</p>
 <p><em>manage_cluster</em>, boolean (default=yes) that specifies that cluster-level backup and restore operations are performed, mandatory for the VIOS that is part of an SSP cluster.</p>
@@ -338,7 +339,7 @@
     <span class="nt">action</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">get_status</span>
     <span class="nt">targets</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nimvios01</span>
   <span class="nt">register</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">result</span>
-  <span class="nt">until</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">result.status[&#39;nimvios01&#39;] == &#39;ONGOING&#39;</span>
+  <span class="nt">until</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">result.status[&#39;nimvios01&#39;] != &#39;ONGOING&#39;</span>
   <span class="nt">retries</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">30</span>
   <span class="nt">delay</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">120</span>
 
@@ -355,7 +356,7 @@
         <span class="nt">ios_mksysb</span><span class="p">:</span>             <span class="l l-Scalar l-Scalar-Plain">vios-3-1-1-0_sysb</span>
         <span class="nt">spotname</span><span class="p">:</span>               <span class="l l-Scalar l-Scalar-Plain">vios-3-1-1-0_spot</span>
         <span class="nt">rootvg_install_disk</span><span class="p">:</span>    <span class="s">&quot;hdisk1:hdisk2&quot;</span>
-        <span class="nt">skip_rootvg_cloning</span><span class="p">:</span>    <span class="l l-Scalar l-Scalar-Plain">True</span>
+        <span class="nt">skip_rootvg_cloning</span><span class="p">:</span>    <span class="l l-Scalar l-Scalar-Plain">False</span>
         <span class="nt">backup_file_resource</span><span class="p">:</span>   <span class="l l-Scalar l-Scalar-Plain">nimvios02_iosb</span>
 </pre></div>
 </div>
