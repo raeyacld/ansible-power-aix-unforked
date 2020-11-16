@@ -201,7 +201,7 @@ status (always, dict, { vios1: 'SUCCESS', vios2: 'FAILURE' })
 
 
 cmd (If the command was run when C(target_file) is set., str, )
-  Command exectued.
+  Command executed.
 
 
 stdout (If the command was run when C(target_file) is set., str, )
@@ -238,7 +238,7 @@ meta (always, dict, )
 
 
     cmd (If the command was run., str, )
-      Command exectued.
+      Command executed.
 
 
     stdout (If the command was run., str, )

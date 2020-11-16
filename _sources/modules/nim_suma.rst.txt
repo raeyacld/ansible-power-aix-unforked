@@ -57,7 +57,7 @@ Parameters
 
     ``Latest`` specifies to update the target to the latest SP suma can update for the current TL.
 
-    ``xxxx-xx(-00-0000``) sepcifies to update the target to a specif TL.
+    ``xxxx-xx(-00-0000``) specifies to update the target to a specific TL.
 
     ``xxxx-xx-xx-xxxx`` or ``xxxx-xx-xx`` specifies to update the target to a specific SP.
 
@@ -75,7 +75,7 @@ Parameters
   download_dir (optional, path, None)
     Absolute directory path where to download the packages on the NIM server.
 
-    When not set, if a NIM ressource *lpp_source_name* exists then it is the resource's location.
+    When not set, if a NIM resource *lpp_source_name* exists then it is the resource's location.
 
     If no NIM ressource exists, then it is set to /usr/sys/inst.images
 
@@ -101,7 +101,7 @@ Parameters
   description (optional, str, None)
     Specifies the display name for SUMA task. This is used when viewing existing SUMA tasks in SMIT for example.
 
-    If not set the will be labelled as '*action* request for oslevel *oslevel*'.
+    If not set they will be labelled as '*action* request for oslevel *oslevel*'.
 
     Can be used for *action=download* or *action=preview*.
 
@@ -123,7 +123,7 @@ Notes
    - The **/var/adm/ras/suma_dl.log** file on your system contains a list of files that have been downloaded.
    - When you configure SUMA in an AIX logical partition (LPAR) or as the NIM master, it establishes a connection to the fix distribution website and downloads the available service update. The fix distribution website is an IBM server with the domain name of esupport.ibm.com. If your configuration contains a firewall that blocks the connection to the fix distribution website, you must customize the firewall rules to allow SUMA to connect to the following IP addresses 129.42.56.189, 129.42.60.189, 129.42.54.189. SUMA connects to one of these IP addresses based on your geography.
    - You can refer to the IBM documentation for additional information on the SUMA command and configuration settings at https://www.ibm.com/support/knowledgecenter/ssw_aix_72/s_commands/suma.html.
-   - If you hit the known bug that prevent suma from running successfully, contact IBM AIX support and request and ifix for this problem (APAR IJ06197 SUMA MAY CAUSE A NULLPOINTEREXCEPTION) at http://www-01.ibm.com/support/docview.wss?uid=isg1IJ06197.
+   - If you hit the known bug that prevents suma from running successfully, contact IBM AIX support and request and ifix for this problem (APAR IJ06197 SUMA MAY CAUSE A NULLPOINTEREXCEPTION) at http://www-01.ibm.com/support/docview.wss?uid=isg1IJ06197.
    - To get assistance for SUMA errors through AIX Support refer to https://www-01.ibm.com/support/docview.wss?uid=ibm10719985.
 
 
@@ -135,7 +135,7 @@ Examples
 .. code-block:: yaml+jinja
 
     
-    - name: Check, download and create the NIM resource to install lastest updates
+    - name: Check, download and create the NIM resource to install latest updates
       nim_suma:
         action: download
         targets: nimclient01
@@ -160,7 +160,7 @@ targets (always, list, ['nimclient01', 'nimclient02', '...'])
 
 
 cmd (if a command was run., str, )
-  The command exectued.
+  The command executed.
 
 
 stdout (always, str, )

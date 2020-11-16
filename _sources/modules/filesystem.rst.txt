@@ -41,7 +41,7 @@ Parameters
 
 
   rm_mount_point (optional, bool, False)
-    When state is *state=absent*, specifies to remove the mount directory along with the entry in the filesystem.
+    When *state=absent*, specifies to remove the mount directory along with the entry in the filesystem.
 
 
   attributes (optional, list, None)

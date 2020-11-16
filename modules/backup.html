@@ -111,7 +111,7 @@
 <li class="toctree-l3"><a class="reference internal" href="filesystem.html">filesystem – Local and NFS filesystems management.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="flrtvc.html">flrtvc – Generate FLRTVC report, download and install security and HIPER fixes.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="geninstall.html">geninstall – Generic installer for various packaging formats.</a></li>
-<li class="toctree-l3"><a class="reference internal" href="group.html">group – Manage presence, attibutes and memeber of AIX groups.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="group.html">group – Manage presence, attributes and member of AIX groups.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="inittab.html">inittab – Create/change/remove entries in the inittab file on AIX</a></li>
 <li class="toctree-l3"><a class="reference internal" href="installp.html">installp – Installs and updates software</a></li>
 <li class="toctree-l3"><a class="reference internal" href="lpp_facts.html">lpp_facts – Returns installed software products as facts</a></li>
@@ -280,7 +280,7 @@
 <p>This disk or these disks must not currently contain any volume group definition.</p>
 <p>Required if <em>action=restore</em> and <em>type=mksysb</em>.</p>
 </dd>
-<dt>script (optional, path, None)</dt><dd><p>Specifies the full path of a customiation script file to run at the end of the mksysb installation.</p>
+<dt>script (optional, path, None)</dt><dd><p>Specifies the full path of a customization script file to run at the end of the mksysb installation.</p>
 <p>Can be used if <em>action=restore</em> or <em>type=mksysb</em>.</p>
 </dd>
 <dt>resolv_conf (optional, path, None)</dt><dd><p>Specifies the full path of a alternate resolv.conf file to replace the existing one after the mksysb installation.</p>
@@ -297,7 +297,7 @@
 <dt>create_data_file (optional, str, no)</dt><dd><p>Specifies to create the data file containing information on the vloume group, logical volumes, file systems and their sizes.</p>
 <p>If <em>volume_group=rootvg</em>, then data file will be in <code class="docutils literal notranslate"><span class="pre">/image.data</span></code>.</p>
 <p>If <code class="docutils literal notranslate"><span class="pre">volume_group</span></code> is a data volume group, data file will be in <code class="docutils literal notranslate"><span class="pre">/tmp/vgdata/vgname/vgname.data</span></code>.</p>
-<p>Specify <em>create_data_file=mapfile</em> to creates the MAPFILE containing the mapping of the logical to physical partitions for each logical volume in the volume group. This mapping can be used to allocate the same logical-to-physical mapping when the image is restored.</p>
+<p>Specify <em>create_data_file=mapfile</em> to create the MAPFILE containing the mapping of the logical to physical partitions for each logical volume in the volume group. This mapping can be used to allocate the same logical-to-physical mapping when the image is restored.</p>
 <p>Can be used if <em>action=create</em>.</p>
 </dd>
 <dt>exclude_fs (optional, path, None)</dt><dd><p>Specifies a file path that contains the list of file systems to exclude from the backup.</p>

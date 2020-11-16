@@ -1,7 +1,7 @@
 .. _group_module:
 
 
-group -- Manage presence, attibutes and memeber of AIX groups.
+group -- Manage presence, attributes and member of AIX groups.
 ==============================================================
 
 .. contents::
@@ -52,7 +52,7 @@ Parameters
   user_list_action (optional, str, None)
     Specifies to add or remove members/admins from the group.
 
-    ``add`` to add members or amdins of the group with provided *users_list* in group *name*
+    ``add`` to add members or admins of the group with provided *users_list* in group *name*
 
     ``remove`` to remove members or admins of the group with provided *users_list* from group *name*
 
@@ -119,7 +119,7 @@ msg (always, str, Group: foo SUCCESSFULLY created.)
 
 
 cmd (always, str, )
-  The command exectued.
+  The command executed.
 
 
 rc (When the command is executed., int, )

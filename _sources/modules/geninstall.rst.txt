@@ -108,7 +108,7 @@ msg (always, str, Invalid parameter: install_list cannot be empty)
 
 
 cmd (always, str, )
-  The command exectued.
+  The command executed.
 
 
 rc (When the command is executed., int, )

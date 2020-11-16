@@ -102,7 +102,7 @@
 <li class="toctree-l3"><a class="reference internal" href="filesystem.html">filesystem – Local and NFS filesystems management.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="flrtvc.html">flrtvc – Generate FLRTVC report, download and install security and HIPER fixes.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="geninstall.html">geninstall – Generic installer for various packaging formats.</a></li>
-<li class="toctree-l3"><a class="reference internal" href="group.html">group – Manage presence, attibutes and memeber of AIX groups.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="group.html">group – Manage presence, attributes and member of AIX groups.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="inittab.html">inittab – Create/change/remove entries in the inittab file on AIX</a></li>
 <li class="toctree-l3"><a class="reference internal" href="installp.html">installp – Installs and updates software</a></li>
 <li class="toctree-l3"><a class="reference internal" href="lpp_facts.html">lpp_facts – Returns installed software products as facts</a></li>
@@ -262,7 +262,7 @@
 </dd>
 <dt>oslevel (optional, str, Latest)</dt><dd><p>Specifies the Operating System level to update to;</p>
 <p><code class="docutils literal notranslate"><span class="pre">Latest</span></code> specifies to update the target to the latest SP suma can update for the current TL.</p>
-<p><code class="docutils literal notranslate"><span class="pre">xxxx-xx(-00-0000</span></code>) sepcifies to update the target to a specific TL.</p>
+<p><code class="docutils literal notranslate"><span class="pre">xxxx-xx(-00-0000</span></code>) specifies to update the target to a specific TL.</p>
 <p><code class="docutils literal notranslate"><span class="pre">xxxx-xx-xx-xxxx</span></code> or <code class="docutils literal notranslate"><span class="pre">xxxx-xx-xx</span></code> specifies to update the target to a specific SP.</p>
 <p>Required when <em>action=download</em> or <em>action=preview</em>.</p>
 </dd>
@@ -295,7 +295,7 @@
 <p>If <em>oslevel</em> is a TL and <em>last_sp=yes</em> the task is saved with the last SP available at the time the task is saved.</p>
 </dd>
 <dt>description (optional, str, None)</dt><dd><p>Specifies the display name for SUMA task. This is used when viewing existing SUMA tasks in SMIT for example.</p>
-<p>If not set the will be labelled as ‘<em>action</em> request for oslevel <em>oslevel</em>’.</p>
+<p>If not set they will be labelled as ‘<em>action</em> request for oslevel <em>oslevel</em>’.</p>
 <p>Can be used for <em>action=download</em> or <em>action=preview</em>.</p>
 </dd>
 <dt>metadata_dir (optional, path, /var/adm/ansible/metadata)</dt><dd><p>Specifies the directory where metadata files are downloaded.</p>
@@ -313,7 +313,7 @@
 <li><p>The <strong>/var/adm/ras/suma_dl.log</strong> file on your system contains a list of files that have been downloaded.</p></li>
 <li><p>When you configure SUMA in an AIX logical partition (LPAR) or as the NIM master, it establishes a connection to the fix distribution website and downloads the available service update. The fix distribution website is an IBM server with the domain name of esupport.ibm.com. If your configuration contains a firewall that blocks the connection to the fix distribution website, you must customize the firewall rules to allow SUMA to connect to the following IP addresses 129.42.56.189, 129.42.60.189, 129.42.54.189. SUMA connects to one of these IP addresses based on your geography.</p></li>
 <li><p>You can refer to the IBM documentation for additional information on the SUMA command and configuration settings at <a class="reference external" href="https://www.ibm.com/support/knowledgecenter/ssw_aix_72/s_commands/suma.html">https://www.ibm.com/support/knowledgecenter/ssw_aix_72/s_commands/suma.html</a>.</p></li>
-<li><p>If you hit the known bug that prevent suma from running successfully, contact IBM AIX support and request and ifix for this problem (APAR IJ06197 SUMA MAY CAUSE A NULLPOINTEREXCEPTION) at <a class="reference external" href="http://www-01.ibm.com/support/docview.wss?uid=isg1IJ06197">http://www-01.ibm.com/support/docview.wss?uid=isg1IJ06197</a>.</p></li>
+<li><p>If you hit the known bug that prevents suma from running successfully, contact IBM AIX support and request and ifix for this problem (APAR IJ06197 SUMA MAY CAUSE A NULLPOINTEREXCEPTION) at <a class="reference external" href="http://www-01.ibm.com/support/docview.wss?uid=isg1IJ06197">http://www-01.ibm.com/support/docview.wss?uid=isg1IJ06197</a>.</p></li>
 <li><p>To get assistance for SUMA errors through AIX Support refer to <a class="reference external" href="https://www-01.ibm.com/support/docview.wss?uid=ibm10719985">https://www-01.ibm.com/support/docview.wss?uid=ibm10719985</a>.</p></li>
 </ul>
 </div>
@@ -353,7 +353,7 @@
 <dl>
 <dt>msg (always, str, Suma preview completed successfully)</dt><dd><p>The execution message.</p>
 </dd>
-<dt>cmd (if a command was run., str, )</dt><dd><p>The command exectued.</p>
+<dt>cmd (if a command was run., str, )</dt><dd><p>The command executed.</p>
 </dd>
 <dt>stdout (always, str, )</dt><dd><p>The standard output of the command.</p>
 </dd>
