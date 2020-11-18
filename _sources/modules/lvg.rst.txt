@@ -1,8 +1,8 @@
 .. _lvg_module:
 
 
-lvg -- Configure LVM volume groups
-==================================
+lvg -- Configure AIX LVM volume groups
+======================================
 
 .. contents::
    :local:
@@ -22,6 +22,7 @@ The below requirements are needed on the host that executes this module.
 
 - AIX >= 7.1 TL3
 - Python >= 2.7
+- Root user is required.
 
 
 
