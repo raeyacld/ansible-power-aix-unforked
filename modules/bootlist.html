@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>devices – Devices management. &mdash; IBM Power Systems AIX 1.0.0-beta1 documentation</title>
+  <title>bootlist – Alters the list of boot devices available to the system &mdash; IBM Power Systems AIX 1.0.0-beta1 documentation</title>
   
 
   
@@ -38,8 +38,8 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="emgr – System interim fixes management." href="emgr.html" />
-    <link rel="prev" title="bootlist – Alters the list of boot devices available to the system" href="bootlist.html" /> 
+    <link rel="next" title="devices – Devices management." href="devices.html" />
+    <link rel="prev" title="backup – Data or system volume group backup management." href="backup.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -97,8 +97,7 @@
 <li class="toctree-l3"><a class="reference internal" href="aixpert.html">aixpert – System security settings management.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="alt_disk.html">alt_disk – Alternate rootvg disk management.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="backup.html">backup – Data or system volume group backup management.</a></li>
-<li class="toctree-l3"><a class="reference internal" href="bootlist.html">bootlist – Alters the list of boot devices available to the system</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">devices – Devices management.</a><ul>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">bootlist – Alters the list of boot devices available to the system</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#synopsis">Synopsis</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#requirements">Requirements</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
@@ -107,6 +106,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#status">Status</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="devices.html">devices – Devices management.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="emgr.html">emgr – System interim fixes management.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="filesystem.html">filesystem – Local and NFS filesystems management.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="flrtvc.html">flrtvc – Generate FLRTVC report, download and install security and HIPER fixes.</a></li>
@@ -198,14 +198,14 @@
         
           <li><a href="../modules.html">Modules</a> &raquo;</li>
         
-      <li>devices – Devices management.</li>
+      <li>bootlist – Alters the list of boot devices available to the system</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
             
-              <a href="https://github.com/IBM/ansible-power-aix/blob/dev-collection/docs/source/modules/devices.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/IBM/ansible-power-aix/blob/dev-collection/docs/source/modules/bootlist.rst" class="fa fa-github"> Edit on GitHub</a>
             
           
         
@@ -219,8 +219,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="devices-devices-management">
-<span id="devices-module"></span><h1>devices – Devices management.<a class="headerlink" href="#devices-devices-management" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="bootlist-alters-the-list-of-boot-devices-available-to-the-system">
+<span id="bootlist-module"></span><h1>bootlist – Alters the list of boot devices available to the system<a class="headerlink" href="#bootlist-alters-the-list-of-boot-devices-available-to-the-system" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
 <li><p><a class="reference internal" href="#synopsis" id="id1">Synopsis</a></p></li>
@@ -233,14 +233,13 @@
 </div>
 <div class="section" id="synopsis">
 <h2><a class="toc-backref" href="#id1">Synopsis</a><a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
-<p>Configures, modifies and unconfigures devices of a logical partition (LPAR).</p>
-<p>This module allows to configure a specified device or all devices in defined state. It can change attributes of a device in ‘Defined/Available’ state. At last it can unconfigure or stop a device in ‘Available’ state.</p>
+<p>Alters the list of possible boot devices from which the system may be booted. When the system is booted, it will scan the devices in the list and attempt to boot from the first device it finds containing a boot image.</p>
 </div>
 <div class="section" id="requirements">
 <h2><a class="toc-backref" href="#id2">Requirements</a><a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
 <p>The below requirements are needed on the host that executes this module.</p>
 <ul class="simple">
-<li><p>AIX</p></li>
+<li><p>AIX &gt;= 7.1 TL3</p></li>
 <li><p>Python &gt;= 2.7</p></li>
 </ul>
 </div>
@@ -248,52 +247,143 @@
 <h2><a class="toc-backref" href="#id3">Parameters</a><a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div><dl>
-<dt>attributes (optional, dict, None)</dt><dd><p>When <em>state=available</em>, specifies the device attribute-value pairs used for changing specific attribute values.</p>
+<dt>force (optional, bool, False)</dt><dd><p>Indicates that the boot list must be modified even if the validation of the <em>speed</em> and <em>duplex</em> attributes, if specified, is not possible.</p>
 </dd>
-<dt>device (optional, str, all)</dt><dd><p>Specifies the device logical name in the Customized Devices object class.</p>
-<p><code class="docutils literal notranslate"><span class="pre">all</span></code> specifies to configure all devices when <em>state=available</em>.</p>
+<dt>normal (optional, list, None)</dt><dd><p>Normal boot list. The normal list designates possible boot devices for when the system is booted in normal mode.</p>
+<p>Mutually exclusive with <em>both</em>.</p>
+<dl>
+<dt>device (True, str, None)</dt><dd><p>Specifies the name of the specific or generic device to include in the boot list.</p>
+<p>The following generic device keywords are supported:</p>
+<p><code class="docutils literal notranslate"><span class="pre">fd</span></code> specifies any standard I/O-attached diskette drive.</p>
+<p><code class="docutils literal notranslate"><span class="pre">scdisk</span></code> specifies any SCSI-attached disk.</p>
+<p><code class="docutils literal notranslate"><span class="pre">badisk</span></code> specifes any direct bus-attached disk.</p>
+<p><code class="docutils literal notranslate"><span class="pre">cd</span></code> specifies any SCSI-attached CD-ROM.</p>
+<p><code class="docutils literal notranslate"><span class="pre">rmt</span></code> specifies any SCSI-attached tape device.</p>
+<p><code class="docutils literal notranslate"><span class="pre">ent</span></code> specifies any Ethernet adapter.</p>
+<p><code class="docutils literal notranslate"><span class="pre">tok</span></code> specifies any Token-Ring adapter.</p>
+<p><code class="docutils literal notranslate"><span class="pre">fddi</span></code> specifies any Fiber Distributed Data Interface adapter.</p>
 </dd>
-<dt>force (optional, bool, False)</dt><dd><p>Forces the change/unconfigure operation to take place on a locked device.</p>
+<dt>blv (optional, str, None)</dt><dd><p>Specifies the boot logical volume on the target disk that is to be included in the boot list.</p>
 </dd>
-<dt>recursive (optional, bool, False)</dt><dd><p>Specifies to unconfigure the device and its children recursively.</p>
+<dt>pathid (optional, str, None)</dt><dd><p>Specifies the path ID of the target disk.</p>
+<p>You can specify one or more path IDs by entering a comma-separated list of the required paths to be added to the boot list.</p>
 </dd>
-<dt>state (optional, str, available)</dt><dd><p>Specifies the desired state of the device.</p>
-<p><code class="docutils literal notranslate"><span class="pre">available</span></code> configures device when its state is ‘defined’, otherwise it changes the device attributes.</p>
-<p><code class="docutils literal notranslate"><span class="pre">defined</span></code> unconfigures/stops the device when its state is ‘available’, otherwise it changes the device attributes.</p>
+<dt>bserver (optional, str, None)</dt><dd><p>Specifies the IP address of the BOOTP server.</p>
 </dd>
-<dt>chtype (optional, str, both)</dt><dd><p>Specifies the change type that is when the change should take place.</p>
-<p><code class="docutils literal notranslate"><span class="pre">reboot</span></code> changes the device at system reboot.</p>
-<p><code class="docutils literal notranslate"><span class="pre">current</span></code> changes the current state of the device temporarily. Not persistent after a reboot.</p>
-<p><code class="docutils literal notranslate"><span class="pre">both</span></code> changes both the current state of the device and the device database. Persistent after a reboot.</p>
+<dt>gateway (optional, str, None)</dt><dd><p>Specifies the IP address of the gateway.</p>
 </dd>
-<dt>parent_device (optional, str, None)</dt><dd><p>While modifying device, specifies the parent device of the device to be updated. For unconfigure/stop operation, specifies the parent device whose children need to be unconfigured recursively.</p>
+<dt>client (optional, str, None)</dt><dd><p>Specifies the IP address of the client.</p>
 </dd>
-<dt>rmtype (optional, str, unconfigure)</dt><dd><p>Specifies whether to unconfigure/stop the device.</p>
-<p><code class="docutils literal notranslate"><span class="pre">unconfigure</span></code> changes are applied to the device when the system is rebooted.</p>
-<p><code class="docutils literal notranslate"><span class="pre">stop</span></code> changes the current state of the device temporarily.</p>
+<dt>speed (optional, str, None)</dt><dd><p>Specifies the network adapter speed.</p>
+</dd>
+<dt>duplex (optional, str, None)</dt><dd><p>Specifies the mode of the network adapter.</p>
+</dd>
+<dt>vlan_tag (optional, int, None)</dt><dd><p>Specifies the virtual local area network (VLAN) identification value.</p>
+</dd>
+<dt>vlan_pri (optional, int, None)</dt><dd><p>Specifies the VLAN priority value.</p>
+</dd>
+<dt>filename (optional, str, None)</dt><dd><p>Specifies the name of the file that is loaded by Trivial File Transfer Protocol (TFTP) from the BOOTP server.</p>
+</dd>
+</dl>
+</dd>
+<dt>service (optional, list, None)</dt><dd><p>Service boot list. The service list designates possible boot devices for when the system is booted in service mode.</p>
+<p>Mutually exclusive with <em>both</em>.</p>
+<dl>
+<dt>device (True, str, None)</dt><dd><p>Specifies the name of the specific or generic device to include in the boot list.</p>
+<p>The following generic device keywords are supported:</p>
+<p><code class="docutils literal notranslate"><span class="pre">fd</span></code> specifies any standard I/O-attached diskette drive.</p>
+<p><code class="docutils literal notranslate"><span class="pre">scdisk</span></code> specifies any SCSI-attached disk.</p>
+<p><code class="docutils literal notranslate"><span class="pre">badisk</span></code> specifes any direct bus-attached disk.</p>
+<p><code class="docutils literal notranslate"><span class="pre">cd</span></code> specifies any SCSI-attached CD-ROM.</p>
+<p><code class="docutils literal notranslate"><span class="pre">rmt</span></code> specifies any SCSI-attached tape device.</p>
+<p><code class="docutils literal notranslate"><span class="pre">ent</span></code> specifies any Ethernet adapter.</p>
+<p><code class="docutils literal notranslate"><span class="pre">tok</span></code> specifies any Token-Ring adapter.</p>
+<p><code class="docutils literal notranslate"><span class="pre">fddi</span></code> specifies any Fiber Distributed Data Interface adapter.</p>
+</dd>
+<dt>blv (optional, str, None)</dt><dd><p>Specifies the boot logical volume on the target disk that is to be included in the boot list.</p>
+</dd>
+<dt>pathid (optional, str, None)</dt><dd><p>Specifies the path ID of the target disk.</p>
+<p>You can specify one or more path IDs by entering a comma-separated list of the required paths to be added to the boot list.</p>
+</dd>
+<dt>bserver (optional, str, None)</dt><dd><p>Specifies the IP address of the BOOTP server.</p>
+</dd>
+<dt>gateway (optional, str, None)</dt><dd><p>Specifies the IP address of the gateway.</p>
+</dd>
+<dt>client (optional, str, None)</dt><dd><p>Specifies the IP address of the client.</p>
+</dd>
+<dt>speed (optional, str, None)</dt><dd><p>Specifies the network adapter speed.</p>
+</dd>
+<dt>duplex (optional, str, None)</dt><dd><p>Specifies the mode of the network adapter.</p>
+</dd>
+<dt>vlan_tag (optional, int, None)</dt><dd><p>Specifies the virtual local area network (VLAN) identification value.</p>
+</dd>
+<dt>vlan_pri (optional, int, None)</dt><dd><p>Specifies the VLAN priority value.</p>
+</dd>
+<dt>filename (optional, str, None)</dt><dd><p>Specifies the name of the file that is loaded by Trivial File Transfer Protocol (TFTP) from the BOOTP server.</p>
+</dd>
+</dl>
+</dd>
+<dt>both (optional, list, None)</dt><dd><p>Both the normal boot list and the service boot list will be set to the same list of devices.</p>
+<p>Mutually exclusive with <em>normal</em> and <em>service</em>.</p>
+<dl>
+<dt>device (True, str, None)</dt><dd><p>Specifies the name of the specific or generic device to include in the boot list.</p>
+<p>The following generic device keywords are supported:</p>
+<p><code class="docutils literal notranslate"><span class="pre">fd</span></code> specifies any standard I/O-attached diskette drive.</p>
+<p><code class="docutils literal notranslate"><span class="pre">scdisk</span></code> specifies any SCSI-attached disk.</p>
+<p><code class="docutils literal notranslate"><span class="pre">badisk</span></code> specifes any direct bus-attached disk.</p>
+<p><code class="docutils literal notranslate"><span class="pre">cd</span></code> specifies any SCSI-attached CD-ROM.</p>
+<p><code class="docutils literal notranslate"><span class="pre">rmt</span></code> specifies any SCSI-attached tape device.</p>
+<p><code class="docutils literal notranslate"><span class="pre">ent</span></code> specifies any Ethernet adapter.</p>
+<p><code class="docutils literal notranslate"><span class="pre">tok</span></code> specifies any Token-Ring adapter.</p>
+<p><code class="docutils literal notranslate"><span class="pre">fddi</span></code> specifies any Fiber Distributed Data Interface adapter.</p>
+</dd>
+<dt>blv (optional, str, None)</dt><dd><p>Specifies the boot logical volume on the target disk that is to be included in the boot list.</p>
+</dd>
+<dt>pathid (optional, str, None)</dt><dd><p>Specifies the path ID of the target disk.</p>
+<p>You can specify one or more path IDs by entering a comma-separated list of the required paths to be added to the boot list.</p>
+</dd>
+<dt>bserver (optional, str, None)</dt><dd><p>Specifies the IP address of the BOOTP server.</p>
+</dd>
+<dt>gateway (optional, str, None)</dt><dd><p>Specifies the IP address of the gateway.</p>
+</dd>
+<dt>client (optional, str, None)</dt><dd><p>Specifies the IP address of the client.</p>
+</dd>
+<dt>speed (optional, str, None)</dt><dd><p>Specifies the network adapter speed.</p>
+</dd>
+<dt>duplex (optional, str, None)</dt><dd><p>Specifies the mode of the network adapter.</p>
+</dd>
+<dt>vlan_tag (optional, int, None)</dt><dd><p>Specifies the virtual local area network (VLAN) identification value.</p>
+</dd>
+<dt>vlan_pri (optional, int, None)</dt><dd><p>Specifies the VLAN priority value.</p>
+</dd>
+<dt>filename (optional, str, None)</dt><dd><p>Specifies the name of the file that is loaded by Trivial File Transfer Protocol (TFTP) from the BOOTP server.</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </div></blockquote>
 </div>
 <div class="section" id="examples">
 <h2><a class="toc-backref" href="#id4">Examples</a><a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-yaml+jinja notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Configure a device</span>
-  <span class="nt">devices</span><span class="p">:</span>
-    <span class="nt">device</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">proc0</span>
-    <span class="nt">state</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">available</span>
+<div class="highlight-yaml+jinja notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Set normal and service boot lists</span>
+  <span class="nt">bootlist</span><span class="p">:</span>
+    <span class="nt">normal</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="nt">device</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">hdisk0</span>
+        <span class="nt">blv</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">hd5</span>
+      <span class="p p-Indicator">-</span> <span class="nt">device</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">hdisk1</span>
+        <span class="nt">blv</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">hd5</span>
+        <span class="nt">pathid</span><span class="p">:</span> <span class="s">&quot;1&quot;</span>
+      <span class="p p-Indicator">-</span> <span class="nt">device</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ent0</span>
+        <span class="nt">client</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">129.35.9.23</span>
+        <span class="nt">gateway</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">129.35.21.1</span>
+        <span class="nt">bserver</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">129.12.2.10</span>
+    <span class="nt">service</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="nt">device</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">cd0</span>
 
-<span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Modify an attribute of a device</span>
-  <span class="nt">devices</span><span class="p">:</span>
-    <span class="nt">device</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">en1</span>
-    <span class="nt">state</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">available</span>
-    <span class="nt">attributes</span><span class="p">:</span>
-      <span class="nt">mtu</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">900</span>
-      <span class="nt">arp</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">off</span>
-
-<span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Unconfigure a device</span>
-  <span class="nt">devices</span><span class="p">:</span>
-    <span class="nt">device</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">proc0</span>
-    <span class="nt">state</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">defined</span>
+<span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Set both normal and service boot lists to the same device</span>
+  <span class="nt">bootlist</span><span class="p">:</span>
+    <span class="nt">both</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="nt">device</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">hdisk0</span>
 </pre></div>
 </div>
 </div>
@@ -302,11 +392,9 @@
 <dl class="simple">
 <dt>msg (always, str, )</dt><dd><p>The execution message.</p>
 </dd>
-<dt>rc (If the command failed., int, )</dt><dd><p>The return code.</p>
+<dt>stdout (always, str, )</dt><dd><p>The standard output</p>
 </dd>
-<dt>stdout (If the command failed., str, )</dt><dd><p>The standard output.</p>
-</dd>
-<dt>stderr (If the command failed., str, )</dt><dd><p>The standard error.</p>
+<dt>stderr (always, str, )</dt><dd><p>The standard error</p>
 </dd>
 </dl>
 </div>
@@ -333,10 +421,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="emgr.html" class="btn btn-neutral float-right" title="emgr – System interim fixes management." accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="devices.html" class="btn btn-neutral float-right" title="devices – Devices management." accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="bootlist.html" class="btn btn-neutral float-left" title="bootlist – Alters the list of boot devices available to the system" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="backup.html" class="btn btn-neutral float-left" title="backup – Data or system volume group backup management." accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
