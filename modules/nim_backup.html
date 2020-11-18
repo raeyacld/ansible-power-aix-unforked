@@ -104,9 +104,9 @@
 <li class="toctree-l3"><a class="reference internal" href="geninstall.html">geninstall – Generic installer for various packaging formats.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="group.html">group – Manage presence, attributes and member of AIX groups.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="inittab.html">inittab – Create/change/remove entries in the inittab file on AIX</a></li>
-<li class="toctree-l3"><a class="reference internal" href="installp.html">installp – Installs and updates software</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installp.html">installp – Installs and updates software.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="lpp_facts.html">lpp_facts – Returns installed software products as facts</a></li>
-<li class="toctree-l3"><a class="reference internal" href="lvg.html">lvg – Create/Modify/Remove a volume group</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lvg.html">lvg – Configure LVM volume groups</a></li>
 <li class="toctree-l3"><a class="reference internal" href="lvm_facts.html">lvm_facts – Provides information about defined LVM components.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="lvol.html">lvol – Create/Delete logical volume or change characteristics of logical volume on AIX</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mkfilt.html">mkfilt – Activates or deactivates the filter rules</a></li>
@@ -262,10 +262,10 @@
 <p>Discarded for <em>action=view</em> as this action only applies to ios_backup.</p>
 </dd>
 <dt>targets (False, list, None)</dt><dd><p>Specifies the NIM clients to perform the action on.</p>
-<p><code class="docutils literal notranslate"><span class="pre">foo*</span></code> designates all the NIM clients with name starting by <code class="docutils literal notranslate"><span class="pre">foo</span></code>.</p>
-<p><code class="docutils literal notranslate"><span class="pre">foo[2:4]</span></code> designates the NIM clients among foo2, foo3 and foo4.</p>
-<p><code class="docutils literal notranslate"><span class="pre">*</span></code> or <code class="docutils literal notranslate"><span class="pre">ALL</span></code> designates all the NIM clients.</p>
-<p><code class="docutils literal notranslate"><span class="pre">vios</span></code> or <code class="docutils literal notranslate"><span class="pre">standalone</span></code> designates all the NIM clients of this type.</p>
+<p><code class="docutils literal notranslate"><span class="pre">foo*</span></code> specifies all the NIM clients with name starting by <code class="docutils literal notranslate"><span class="pre">foo</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">foo[2:4]</span></code> specifies the NIM clients among foo2, foo3 and foo4.</p>
+<p><code class="docutils literal notranslate"><span class="pre">*</span></code> or <code class="docutils literal notranslate"><span class="pre">ALL</span></code> specifies all the NIM clients.</p>
+<p><code class="docutils literal notranslate"><span class="pre">vios</span></code> or <code class="docutils literal notranslate"><span class="pre">standalone</span></code> specifies all the NIM clients of this type.</p>
 <p>Required if <em>action=create</em> and <em>action=restore</em>.</p>
 <p>If <em>action=list</em> it filters the results on the source_image attribute of the NIM resource.</p>
 </dd>

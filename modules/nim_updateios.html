@@ -104,9 +104,9 @@
 <li class="toctree-l3"><a class="reference internal" href="geninstall.html">geninstall – Generic installer for various packaging formats.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="group.html">group – Manage presence, attributes and member of AIX groups.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="inittab.html">inittab – Create/change/remove entries in the inittab file on AIX</a></li>
-<li class="toctree-l3"><a class="reference internal" href="installp.html">installp – Installs and updates software</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installp.html">installp – Installs and updates software.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="lpp_facts.html">lpp_facts – Returns installed software products as facts</a></li>
-<li class="toctree-l3"><a class="reference internal" href="lvg.html">lvg – Create/Modify/Remove a volume group</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lvg.html">lvg – Configure LVM volume groups</a></li>
 <li class="toctree-l3"><a class="reference internal" href="lvm_facts.html">lvm_facts – Provides information about defined LVM components.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="lvol.html">lvol – Create/Delete logical volume or change characteristics of logical volume on AIX</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mkfilt.html">mkfilt – Activates or deactivates the filter rules</a></li>
@@ -317,7 +317,7 @@
 <dl>
 <dt>msg (always, str, NIM updateios operation completed successfully)</dt><dd><p>The execution message.</p>
 </dd>
-<dt>targets (always, str, [‘vios1’, ‘vios2, vios3’, ‘…’])</dt><dd><p>List of VIOSes actually targeted for the operation.</p>
+<dt>targets (always, list, [‘vios1’, ‘vios2, vios3’, ‘…’])</dt><dd><p>List of VIOSes actually targeted for the operation.</p>
 </dd>
 <dt>stdout (always, str, )</dt><dd><p>The standard output.</p>
 </dd>
@@ -353,7 +353,7 @@
 </dd>
 <dt>&lt;vios&gt; (when target is actually a NIM client., dict, )</dt><dd><p>updateios information for a specific vios.</p>
 <dl class="simple">
-<dt>cmd (If the command was run., str, )</dt><dd><p>Command exectued.</p>
+<dt>cmd (If the command was run., str, )</dt><dd><p>Command executed.</p>
 </dd>
 <dt>stdout (If the command was run., str, )</dt><dd><p>Standard output of the command.</p>
 </dd>

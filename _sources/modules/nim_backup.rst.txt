@@ -61,13 +61,13 @@ Parameters
   targets (False, list, None)
     Specifies the NIM clients to perform the action on.
 
-    ``foo*`` designates all the NIM clients with name starting by ``foo``.
+    ``foo*`` specifies all the NIM clients with name starting by ``foo``.
 
-    ``foo[2:4]`` designates the NIM clients among foo2, foo3 and foo4.
+    ``foo[2:4]`` specifies the NIM clients among foo2, foo3 and foo4.
 
-    ``*`` or ``ALL`` designates all the NIM clients.
+    ``*`` or ``ALL`` specifies all the NIM clients.
 
-    ``vios`` or ``standalone`` designates all the NIM clients of this type.
+    ``vios`` or ``standalone`` specifies all the NIM clients of this type.
 
     Required if *action=create* and *action=restore*.
 

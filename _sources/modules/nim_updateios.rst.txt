@@ -145,7 +145,7 @@ msg (always, str, NIM updateios operation completed successfully)
   The execution message.
 
 
-targets (always, str, ['vios1', 'vios2, vios3', '...'])
+targets (always, list, ['vios1', 'vios2, vios3', '...'])
   List of VIOSes actually targeted for the operation.
 
 
@@ -212,7 +212,7 @@ meta (always, dict, )
 
 
       cmd (If the command was run., str, )
-        Command exectued.
+        Command executed.
 
 
       stdout (If the command was run., str, )
