@@ -295,6 +295,14 @@ stderr (always, str, )
   The standard error
 
 
+normal (always, list, )
+  Normal boot list.
+
+
+service (always, list, )
+  Service boot list.
+
+
 
 
 
