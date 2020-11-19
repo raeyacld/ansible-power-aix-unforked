@@ -278,6 +278,12 @@ Examples
         both:
           - device: hdisk0
 
+    - name: Retrieve normal and service boot lists
+      bootlist:
+    - name: Print the boot lists
+      debug:
+        var: ansible_facts.bootlist
+
 
 
 Return Values
@@ -295,12 +301,22 @@ stderr (always, str, )
   The standard error
 
 
-normal (always, list, )
-  Normal boot list.
+ansible_facts (always, complex, )
+  Facts to add to ansible_facts about the normal and service boot lists.
 
 
-service (always, list, )
-  Service boot list.
+  bootlist (always, dict, )
+    Contains information about normal and service boot lists.
+
+
+    normal (always, list, {'normal': [{'blv': 'hd5', 'device': 'hdisk0', 'pathid': '0'}, {'bserver': '129.12.2.10', 'client': '129.35.9.23', 'device': 'ent0', 'gateway': '129.35.21.1'}]})
+      Normal boot list.
+
+
+    service (always, list, )
+      Service boot list.
+
+
 
 
 

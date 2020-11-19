@@ -384,21 +384,35 @@
   <span class="nt">bootlist</span><span class="p">:</span>
     <span class="nt">both</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="nt">device</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">hdisk0</span>
+
+<span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Retrieve normal and service boot lists</span>
+  <span class="nt">bootlist</span><span class="p">:</span>
+<span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Print the boot lists</span>
+  <span class="nt">debug</span><span class="p">:</span>
+    <span class="nt">var</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ansible_facts.bootlist</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="return-values">
 <h2><a class="toc-backref" href="#id5">Return Values</a><a class="headerlink" href="#return-values" title="Permalink to this headline">¶</a></h2>
-<dl class="simple">
+<dl>
 <dt>msg (always, str, )</dt><dd><p>The execution message.</p>
 </dd>
 <dt>stdout (always, str, )</dt><dd><p>The standard output</p>
 </dd>
 <dt>stderr (always, str, )</dt><dd><p>The standard error</p>
 </dd>
-<dt>normal (always, list, )</dt><dd><p>Normal boot list.</p>
+<dt>ansible_facts (always, complex, )</dt><dd><p>Facts to add to ansible_facts about the normal and service boot lists.</p>
+<dl>
+<dt>bootlist (always, dict, )</dt><dd><p>Contains information about normal and service boot lists.</p>
+<dl class="simple">
+<dt>normal (always, list, {‘normal’: [{‘blv’: ‘hd5’, ‘device’: ‘hdisk0’, ‘pathid’: ‘0’}, {‘bserver’: ‘129.12.2.10’, ‘client’: ‘129.35.9.23’, ‘device’: ‘ent0’, ‘gateway’: ‘129.35.21.1’}]})</dt><dd><p>Normal boot list.</p>
 </dd>
 <dt>service (always, list, )</dt><dd><p>Service boot list.</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd>
 </dl>
 </div>
