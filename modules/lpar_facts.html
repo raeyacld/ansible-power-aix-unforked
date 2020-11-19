@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>user – Create new users or change/remove attributes of users on AIX. &mdash; IBM Power Systems AIX 1.0.0-beta1 documentation</title>
+  <title>lpar_facts – Reports logical partition (LPAR) related information. &mdash; IBM Power Systems AIX 1.0.0-beta1 documentation</title>
   
 
   
@@ -38,8 +38,8 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Playbooks" href="../playbooks.html" />
-    <link rel="prev" title="suma – Download/Install fixes, SP or TL from IBM Fix Central website." href="suma.html" /> 
+    <link rel="next" title="lpp_facts – Returns installed software products as facts" href="lpp_facts.html" />
+    <link rel="prev" title="installp – Installs and updates software." href="installp.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -106,7 +106,14 @@
 <li class="toctree-l3"><a class="reference internal" href="group.html">group – Manage presence, attributes and member of AIX groups.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="inittab.html">inittab – Create/change/remove entries in the inittab file on AIX</a></li>
 <li class="toctree-l3"><a class="reference internal" href="installp.html">installp – Installs and updates software.</a></li>
-<li class="toctree-l3"><a class="reference internal" href="lpar_facts.html">lpar_facts – Reports logical partition (LPAR) related information.</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">lpar_facts – Reports logical partition (LPAR) related information.</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#return-values">Return Values</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#status">Status</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="lpp_facts.html">lpp_facts – Returns installed software products as facts</a></li>
 <li class="toctree-l3"><a class="reference internal" href="lvg.html">lvg – Configure AIX LVM volume groups</a></li>
 <li class="toctree-l3"><a class="reference internal" href="lvm_facts.html">lvm_facts – Provides information about defined LVM components.</a></li>
@@ -123,16 +130,7 @@
 <li class="toctree-l3"><a class="reference internal" href="nim_vios_hc.html">nim_vios_hc – Check if a pair of VIOSes can be updated</a></li>
 <li class="toctree-l3"><a class="reference internal" href="nim_viosupgrade.html">nim_viosupgrade – Use NIM to upgrade VIOS(es) with the viosupgrade tool from a NIM master.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suma.html">suma – Download/Install fixes, SP or TL from IBM Fix Central website.</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">user – Create new users or change/remove attributes of users on AIX.</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#synopsis">Synopsis</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#requirements">Requirements</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#notes">Notes</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#return-values">Return Values</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#status">Status</a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="user.html">user – Create new users or change/remove attributes of users on AIX.</a></li>
 </ul>
 </li>
 </ul>
@@ -200,14 +198,14 @@
         
           <li><a href="../modules.html">Modules</a> &raquo;</li>
         
-      <li>user – Create new users or change/remove attributes of users on AIX.</li>
+      <li>lpar_facts – Reports logical partition (LPAR) related information.</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
             
-              <a href="https://github.com/IBM/ansible-power-aix/blob/dev-collection/docs/source/modules/user.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/IBM/ansible-power-aix/blob/dev-collection/docs/source/modules/lpar_facts.rst" class="fa fa-github"> Edit on GitHub</a>
             
           
         
@@ -221,22 +219,20 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="user-create-new-users-or-change-remove-attributes-of-users-on-aix">
-<span id="user-module"></span><h1>user – Create new users or change/remove attributes of users on AIX.<a class="headerlink" href="#user-create-new-users-or-change-remove-attributes-of-users-on-aix" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="lpar-facts-reports-logical-partition-lpar-related-information">
+<span id="lpar-facts-module"></span><h1>lpar_facts – Reports logical partition (LPAR) related information.<a class="headerlink" href="#lpar-facts-reports-logical-partition-lpar-related-information" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
 <li><p><a class="reference internal" href="#synopsis" id="id1">Synopsis</a></p></li>
 <li><p><a class="reference internal" href="#requirements" id="id2">Requirements</a></p></li>
-<li><p><a class="reference internal" href="#parameters" id="id3">Parameters</a></p></li>
-<li><p><a class="reference internal" href="#notes" id="id4">Notes</a></p></li>
-<li><p><a class="reference internal" href="#examples" id="id5">Examples</a></p></li>
-<li><p><a class="reference internal" href="#return-values" id="id6">Return Values</a></p></li>
-<li><p><a class="reference internal" href="#status" id="id7">Status</a></p></li>
+<li><p><a class="reference internal" href="#examples" id="id3">Examples</a></p></li>
+<li><p><a class="reference internal" href="#return-values" id="id4">Return Values</a></p></li>
+<li><p><a class="reference internal" href="#status" id="id5">Status</a></p></li>
 </ul>
 </div>
 <div class="section" id="synopsis">
 <h2><a class="toc-backref" href="#id1">Synopsis</a><a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
-<p>This module facilitates the creation of a new user with provided attributes, the modification of attributes or deletion of an existing user.</p>
+<p>Reports logical partition (LPAR) related information.</p>
 </div>
 <div class="section" id="requirements">
 <h2><a class="toc-backref" href="#id2">Requirements</a><a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
@@ -244,75 +240,127 @@
 <ul class="simple">
 <li><p>AIX &gt;= 7.1 TL3</p></li>
 <li><p>Python &gt;= 2.7</p></li>
-<li><p>Root user is required.</p></li>
 </ul>
-</div>
-<div class="section" id="parameters">
-<h2><a class="toc-backref" href="#id3">Parameters</a><a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
-<blockquote>
-<div><dl>
-<dt>state (True, str, None)</dt><dd><p>Specifies the action to be performed for the user.</p>
-<p><code class="docutils literal notranslate"><span class="pre">present</span></code> creates a user with provided <em>name</em> and <em>attributes</em> in the system.</p>
-<p><code class="docutils literal notranslate"><span class="pre">absent</span></code> deletes the user with provided <em>name</em>.</p>
-<p><code class="docutils literal notranslate"><span class="pre">modify</span></code> changes the specified attributes of an exiting user.</p>
-</dd>
-<dt>name (True, str, None)</dt><dd><p>Specifies the user name.</p>
-<p>It must be unique, you cannot use the ALL or default keywords in the user name.</p>
-</dd>
-<dt>attributes (optional, dict, None)</dt><dd><p>Specifies the attributes to be changed or created for the user.</p>
-<p>For details on valid user attributes, please refers to IBM documentation at <a class="reference external" href="https://www.ibm.com/support/knowledgecenter/ssw_aix_72/c_commands/chuser.html">https://www.ibm.com/support/knowledgecenter/ssw_aix_72/c_commands/chuser.html</a>.</p>
-<p>If you have the proper authority, you can set the following usual user attributes account_locked, admin, admgroups, capabilities, cpu, daemon, data, default_roles, dictionlist, domains, expires, fsize, fsize_hard, gecos, groups, histexpire, home, id, login, loginretries, logintimes, maxages, maxexpired, maxrepeats, maxulogs, minage, minalpha, mindiff, minlen, minother, nofiles, nproc, pgrp, projects, pwdchecks, pwdwarntime, rcmds, rlogin, roles, rss, shell, stack, su, sugroups, sysenv, threads, tpath, ttys, umask, usrenv, etc.</p>
-</dd>
-<dt>remove_password (optional, bool, True)</dt><dd><p>Specifies if the password information should be deleted from the system’s password file while removing a user.</p>
-<p>Can be used when <em>state=absent</em>.</p>
-</dd>
-<dt>change_passwd_on_login (optional, bool, False)</dt><dd><p>Specifies if the user is required to change the password when logging in the first time after the password change operation is performed.</p>
-<p>Can be used when <em>state=present</em>.</p>
-</dd>
-<dt>password (optional, str, None)</dt><dd><p>Specifies the encrypted string for the password to create or change the password.</p>
-<p>Can be used when <em>state=present</em>.</p>
-</dd>
-</dl>
-</div></blockquote>
-</div>
-<div class="section" id="notes">
-<h2><a class="toc-backref" href="#id4">Notes</a><a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<ul class="simple">
-<li><p>You can refer to the IBM documentation for additional information on the commands used at <a class="reference external" href="https://www.ibm.com/support/knowledgecenter/ssw_aix_72/c_commands/chuser.html">https://www.ibm.com/support/knowledgecenter/ssw_aix_72/c_commands/chuser.html</a>, <a class="reference external" href="https://www.ibm.com/support/knowledgecenter/ssw_aix_72/m_commands/mkuser.html">https://www.ibm.com/support/knowledgecenter/ssw_aix_72/m_commands/mkuser.html</a>, <a class="reference external" href="https://www.ibm.com/support/knowledgecenter/ssw_aix_72/r_commands/rmuser.html">https://www.ibm.com/support/knowledgecenter/ssw_aix_72/r_commands/rmuser.html</a>.</p></li>
-</ul>
-</div>
 </div>
 <div class="section" id="examples">
-<h2><a class="toc-backref" href="#id5">Examples</a><a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-yaml+jinja notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Create user aixguest1010</span>
-  <span class="nt">ibm.power_aix.user</span><span class="p">:</span>
-    <span class="nt">state</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">present</span>
-    <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">aixguest1010</span>
-    <span class="nt">change_passwd_on_login</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">False</span>
-    <span class="nt">password</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">as$12ndhkfjk$1c</span>
-    <span class="nt">attributes</span><span class="p">:</span>
-      <span class="nt">home</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/home/test/aixguest1010</span>
-      <span class="nt">data</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1272</span>
+<h2><a class="toc-backref" href="#id3">Examples</a><a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-yaml+jinja notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Retrieve the LPAR related information</span>
+  <span class="nt">lpar_facts</span><span class="p">:</span>
+<span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Print the LPAR related information</span>
+  <span class="nt">debug</span><span class="p">:</span>
+    <span class="nt">var</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ansible_facts.lpar</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="return-values">
-<h2><a class="toc-backref" href="#id6">Return Values</a><a class="headerlink" href="#return-values" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id4">Return Values</a><a class="headerlink" href="#return-values" title="Permalink to this headline">¶</a></h2>
+<dl>
+<dt>ansible_facts (always, complex, )</dt><dd><p>Facts to add to ansible_facts about LPAR related information.</p>
+<dl>
+<dt>lpar (always, dict, )</dt><dd><p>Reports logical partition (LPAR) related information.</p>
 <dl class="simple">
-<dt>msg (always, str, Username is created SUCCESSFULLY: aixguest1010)</dt><dd><p>The execution message.</p>
+<dt>nodename (always, str, )</dt><dd><p>Node name.</p>
 </dd>
-<dt>rc (If the command failed., int, )</dt><dd><p>The return code.</p>
+<dt>lpar_name (when available, str, )</dt><dd><p>Partition name.</p>
 </dd>
-<dt>stdout (If the command failed., str, )</dt><dd><p>The standard output.</p>
+<dt>lpar_number (when available, int, )</dt><dd><p>Partition number.</p>
 </dd>
-<dt>stderr (If the command failed., str, )</dt><dd><p>The standard error.</p>
+<dt>lpar_type (always, str, )</dt><dd><p>Type.</p>
+</dd>
+<dt>lpar_mode (always, str, )</dt><dd><p>Mode.</p>
+</dd>
+<dt>entitled_capacity (always, float, )</dt><dd><p>Entitled capacity.</p>
+</dd>
+<dt>group_id (when available, int, )</dt><dd><p>Partition Group-ID.</p>
+</dd>
+<dt>pool_id (when available, int, )</dt><dd><p>Shared Pool ID.</p>
+</dd>
+<dt>online_vcpus (always, int, )</dt><dd><p>Online Virtual CPUs.</p>
+</dd>
+<dt>max_vcpus (always, int, )</dt><dd><p>Maximum Virtual CPUs.</p>
+</dd>
+<dt>min_vcpus (always, int, )</dt><dd><p>Minimum Virtual CPUs.</p>
+</dd>
+<dt>online_memory (always, float, )</dt><dd><p>Online Memory.</p>
+</dd>
+<dt>max_memory (always, float, )</dt><dd><p>Maximum Memory.</p>
+</dd>
+<dt>min_memory (always, float, )</dt><dd><p>Minimum Memory.</p>
+</dd>
+<dt>ps_16G (when available, int, )</dt><dd><p>16GB Page Memory.</p>
+</dd>
+<dt>variable_weight (when available, int, )</dt><dd><p>Variable Capacity Weight.</p>
+</dd>
+<dt>minimum_capacity (always, float, )</dt><dd><p>Minimum Capacity.</p>
+</dd>
+<dt>maximum_capacity (always, float, )</dt><dd><p>Maximum Capacity.</p>
+</dd>
+<dt>capacity_increment (always, float, )</dt><dd><p>Capacity Increment.</p>
+</dd>
+<dt>max_pcpus_in_sys (always, int, )</dt><dd><p>Maximum Physical CPUs in system.</p>
+</dd>
+<dt>pcpus_in_sys (always, int, )</dt><dd><p>Active Physical CPUs in system.</p>
+</dd>
+<dt>pcpus_in_pool (when available, int, )</dt><dd><p>Active CPUs in Pool.</p>
+</dd>
+<dt>shcpus_in_sys (when available, int, )</dt><dd><p>Shared Physical CPUs in system.</p>
+</dd>
+<dt>max_pool_capacity (when available, int, )</dt><dd><p>Maximum Capacity of Pool.</p>
+</dd>
+<dt>entitled_pool_capacity (when available, int, )</dt><dd><p>Entitled Capacity of Pool.</p>
+</dd>
+<dt>unalloc_capacity (when available, float, )</dt><dd><p>Unallocated Capacity.</p>
+</dd>
+<dt>pcpu_percent (always, float, )</dt><dd><p>Physical CPU Percentage.</p>
+</dd>
+<dt>unalloc_weight (when available, int, )</dt><dd><p>Unallocated Weight.</p>
+</dd>
+<dt>vrm_mode (when available, str, )</dt><dd><p>Memory Mode.</p>
+</dd>
+<dt>ent_mem_capacity (when available, float, )</dt><dd><p>Total I/O Memory Entitlement.</p>
+</dd>
+<dt>var_mem_weight (when available, int, )</dt><dd><p>Variable Memory Capacity Weight.</p>
+</dd>
+<dt>vrm_pool_id (when available, int, )</dt><dd><p>Memory Pool ID.</p>
+</dd>
+<dt>vrm_pool_physmem (when available, float, )</dt><dd><p>Physical Memory in the Pool.</p>
+</dd>
+<dt>hyp_pagesize (when available, str, )</dt><dd><p>Hypervisor Page Size.</p>
+</dd>
+<dt>unalloc_var_mem_weight (when available, int, )</dt><dd><p>Unallocated Variable Memory Capacity Weight.</p>
+</dd>
+<dt>unalloc_ent_mem_capacity (when available, float, )</dt><dd><p>Unallocated I/O Memory entitlement.</p>
+</dd>
+<dt>vrm_group_id (when available, int, )</dt><dd><p>Memory Group ID of LPAR.</p>
+</dd>
+<dt>desired_vcpus (always, int, )</dt><dd><p>Desired Virtual CPUs.</p>
+</dd>
+<dt>desired_memory (always, float, )</dt><dd><p>Desired Memory.</p>
+</dd>
+<dt>desired_variable_capwt (when available, int, )</dt><dd><p>Desired Variable Capacity Weight.</p>
+</dd>
+<dt>desired_capacity (always, float, )</dt><dd><p>Desired Capacity.</p>
+</dd>
+<dt>ame_factor_tgt (when available, float, )</dt><dd><p>Target Memory Expansion Factor.</p>
+</dd>
+<dt>ame_memsizepgs (when available, float, )</dt><dd><p>Target Memory Expansion Size.</p>
+</dd>
+<dt>psmode (when supported, str, )</dt><dd><p>Power Saving Mode.</p>
+</dd>
+<dt>spcm_status (when supported, str, )</dt><dd><p>Sub Processor Mode.</p>
+</dd>
+<dt>servpar_id (when available, int, )</dt><dd><p>Service Partition ID.</p>
+</dd>
+<dt>num_lpars (when available, int, )</dt><dd><p>Number of Configured LPARs.</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd>
 </dl>
 </div>
 <div class="section" id="status">
-<h2><a class="toc-backref" href="#id7">Status</a><a class="headerlink" href="#status" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id5">Status</a><a class="headerlink" href="#status" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>This module is not guaranteed to have a backwards compatible interface. <em>[preview]</em></p></li>
 <li><p>This module is maintained by community.</p></li>
@@ -334,10 +382,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../playbooks.html" class="btn btn-neutral float-right" title="Playbooks" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="lpp_facts.html" class="btn btn-neutral float-right" title="lpp_facts – Returns installed software products as facts" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="suma.html" class="btn btn-neutral float-left" title="suma – Download/Install fixes, SP or TL from IBM Fix Central website." accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="installp.html" class="btn btn-neutral float-left" title="installp – Installs and updates software." accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
