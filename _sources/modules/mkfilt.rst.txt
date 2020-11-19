@@ -429,6 +429,12 @@ Examples
           - action: remove
             id: all
 
+    - name: Export filter rules as is into export text files
+      mkfilt:
+        action: export
+        directory: /root/export
+        rawexport: yes
+
 
 
 Return Values
