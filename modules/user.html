@@ -110,7 +110,7 @@
 <li class="toctree-l3"><a class="reference internal" href="lvg.html">lvg – Configure AIX LVM volume groups</a></li>
 <li class="toctree-l3"><a class="reference internal" href="lvm_facts.html">lvm_facts – Provides information about defined LVM components.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="lvol.html">lvol – Configure AIX LVM logical volumes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="mkfilt.html">mkfilt – Activates or deactivates the filter rules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mkfilt.html">mkfilt – Activates or deactivates the filter rules.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mktcpip.html">mktcpip – Sets the required values for starting TCP/IP on a host.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mount.html">mount – Mounts/unmounts a filesystem or device on AIX.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="nim.html">nim – Server setup, install packages, update SP or TL.</a></li>
@@ -126,6 +126,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#synopsis">Synopsis</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#requirements">Requirements</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#notes">Notes</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#return-values">Return Values</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#status">Status</a></li>
@@ -226,14 +227,15 @@
 <li><p><a class="reference internal" href="#synopsis" id="id1">Synopsis</a></p></li>
 <li><p><a class="reference internal" href="#requirements" id="id2">Requirements</a></p></li>
 <li><p><a class="reference internal" href="#parameters" id="id3">Parameters</a></p></li>
-<li><p><a class="reference internal" href="#examples" id="id4">Examples</a></p></li>
-<li><p><a class="reference internal" href="#return-values" id="id5">Return Values</a></p></li>
-<li><p><a class="reference internal" href="#status" id="id6">Status</a></p></li>
+<li><p><a class="reference internal" href="#notes" id="id4">Notes</a></p></li>
+<li><p><a class="reference internal" href="#examples" id="id5">Examples</a></p></li>
+<li><p><a class="reference internal" href="#return-values" id="id6">Return Values</a></p></li>
+<li><p><a class="reference internal" href="#status" id="id7">Status</a></p></li>
 </ul>
 </div>
 <div class="section" id="synopsis">
 <h2><a class="toc-backref" href="#id1">Synopsis</a><a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
-<p>This module facilitates the creation of a new user with provided attributes, the modification of attributes of existing user and the deletion of user.</p>
+<p>This module facilitates the creation of a new user with provided attributes, the modification of attributes or deletion of an existing user.</p>
 </div>
 <div class="section" id="requirements">
 <h2><a class="toc-backref" href="#id2">Requirements</a><a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
@@ -249,25 +251,40 @@
 <blockquote>
 <div><dl>
 <dt>state (True, str, None)</dt><dd><p>Specifies the action to be performed for the user.</p>
-<p><code class="docutils literal notranslate"><span class="pre">present</span></code> to create user with provided <em>name</em> and <em>attributes</em> in the system.</p>
-<p><code class="docutils literal notranslate"><span class="pre">absent</span></code> to delete user with provided <em>name</em>. If username is not present then message will be displayed.</p>
-<p><code class="docutils literal notranslate"><span class="pre">modify</span></code> to change the specified attributes with provided value of the given username.</p>
+<p><code class="docutils literal notranslate"><span class="pre">present</span></code> creates a user with provided <em>name</em> and <em>attributes</em> in the system.</p>
+<p><code class="docutils literal notranslate"><span class="pre">absent</span></code> deletes the user with provided <em>name</em>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">modify</span></code> changes the specified attributes of an exiting user.</p>
 </dd>
-<dt>name (True, str, None)</dt><dd><p>Specifies the user name for which the action is to be taken.</p>
+<dt>name (True, str, None)</dt><dd><p>Specifies the user name.</p>
+<p>It must be unique, you cannot use the ALL or default keywords in the user name.</p>
 </dd>
 <dt>attributes (optional, dict, None)</dt><dd><p>Specifies the attributes to be changed or created for the user.</p>
+<p>For details on valid user attributes, please refers to IBM documentation at <a class="reference external" href="https://www.ibm.com/support/knowledgecenter/ssw_aix_72/c_commands/chuser.html">https://www.ibm.com/support/knowledgecenter/ssw_aix_72/c_commands/chuser.html</a>.</p>
+<p>If you have the proper authority, you can set the following usual user attributes account_locked, admin, admgroups, capabilities, cpu, daemon, data, default_roles, dictionlist, domains, expires, fsize, fsize_hard, gecos, groups, histexpire, home, id, login, loginretries, logintimes, maxages, maxexpired, maxrepeats, maxulogs, minage, minalpha, mindiff, minlen, minother, nofiles, nproc, pgrp, projects, pwdchecks, pwdwarntime, rcmds, rlogin, roles, rss, shell, stack, su, sugroups, sysenv, threads, tpath, ttys, umask, usrenv, etc.</p>
 </dd>
-<dt>remove_password (optional, bool, True)</dt><dd><p>Specifies if the password information should be deleted from the system’s password file while performing the delete operation on username.</p>
+<dt>remove_password (optional, bool, True)</dt><dd><p>Specifies if the password information should be deleted from the system’s password file while removing a user.</p>
+<p>Can be used when <em>state=absent</em>.</p>
 </dd>
 <dt>change_passwd_on_login (optional, bool, False)</dt><dd><p>Specifies if the user is required to change the password when logging in the first time after the password change operation is performed.</p>
+<p>Can be used when <em>state=present</em>.</p>
 </dd>
 <dt>password (optional, str, None)</dt><dd><p>Specifies the encrypted string for the password to create or change the password.</p>
+<p>Can be used when <em>state=present</em>.</p>
 </dd>
 </dl>
 </div></blockquote>
 </div>
+<div class="section" id="notes">
+<h2><a class="toc-backref" href="#id4">Notes</a><a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>You can refer to the IBM documentation for additional information on the commands used at <a class="reference external" href="https://www.ibm.com/support/knowledgecenter/ssw_aix_72/c_commands/chuser.html">https://www.ibm.com/support/knowledgecenter/ssw_aix_72/c_commands/chuser.html</a>, <a class="reference external" href="https://www.ibm.com/support/knowledgecenter/ssw_aix_72/m_commands/mkuser.html">https://www.ibm.com/support/knowledgecenter/ssw_aix_72/m_commands/mkuser.html</a>, <a class="reference external" href="https://www.ibm.com/support/knowledgecenter/ssw_aix_72/r_commands/rmuser.html">https://www.ibm.com/support/knowledgecenter/ssw_aix_72/r_commands/rmuser.html</a>.</p></li>
+</ul>
+</div>
+</div>
 <div class="section" id="examples">
-<h2><a class="toc-backref" href="#id4">Examples</a><a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id5">Examples</a><a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-yaml+jinja notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Create user aixguest1010</span>
   <span class="nt">ibm.power_aix.user</span><span class="p">:</span>
     <span class="nt">state</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">present</span>
@@ -281,7 +298,7 @@
 </div>
 </div>
 <div class="section" id="return-values">
-<h2><a class="toc-backref" href="#id5">Return Values</a><a class="headerlink" href="#return-values" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id6">Return Values</a><a class="headerlink" href="#return-values" title="Permalink to this headline">¶</a></h2>
 <dl class="simple">
 <dt>msg (always, str, Username is created SUCCESSFULLY: aixguest1010)</dt><dd><p>The execution message.</p>
 </dd>
@@ -294,7 +311,7 @@
 </dl>
 </div>
 <div class="section" id="status">
-<h2><a class="toc-backref" href="#id6">Status</a><a class="headerlink" href="#status" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id7">Status</a><a class="headerlink" href="#status" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>This module is not guaranteed to have a backwards compatible interface. <em>[preview]</em></p></li>
 <li><p>This module is maintained by community.</p></li>

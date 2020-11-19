@@ -30,7 +30,7 @@ Parameters
 ----------
 
   state (optional, str, present)
-    Specifies the action to be performed on a volume group. *present* creates, extends or modifies a volume group; *absent* reduces or removes a volume group; *varyon* activates a volume group performing a varyon operation; *varyoff* deactivates a volume group performing a varyoff operation.
+    Specifies the action to be performed on a volume group. ``present`` creates, extends or modifies a volume group; ``absent`` reduces or removes a volume group; ``varyon`` activates a volume group performing a varyon operation; ``varyoff`` deactivates a volume group performing a varyoff operation.
 
 
   vg_name (True, str, None)
@@ -114,13 +114,13 @@ Parameters
   pp_limit (optional, int, None)
     Changes the limit of the number of physical partitions per physical volume.
 
-    The maximum number of physical partitions per physical volume for this volume group changes to ``pp_limit`` x 1016.
+    The maximum number of physical partitions per physical volume for this volume group changes to *pp_limit* x 1016.
 
     It must be 1 - 16 for 32 PV volume groups and 1 and 64 for 128 PV volume groups.
 
-    The maximum number of PVs that can be included in the volume group is MaxPVs / ``pp_limit``.
+    The maximum number of PVs that can be included in the volume group is MaxPVs / *pp_limit*.
 
-    The default is the lowest value to remain within the physical partition limit of ``pp_limit`` x 1016.
+    The default is the lowest value to remain within the physical partition limit of *pp_limit* x 1016.
 
     Can be used when creating or changing a volume group, hence when *state=present*.
 
@@ -142,11 +142,11 @@ Parameters
   mirror_pool_strict (optional, str, none)
     Enables mirror pool strictness for the volume group.
 
-    *mirror_pool_strict=none* specifies that no restrictions are placed on the user of mirror pool.
+    ``none`` specifies that no restrictions are placed on the user of mirror pool.
 
-    *mirror_pool_strict=normal* specifies that mirror pools must be used on each logical volume in the volume group.
+    ``normal`` specifies that mirror pools must be used on each logical volume in the volume group.
 
-    *mirror_pool_strict=strict* specifies that super-strict mirror pools are enforced on this volume group. Partitions allocated for one mirror cannot share a physical volume with the partitions from another mirror; with this setting each mirror pool must contain at least one copy of each logical volume.
+    ``strict`` specifies that super-strict mirror pools are enforced on this volume group. Partitions allocated for one mirror cannot share a physical volume with the partitions from another mirror; with this setting each mirror pool must contain at least one copy of each logical volume.
 
     Can be used when creating or changing a volume group, hence when *state=present*.
 

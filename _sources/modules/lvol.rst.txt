@@ -56,13 +56,13 @@ Parameters
 
     You **cannot** create a striped logical volume of type ``boot``.
 
-    Can be used to create a logical volume, hence when ``state=present``.
+    Can be used to create a logical volume, hence when *state=present*.
 
 
   size (optional, str, None)
     Specifies the size of the logical volume to create.
 
-    Can be used to create a logical volume, hence when ``state=present``.
+    Can be used to create a logical volume, hence when *state=present*.
 
 
   extra_opts (optional, str, None)
@@ -74,19 +74,19 @@ Parameters
 
     Maximum value allowed is 3
 
-    Can be used to create a logical volume, hence when ``state=present``.
+    Can be used to create a logical volume, hence when *state=present*.
 
 
   num_of_logical_partitions (optional, int, 1)
     Specifies the number of logical partitions
 
-    Can be used to create a logical volume, hence when ``state=present``.
+    Can be used to create a logical volume, hence when *state=present*.
 
 
   pv_list (optional, list, None)
     List of pysical volumes.
 
-    Can be used to create a logical volume, hence when ``state=present``.
+    Can be used to create a logical volume, hence when *state=present*.
 
 
   policy (optional, str, maximum)
@@ -96,13 +96,13 @@ Parameters
 
     ``minimum`` allocates logical partitions across the minimum number of physical volumes.
 
-    Can be used to create or modify a logical volume, hence when ``state=present``.
+    Can be used to create or modify a logical volume, hence when *state=present*.
 
 
   lv_new_name (optional, str, None)
     Specifies the name of the logical volume to change an existing logical volume.
 
-    Can be used to modify a logical volume, hence when ``state=present``.
+    Can be used to modify a logical volume, hence when *state=present*.
 
 
 

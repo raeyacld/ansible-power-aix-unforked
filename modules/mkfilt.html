@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mkfilt – Activates or deactivates the filter rules &mdash; IBM Power Systems AIX 1.0.0-beta1 documentation</title>
+  <title>mkfilt – Activates or deactivates the filter rules. &mdash; IBM Power Systems AIX 1.0.0-beta1 documentation</title>
   
 
   
@@ -110,10 +110,11 @@
 <li class="toctree-l3"><a class="reference internal" href="lvg.html">lvg – Configure AIX LVM volume groups</a></li>
 <li class="toctree-l3"><a class="reference internal" href="lvm_facts.html">lvm_facts – Provides information about defined LVM components.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="lvol.html">lvol – Configure AIX LVM logical volumes</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">mkfilt – Activates or deactivates the filter rules</a><ul>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">mkfilt – Activates or deactivates the filter rules.</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#synopsis">Synopsis</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#requirements">Requirements</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#notes">Notes</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#return-values">Return Values</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#status">Status</a></li>
@@ -198,7 +199,7 @@
         
           <li><a href="../modules.html">Modules</a> &raquo;</li>
         
-      <li>mkfilt – Activates or deactivates the filter rules</li>
+      <li>mkfilt – Activates or deactivates the filter rules.</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -220,20 +221,22 @@
            <div itemprop="articleBody">
             
   <div class="section" id="mkfilt-activates-or-deactivates-the-filter-rules">
-<span id="mkfilt-module"></span><h1>mkfilt – Activates or deactivates the filter rules<a class="headerlink" href="#mkfilt-activates-or-deactivates-the-filter-rules" title="Permalink to this headline">¶</a></h1>
+<span id="mkfilt-module"></span><h1>mkfilt – Activates or deactivates the filter rules.<a class="headerlink" href="#mkfilt-activates-or-deactivates-the-filter-rules" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
 <li><p><a class="reference internal" href="#synopsis" id="id1">Synopsis</a></p></li>
 <li><p><a class="reference internal" href="#requirements" id="id2">Requirements</a></p></li>
 <li><p><a class="reference internal" href="#parameters" id="id3">Parameters</a></p></li>
-<li><p><a class="reference internal" href="#examples" id="id4">Examples</a></p></li>
-<li><p><a class="reference internal" href="#return-values" id="id5">Return Values</a></p></li>
-<li><p><a class="reference internal" href="#status" id="id6">Status</a></p></li>
+<li><p><a class="reference internal" href="#notes" id="id4">Notes</a></p></li>
+<li><p><a class="reference internal" href="#examples" id="id5">Examples</a></p></li>
+<li><p><a class="reference internal" href="#return-values" id="id6">Return Values</a></p></li>
+<li><p><a class="reference internal" href="#status" id="id7">Status</a></p></li>
 </ul>
 </div>
 <div class="section" id="synopsis">
 <h2><a class="toc-backref" href="#id1">Synopsis</a><a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
 <p>Activates or deactivates the filter rules.</p>
+<p>This command can also be used to control the filter logging function.</p>
 </div>
 <div class="section" id="requirements">
 <h2><a class="toc-backref" href="#id2">Requirements</a><a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
@@ -241,6 +244,7 @@
 <ul class="simple">
 <li><p>AIX &gt;= 7.1 TL3</p></li>
 <li><p>Python &gt;= 2.7</p></li>
+<li><p>User with priviledged authorizations.</p></li>
 </ul>
 </div>
 <div class="section" id="parameters">
@@ -250,7 +254,7 @@
 <dt>action (optional, str, add)</dt><dd><p>Specifies the action to perform.</p>
 <p><code class="docutils literal notranslate"><span class="pre">add</span></code> to add filter rules.</p>
 <p><code class="docutils literal notranslate"><span class="pre">check</span></code> to check the syntax of filter rules.</p>
-<p><code class="docutils literal notranslate"><span class="pre">change</span></code> to change a filter rule.</p>
+<p><code class="docutils literal notranslate"><span class="pre">change</span></code> to change filter rules.</p>
 <p><code class="docutils literal notranslate"><span class="pre">import</span></code> to import filter rules from an export file.</p>
 <p><code class="docutils literal notranslate"><span class="pre">export</span></code> to export filter rules to an export file.</p>
 </dd>
@@ -432,8 +436,17 @@
 </dl>
 </div></blockquote>
 </div>
+<div class="section" id="notes">
+<h2><a class="toc-backref" href="#id4">Notes</a><a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>You can refer to the IBM documentation for additional information on the command used at <a class="reference external" href="https://www.ibm.com/support/knowledgecenter/ssw_aix_72/m_commands/mkfilt.html">https://www.ibm.com/support/knowledgecenter/ssw_aix_72/m_commands/mkfilt.html</a>.</p></li>
+</ul>
+</div>
+</div>
 <div class="section" id="examples">
-<h2><a class="toc-backref" href="#id4">Examples</a><a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id5">Examples</a><a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-yaml+jinja notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Allow SSH activity through interface en0</span>
   <span class="nt">mkfilt</span><span class="p">:</span>
     <span class="nt">ipv4</span><span class="p">:</span>
@@ -465,7 +478,7 @@
 </div>
 </div>
 <div class="section" id="return-values">
-<h2><a class="toc-backref" href="#id5">Return Values</a><a class="headerlink" href="#return-values" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id6">Return Values</a><a class="headerlink" href="#return-values" title="Permalink to this headline">¶</a></h2>
 <dl class="simple">
 <dt>msg (always, str, mkfilt completed successfully)</dt><dd><p>The execution message.</p>
 </dd>
@@ -478,7 +491,7 @@
 </dl>
 </div>
 <div class="section" id="status">
-<h2><a class="toc-backref" href="#id6">Status</a><a class="headerlink" href="#status" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id7">Status</a><a class="headerlink" href="#status" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>This module is not guaranteed to have a backwards compatible interface. <em>[preview]</em></p></li>
 <li><p>This module is maintained by community.</p></li>
