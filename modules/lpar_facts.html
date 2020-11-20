@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>lpar_facts – Reports logical partition (LPAR) related information. &mdash; IBM Power Systems AIX 1.0.0-beta1 documentation</title>
+  <title>lpar_facts – Reports logical partition (LPAR) related information as facts. &mdash; IBM Power Systems AIX 1.0.0-beta1 documentation</title>
   
 
   
@@ -38,7 +38,7 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="lpp_facts – Returns installed software products as facts" href="lpp_facts.html" />
+    <link rel="next" title="lpp_facts – Returns installed software products as facts." href="lpp_facts.html" />
     <link rel="prev" title="installp – Installs and updates software." href="installp.html" /> 
 </head>
 
@@ -104,19 +104,20 @@
 <li class="toctree-l3"><a class="reference internal" href="flrtvc.html">flrtvc – Generate FLRTVC report, download and install security and HIPER fixes.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="geninstall.html">geninstall – Generic installer for various packaging formats.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="group.html">group – Manage presence, attributes and member of AIX groups.</a></li>
-<li class="toctree-l3"><a class="reference internal" href="inittab.html">inittab – Create/change/remove entries in the inittab file on AIX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="inittab.html">inittab – Manage inittab entries on AIX.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="installp.html">installp – Installs and updates software.</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">lpar_facts – Reports logical partition (LPAR) related information.</a><ul>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">lpar_facts – Reports logical partition (LPAR) related information as facts.</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#synopsis">Synopsis</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#notes">Notes</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#return-values">Return Values</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#status">Status</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="lpp_facts.html">lpp_facts – Returns installed software products as facts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lpp_facts.html">lpp_facts – Returns installed software products as facts.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="lvg.html">lvg – Configure AIX LVM volume groups</a></li>
-<li class="toctree-l3"><a class="reference internal" href="lvm_facts.html">lvm_facts – Provides information about defined LVM components.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lvm_facts.html">lvm_facts – Reports LVM information as facts.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="lvol.html">lvol – Configure AIX LVM logical volumes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mkfilt.html">mkfilt – Activates or deactivates the filter rules.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mktcpip.html">mktcpip – Sets the required values for starting TCP/IP on a host.</a></li>
@@ -198,7 +199,7 @@
         
           <li><a href="../modules.html">Modules</a> &raquo;</li>
         
-      <li>lpar_facts – Reports logical partition (LPAR) related information.</li>
+      <li>lpar_facts – Reports logical partition (LPAR) related information as facts.</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -219,20 +220,21 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="lpar-facts-reports-logical-partition-lpar-related-information">
-<span id="lpar-facts-module"></span><h1>lpar_facts – Reports logical partition (LPAR) related information.<a class="headerlink" href="#lpar-facts-reports-logical-partition-lpar-related-information" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="lpar-facts-reports-logical-partition-lpar-related-information-as-facts">
+<span id="lpar-facts-module"></span><h1>lpar_facts – Reports logical partition (LPAR) related information as facts.<a class="headerlink" href="#lpar-facts-reports-logical-partition-lpar-related-information-as-facts" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
 <li><p><a class="reference internal" href="#synopsis" id="id1">Synopsis</a></p></li>
 <li><p><a class="reference internal" href="#requirements" id="id2">Requirements</a></p></li>
-<li><p><a class="reference internal" href="#examples" id="id3">Examples</a></p></li>
-<li><p><a class="reference internal" href="#return-values" id="id4">Return Values</a></p></li>
-<li><p><a class="reference internal" href="#status" id="id5">Status</a></p></li>
+<li><p><a class="reference internal" href="#notes" id="id3">Notes</a></p></li>
+<li><p><a class="reference internal" href="#examples" id="id4">Examples</a></p></li>
+<li><p><a class="reference internal" href="#return-values" id="id5">Return Values</a></p></li>
+<li><p><a class="reference internal" href="#status" id="id6">Status</a></p></li>
 </ul>
 </div>
 <div class="section" id="synopsis">
 <h2><a class="toc-backref" href="#id1">Synopsis</a><a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
-<p>Reports logical partition (LPAR) related information.</p>
+<p>Lists and reports iformation related to logical partition (LPAR) in Ansible facts.</p>
 </div>
 <div class="section" id="requirements">
 <h2><a class="toc-backref" href="#id2">Requirements</a><a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
@@ -242,8 +244,17 @@
 <li><p>Python &gt;= 2.7</p></li>
 </ul>
 </div>
+<div class="section" id="notes">
+<h2><a class="toc-backref" href="#id3">Notes</a><a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>You can refer to the IBM documentation for additional information on the lparstat command at <a class="reference external" href="https://www.ibm.com/support/knowledgecenter/ssw_aix_72/l_commands/lparstat.html">https://www.ibm.com/support/knowledgecenter/ssw_aix_72/l_commands/lparstat.html</a>.</p></li>
+</ul>
+</div>
+</div>
 <div class="section" id="examples">
-<h2><a class="toc-backref" href="#id3">Examples</a><a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id4">Examples</a><a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-yaml+jinja notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Retrieve the LPAR related information</span>
   <span class="nt">lpar_facts</span><span class="p">:</span>
 <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Print the LPAR related information</span>
@@ -253,7 +264,7 @@
 </div>
 </div>
 <div class="section" id="return-values">
-<h2><a class="toc-backref" href="#id4">Return Values</a><a class="headerlink" href="#return-values" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id5">Return Values</a><a class="headerlink" href="#return-values" title="Permalink to this headline">¶</a></h2>
 <dl>
 <dt>ansible_facts (always, complex, )</dt><dd><p>Facts to add to ansible_facts about LPAR related information.</p>
 <dl>
@@ -360,7 +371,7 @@
 </dl>
 </div>
 <div class="section" id="status">
-<h2><a class="toc-backref" href="#id5">Status</a><a class="headerlink" href="#status" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id6">Status</a><a class="headerlink" href="#status" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>This module is not guaranteed to have a backwards compatible interface. <em>[preview]</em></p></li>
 <li><p>This module is maintained by community.</p></li>
@@ -382,7 +393,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="lpp_facts.html" class="btn btn-neutral float-right" title="lpp_facts – Returns installed software products as facts" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="lpp_facts.html" class="btn btn-neutral float-right" title="lpp_facts – Returns installed software products as facts." accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="installp.html" class="btn btn-neutral float-left" title="installp – Installs and updates software." accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

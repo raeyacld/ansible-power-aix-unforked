@@ -1,8 +1,8 @@
 .. _lpar_facts_module:
 
 
-lpar_facts -- Reports logical partition (LPAR) related information.
-===================================================================
+lpar_facts -- Reports logical partition (LPAR) related information as facts.
+============================================================================
 
 .. contents::
    :local:
@@ -12,7 +12,7 @@ lpar_facts -- Reports logical partition (LPAR) related information.
 Synopsis
 --------
 
-Reports logical partition (LPAR) related information.
+Lists and reports iformation related to logical partition (LPAR) in Ansible facts.
 
 
 
@@ -27,6 +27,11 @@ The below requirements are needed on the host that executes this module.
 
 
 
+Notes
+-----
+
+.. note::
+   - You can refer to the IBM documentation for additional information on the lparstat command at https://www.ibm.com/support/knowledgecenter/ssw_aix_72/l_commands/lparstat.html.
 
 
 

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>lvm_facts – Provides information about defined LVM components. &mdash; IBM Power Systems AIX 1.0.0-beta1 documentation</title>
+  <title>lvm_facts – Reports LVM information as facts. &mdash; IBM Power Systems AIX 1.0.0-beta1 documentation</title>
   
 
   
@@ -104,12 +104,12 @@
 <li class="toctree-l3"><a class="reference internal" href="flrtvc.html">flrtvc – Generate FLRTVC report, download and install security and HIPER fixes.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="geninstall.html">geninstall – Generic installer for various packaging formats.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="group.html">group – Manage presence, attributes and member of AIX groups.</a></li>
-<li class="toctree-l3"><a class="reference internal" href="inittab.html">inittab – Create/change/remove entries in the inittab file on AIX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="inittab.html">inittab – Manage inittab entries on AIX.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="installp.html">installp – Installs and updates software.</a></li>
-<li class="toctree-l3"><a class="reference internal" href="lpar_facts.html">lpar_facts – Reports logical partition (LPAR) related information.</a></li>
-<li class="toctree-l3"><a class="reference internal" href="lpp_facts.html">lpp_facts – Returns installed software products as facts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lpar_facts.html">lpar_facts – Reports logical partition (LPAR) related information as facts.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lpp_facts.html">lpp_facts – Returns installed software products as facts.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="lvg.html">lvg – Configure AIX LVM volume groups</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">lvm_facts – Provides information about defined LVM components.</a><ul>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">lvm_facts – Reports LVM information as facts.</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#synopsis">Synopsis</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#requirements">Requirements</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
@@ -199,7 +199,7 @@
         
           <li><a href="../modules.html">Modules</a> &raquo;</li>
         
-      <li>lvm_facts – Provides information about defined LVM components.</li>
+      <li>lvm_facts – Reports LVM information as facts.</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -220,8 +220,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="lvm-facts-provides-information-about-defined-lvm-components">
-<span id="lvm-facts-module"></span><h1>lvm_facts – Provides information about defined LVM components.<a class="headerlink" href="#lvm-facts-provides-information-about-defined-lvm-components" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="lvm-facts-reports-lvm-information-as-facts">
+<span id="lvm-facts-module"></span><h1>lvm_facts – Reports LVM information as facts.<a class="headerlink" href="#lvm-facts-reports-lvm-information-as-facts" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
 <li><p><a class="reference internal" href="#synopsis" id="id1">Synopsis</a></p></li>
@@ -234,7 +234,7 @@
 </div>
 <div class="section" id="synopsis">
 <h2><a class="toc-backref" href="#id1">Synopsis</a><a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
-<p>Provides details about defined Logical Volume Manager(LVM) components - Physical volumes, Logical volumes and Volume groups</p>
+<p>List and reports details about defined AIX Logical Volume Manager (LVM) components such as Physical volumes, Logical volumes and Volume groups in Ansible facts.</p>
 </div>
 <div class="section" id="requirements">
 <h2><a class="toc-backref" href="#id2">Requirements</a><a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
@@ -247,11 +247,11 @@
 <h2><a class="toc-backref" href="#id3">Parameters</a><a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div><dl class="simple">
-<dt>name (optional, str, all)</dt><dd><p>Specifies the name of a LVM component</p>
+<dt>name (optional, str, all)</dt><dd><p>Specifies the name of a LVM component.</p>
 </dd>
-<dt>component (optional, str, all)</dt><dd><p>Specifies the specified device is a physical/logical volume or a volume group. <em>pv</em> - specifies physical volume <em>lv</em> - specifies logical volume <em>vg</em> - specifies volume group</p>
+<dt>component (optional, str, all)</dt><dd><p>Specifies the type of LVM component to report information. A(pv) specifies physical volume. A(lv) specifies logical volume. A(vg) specifies volume group. <code class="docutils literal notranslate"><span class="pre">all</span></code> specifies all previous LVM components to be reported.</p>
 </dd>
-<dt>lvm (optional, dict, {})</dt><dd><p>Users can provide the existing LVM facts to which the queried facts should be updated If not specified, the LVM facts in the ansible_facts will be replaced by just the queried facts</p>
+<dt>lvm (optional, dict, {})</dt><dd><p>Users can provide the existing LVM facts to which the queried facts should be updated. If not specified, the LVM facts in the ansible_facts will be replaced.</p>
 </dd>
 </dl>
 </div></blockquote>
@@ -279,69 +279,69 @@
 <div class="section" id="return-values">
 <h2><a class="toc-backref" href="#id5">Return Values</a><a class="headerlink" href="#return-values" title="Permalink to this headline">¶</a></h2>
 <dl>
-<dt>ansible_facts (always, complex, )</dt><dd><p>Facts to add to ansible_facts about the LVM components on the system</p>
+<dt>ansible_facts (always, complex, )</dt><dd><p>Facts to add to ansible_facts about the LVM components on the system.</p>
 <dl>
 <dt>lvm (success, dict, )</dt><dd><p>Contains a list of VGs, PVs and LVs.</p>
 <dl>
 <dt>VGs (success, dict, )</dt><dd><p>Contains the list of volume groups on the system.</p>
 <dl class="simple">
-<dt>name (always, str, rootvg)</dt><dd><p>VG name</p>
+<dt>name (always, str, rootvg)</dt><dd><p>Volume Group name.</p>
 </dd>
-<dt>vg_state (always, str, active)</dt><dd><p>State of the Volume Group</p>
+<dt>vg_state (always, str, active)</dt><dd><p>State of the Volume Group.</p>
 </dd>
-<dt>num_lvs (always, str, 2)</dt><dd><p>Number of logical volumes</p>
+<dt>num_lvs (always, str, 2)</dt><dd><p>Number of logical volumes.</p>
 </dd>
-<dt>num_pvs (always, str, 2)</dt><dd><p>Number of physical volumes</p>
+<dt>num_pvs (always, str, 2)</dt><dd><p>Number of physical volumes.</p>
 </dd>
-<dt>total_pps (always, str, 952)</dt><dd><p>Total number of physical partitions within the volume group</p>
+<dt>total_pps (always, str, 952)</dt><dd><p>Total number of physical partitions within the volume group.</p>
 </dd>
-<dt>free_pps (always, str, 100)</dt><dd><p>Number of physical partitions not allocated</p>
+<dt>free_pps (always, str, 100)</dt><dd><p>Number of physical partitions not allocated.</p>
 </dd>
-<dt>pp_size (always, str, 64 megabyte (s))</dt><dd><p>Size of each physical partition</p>
+<dt>pp_size (always, str, 64 megabyte (s))</dt><dd><p>Size of each physical partition.</p>
 </dd>
-<dt>size_g (always, str, 18.99)</dt><dd><p>Total size of the volume group in gigabytes</p>
+<dt>size_g (always, str, 18.99)</dt><dd><p>Total size of the volume group in gigabytes.</p>
 </dd>
-<dt>free_g (always, str, 10.6)</dt><dd><p>Free space of the volume group in gigabytes</p>
+<dt>free_g (always, str, 10.6)</dt><dd><p>Free space of the volume group in gigabytes.</p>
 </dd>
 </dl>
 </dd>
-<dt>PVs (success, dict, )</dt><dd><p>Contains a list of Physical volumes on the system</p>
+<dt>PVs (success, dict, )</dt><dd><p>Contains a list of physical volumes on the system.</p>
 <dl class="simple">
 <dt>name (always, str, hdisk0)</dt><dd><p>PV name</p>
 </dd>
-<dt>vg (always, str, rootvg)</dt><dd><p>Volume group to which the Physical Volume has been assigned</p>
+<dt>vg (always, str, rootvg)</dt><dd><p>Volume group to which the physical volume has been assigned.</p>
 </dd>
-<dt>pv_state (always, str, active)</dt><dd><p>PV state</p>
+<dt>pv_state (always, str, active)</dt><dd><p>Physical volume state.</p>
 </dd>
-<dt>total_pps (always, str, 476)</dt><dd><p>Total number of physical partitions in the Physical Volume</p>
+<dt>total_pps (always, str, 476)</dt><dd><p>Total number of physical partitions in the physical volume.</p>
 </dd>
-<dt>free_pps (always, str, 130)</dt><dd><p>Number of free physical partitions in the Physical Volume</p>
+<dt>free_pps (always, str, 130)</dt><dd><p>Number of free physical partitions in the physical volume.</p>
 </dd>
-<dt>pp_size (always, str, 64 megabyte (s))</dt><dd><p>Size of each physical partition</p>
+<dt>pp_size (always, str, 64 megabyte (s))</dt><dd><p>Size of each physical partition.</p>
 </dd>
-<dt>size_g (always, str, 18.99)</dt><dd><p>Total size of the Physical volume in gigabytes</p>
+<dt>size_g (always, str, 18.99)</dt><dd><p>Total size of the physical volume in gigabytes.</p>
 </dd>
-<dt>free_g (always, str, 10.6)</dt><dd><p>Free space of the Physical volume in gigabytes</p>
+<dt>free_g (always, str, 10.6)</dt><dd><p>Free space of the physical volume in gigabytes.</p>
 </dd>
 </dl>
 </dd>
-<dt>LVs (success, dict, )</dt><dd><p>Contains a list of Logical volumes on the system</p>
+<dt>LVs (success, dict, )</dt><dd><p>Contains a list of logical volumes on the system.</p>
 <dl class="simple">
-<dt>name (always, str, hd1)</dt><dd><p>LV name</p>
+<dt>name (always, str, hd1)</dt><dd><p>Logical volume name.</p>
 </dd>
-<dt>vg (always, str, rootvg)</dt><dd><p>Volume group to which the Logical Volume belongs to</p>
+<dt>vg (always, str, rootvg)</dt><dd><p>Volume group to which the Logical Volume belongs to.</p>
 </dd>
-<dt>lv_state (always, str, active)</dt><dd><p>LV state</p>
+<dt>lv_state (always, str, active)</dt><dd><p>Logical Volume state.</p>
 </dd>
-<dt>type (always, str, jfs2)</dt><dd><p>Logical volume type</p>
+<dt>type (always, str, jfs2)</dt><dd><p>Logical volume type.</p>
 </dd>
-<dt>LPs (always, str, 476)</dt><dd><p>Total number of logical partitions in the Logical Volume</p>
+<dt>LPs (always, str, 476)</dt><dd><p>Total number of logical partitions in the logical volume.</p>
 </dd>
-<dt>PPs (always, str, 130)</dt><dd><p>Total number of physical partitions in the Logical Volume</p>
+<dt>PPs (always, str, 130)</dt><dd><p>Total number of physical partitions in the logical volume.</p>
 </dd>
-<dt>PVs (always, str, 2)</dt><dd><p>Number of physical volumes used by the logical volume</p>
+<dt>PVs (always, str, 2)</dt><dd><p>Number of physical volumes used by the logical volume.</p>
 </dd>
-<dt>mount_point (always, str, /home)</dt><dd><p>File system mount point for the logical volume, if applicable</p>
+<dt>mount_point (always, str, /home)</dt><dd><p>File system mount point for the logical volume, if applicable.</p>
 </dd>
 </dl>
 </dd>
