@@ -76,6 +76,11 @@ Parameters
 
 
 
+Notes
+-----
+
+.. note::
+   - You can refer to the IBM documentation for additional information on the aixpert command at https://www.ibm.com/support/knowledgecenter/ssw_aix_72/a_commands/aixpert.html.
 
 
 

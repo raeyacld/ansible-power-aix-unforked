@@ -226,6 +226,7 @@ Notes
    - ``savevg`` backs up all logical volume information and will be recreated. However, only JFS-mounted file system data will be backed up. Raw logical volume data will NOT be backed up using a savevg.
    - ``savevg`` only backs up varied-on volume group. The file systems must be mounted.
    - This :ref:`backup <backup_module>` module only operates on LPAR, for operation on VIOS, please checkout the :ref:`backupios <backupios_module>` module in the power-vios collection.
+   - You can refer to the IBM documentation for additional information on the commands used at U(https://www.ibm.com/support/knowledgecenter/ssw_aix_72/a_commands/alt_disk_mksysb.html, U(https://www.ibm.com/support/knowledgecenter/ssw_aix_72/l_commands/lsmksysb.html, U(https://www.ibm.com/support/knowledgecenter/ssw_aix_72/m_commands/mksysb.html, U(https://www.ibm.com/support/knowledgecenter/ssw_aix_72/r_commands/restvg.html, U(https://www.ibm.com/support/knowledgecenter/ssw_aix_72/s_commands/savevg.html.
 
 
 

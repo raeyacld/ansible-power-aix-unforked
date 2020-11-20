@@ -91,6 +91,11 @@ Parameters
 
 
 
+Notes
+-----
+
+.. note::
+   - You can refer to the IBM documentation for additional information on the commands used at https://www.ibm.com/support/knowledgecenter/ssw_aix_72/c_commands/chfsmnt.html, https://www.ibm.com/support/knowledgecenter/ssw_aix_72/c_commands/chnfsmnt.html, https://www.ibm.com/support/knowledgecenter/ssw_aix_72/c_commands/crfs.html, https://www.ibm.com/support/knowledgecenter/ssw_aix_72/m_commands/mknfsmnt.html, https://www.ibm.com/support/knowledgecenter/ssw_aix_72/r_commands/rmfs.html, https://www.ibm.com/support/knowledgecenter/ssw_aix_72/r_commands/rmnfsmnt.html.
 
 
 

@@ -38,7 +38,7 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="bootlist – Alters the list of boot devices available to the system" href="bootlist.html" />
+    <link rel="next" title="bootlist – Alters the list of boot devices available to the system." href="bootlist.html" />
     <link rel="prev" title="alt_disk – Alternate rootvg disk management." href="alt_disk.html" /> 
 </head>
 
@@ -106,7 +106,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#status">Status</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="bootlist.html">bootlist – Alters the list of boot devices available to the system</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bootlist.html">bootlist – Alters the list of boot devices available to the system.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="devices.html">devices – Devices management.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="emgr.html">emgr – System interim fixes management.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="filesystem.html">filesystem – Local and NFS filesystems management.</a></li>
@@ -124,12 +124,12 @@
 <li class="toctree-l3"><a class="reference internal" href="mktcpip.html">mktcpip – Sets the required values for starting TCP/IP on a host.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mount.html">mount – Mounts/unmounts a filesystem or device on AIX.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="nim.html">nim – Performs NIM operations - server setup, install packages, update SP or TL.</a></li>
-<li class="toctree-l3"><a class="reference internal" href="nim_backup.html">nim_backup – Use NIM to create, list and restore backup on LPAR and VIOS clients.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nim_backup.html">nim_backup – Uses NIM to manage backup of LPAR or VIOS clients.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="nim_flrtvc.html">nim_flrtvc – Use NIM to generate FLRTVC report, download and install security and HIPER fixes.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="nim_suma.html">nim_suma – Use NIM to download fixes, SP or TL from IBM Fix Central website.</a></li>
-<li class="toctree-l3"><a class="reference internal" href="nim_updateios.html">nim_updateios – Use NIM to update a single or a pair of Virtual I/O Servers to latest maintenance level.</a></li>
-<li class="toctree-l3"><a class="reference internal" href="nim_vios_alt_disk.html">nim_vios_alt_disk – Create/Cleanup an alternate rootvg disk</a></li>
-<li class="toctree-l3"><a class="reference internal" href="nim_vios_hc.html">nim_vios_hc – Check if a pair of VIOSes can be updated</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nim_updateios.html">nim_updateios – Use NIM to update a single or a pair of Virtual I/O Servers.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nim_vios_alt_disk.html">nim_vios_alt_disk – Uses NIM to create/cleanup an alternate rootvg disk of VIOS clients.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nim_vios_hc.html">nim_vios_hc – Check if a pair of VIOSes could be updated.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="nim_viosupgrade.html">nim_viosupgrade – Use NIM to upgrade VIOS(es) with the viosupgrade tool from a NIM master.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suma.html">suma – Download/Install fixes, SP or TL from IBM Fix Central website.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="user.html">user – Create new users or change/remove attributes of users on AIX.</a></li>
@@ -356,6 +356,7 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">savevg</span></code> backs up all logical volume information and will be recreated. However, only JFS-mounted file system data will be backed up. Raw logical volume data will NOT be backed up using a savevg.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">savevg</span></code> only backs up varied-on volume group. The file systems must be mounted.</p></li>
 <li><p>This <a class="reference internal" href="#backup-module"><span class="std std-ref">backup</span></a> module only operates on LPAR, for operation on VIOS, please checkout the <span class="xref std std-ref">backupios</span> module in the power-vios collection.</p></li>
+<li><p>You can refer to the IBM documentation for additional information on the commands used at U(<a class="reference external" href="https://www.ibm.com/support/knowledgecenter/ssw_aix_72/a_commands/alt_disk_mksysb.html">https://www.ibm.com/support/knowledgecenter/ssw_aix_72/a_commands/alt_disk_mksysb.html</a>, U(<a class="reference external" href="https://www.ibm.com/support/knowledgecenter/ssw_aix_72/l_commands/lsmksysb.html">https://www.ibm.com/support/knowledgecenter/ssw_aix_72/l_commands/lsmksysb.html</a>, U(<a class="reference external" href="https://www.ibm.com/support/knowledgecenter/ssw_aix_72/m_commands/mksysb.html">https://www.ibm.com/support/knowledgecenter/ssw_aix_72/m_commands/mksysb.html</a>, U(<a class="reference external" href="https://www.ibm.com/support/knowledgecenter/ssw_aix_72/r_commands/restvg.html">https://www.ibm.com/support/knowledgecenter/ssw_aix_72/r_commands/restvg.html</a>, U(<a class="reference external" href="https://www.ibm.com/support/knowledgecenter/ssw_aix_72/s_commands/savevg.html">https://www.ibm.com/support/knowledgecenter/ssw_aix_72/s_commands/savevg.html</a>.</p></li>
 </ul>
 </div>
 </div>
@@ -463,7 +464,7 @@ New volume on /tmp/datavg_backup: Cluster 51200 bytes (100 blocks). Volume numbe
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="bootlist.html" class="btn btn-neutral float-right" title="bootlist – Alters the list of boot devices available to the system" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="bootlist.html" class="btn btn-neutral float-right" title="bootlist – Alters the list of boot devices available to the system." accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="alt_disk.html" class="btn btn-neutral float-left" title="alt_disk – Alternate rootvg disk management." accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
