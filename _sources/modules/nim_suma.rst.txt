@@ -176,7 +176,7 @@ meta (always, dict, {'meta': {'messages': ['Unavailable client: nimclient02', 'T
 
 
   messages (always, list, Unavailable client: nimclient02)
-    Details on errors/warnings/inforamtion
+    Details on errors/warnings/information
 
 
 

@@ -209,7 +209,7 @@ meta (always, dict, {'meta': {'messages': ['Parameter last_sp=yes is ignored whe
 
 
   messages (always, list, Parameter last_sp=yes is ignored when oslevel is a TL 7200-02-00)
-    Details on errors/warnings/inforamtion
+    Details on errors/warnings/information
 
 
 
