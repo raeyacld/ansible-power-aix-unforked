@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>geninstall – Generic installer for various packaging formats. &mdash; IBM Power Systems AIX 1.0.0-beta1 documentation</title>
+  <title>mpio – Returns information about MultiPath I/O capable devices. &mdash; IBM Power Systems AIX 1.0.0-beta1 documentation</title>
   
 
   
@@ -38,8 +38,8 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="group – Manage presence, attributes and member of AIX groups." href="group.html" />
-    <link rel="prev" title="flrtvc – Generate FLRTVC report, download and install security and HIPER fixes." href="flrtvc.html" /> 
+    <link rel="next" title="nim – Performs NIM operations - server setup, install packages, update SP or TL." href="nim.html" />
+    <link rel="prev" title="mount – Mounts/unmounts a filesystem or device on AIX." href="mount.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -102,16 +102,7 @@
 <li class="toctree-l3"><a class="reference internal" href="emgr.html">emgr – System interim fixes management.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="filesystem.html">filesystem – Local and NFS filesystems management.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="flrtvc.html">flrtvc – Generate FLRTVC report, download and install security and HIPER fixes.</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">geninstall – Generic installer for various packaging formats.</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#synopsis">Synopsis</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#requirements">Requirements</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#notes">Notes</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#return-values">Return Values</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#status">Status</a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="geninstall.html">geninstall – Generic installer for various packaging formats.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="group.html">group – Manage presence, attributes and member of AIX groups.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="inittab.html">inittab – Manage inittab entries on AIX.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="installp.html">installp – Installs and updates software.</a></li>
@@ -123,7 +114,15 @@
 <li class="toctree-l3"><a class="reference internal" href="mkfilt.html">mkfilt – Activates or deactivates the filter rules.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mktcpip.html">mktcpip – Sets the required values for starting TCP/IP on a host.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mount.html">mount – Mounts/unmounts a filesystem or device on AIX.</a></li>
-<li class="toctree-l3"><a class="reference internal" href="mpio.html">mpio – Returns information about MultiPath I/O capable devices.</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">mpio – Returns information about MultiPath I/O capable devices.</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#return-values">Return Values</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#status">Status</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="nim.html">nim – Performs NIM operations - server setup, install packages, update SP or TL.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="nim_backup.html">nim_backup – Uses NIM to manage backup of LPAR or VIOS clients.</a></li>
 <li class="toctree-l3"><a class="reference internal" href="nim_flrtvc.html">nim_flrtvc – Use NIM to generate FLRTVC report, download and install security and HIPER fixes.</a></li>
@@ -202,14 +201,14 @@
         
           <li><a href="../modules.html">Modules</a> &raquo;</li>
         
-      <li>geninstall – Generic installer for various packaging formats.</li>
+      <li>mpio – Returns information about MultiPath I/O capable devices.</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
             
-              <a href="https://github.com/IBM/ansible-power-aix/blob/dev-collection/docs/source/modules/geninstall.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/IBM/ansible-power-aix/blob/dev-collection/docs/source/modules/mpio.rst" class="fa fa-github"> Edit on GitHub</a>
             
           
         
@@ -223,23 +222,21 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="geninstall-generic-installer-for-various-packaging-formats">
-<span id="geninstall-module"></span><h1>geninstall – Generic installer for various packaging formats.<a class="headerlink" href="#geninstall-generic-installer-for-various-packaging-formats" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="mpio-returns-information-about-multipath-i-o-capable-devices">
+<span id="mpio-module"></span><h1>mpio – Returns information about MultiPath I/O capable devices.<a class="headerlink" href="#mpio-returns-information-about-multipath-i-o-capable-devices" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
 <li><p><a class="reference internal" href="#synopsis" id="id1">Synopsis</a></p></li>
 <li><p><a class="reference internal" href="#requirements" id="id2">Requirements</a></p></li>
 <li><p><a class="reference internal" href="#parameters" id="id3">Parameters</a></p></li>
-<li><p><a class="reference internal" href="#notes" id="id4">Notes</a></p></li>
-<li><p><a class="reference internal" href="#examples" id="id5">Examples</a></p></li>
-<li><p><a class="reference internal" href="#return-values" id="id6">Return Values</a></p></li>
-<li><p><a class="reference internal" href="#status" id="id7">Status</a></p></li>
+<li><p><a class="reference internal" href="#examples" id="id4">Examples</a></p></li>
+<li><p><a class="reference internal" href="#return-values" id="id5">Return Values</a></p></li>
+<li><p><a class="reference internal" href="#status" id="id6">Status</a></p></li>
 </ul>
 </div>
 <div class="section" id="synopsis">
 <h2><a class="toc-backref" href="#id1">Synopsis</a><a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
-<p>A generic installer that installs software products of various packaging formats.</p>
-<p>For example, installp, RPM, SI, and ISMP.</p>
+<p>Returns information about MultiPath I/O capable devices.</p>
 </div>
 <div class="section" id="requirements">
 <h2><a class="toc-backref" href="#id2">Requirements</a><a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
@@ -252,70 +249,49 @@
 <div class="section" id="parameters">
 <h2><a class="toc-backref" href="#id3">Parameters</a><a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
 <blockquote>
-<div><dl>
-<dt>action (optional, str, install)</dt><dd><p>Controls what is performed.</p>
-<p><code class="docutils literal notranslate"><span class="pre">install</span></code> performs an install of the specified software.</p>
-<p><code class="docutils literal notranslate"><span class="pre">uninstall</span></code> performs an uninstall of the specified software.</p>
-<p><code class="docutils literal notranslate"><span class="pre">list</span></code> lists the contents of the media.</p>
+<div><dl class="simple">
+<dt>device (optional, str, None)</dt><dd><p>Specifies the logical device name of the target device whose path information is to be returned.</p>
 </dd>
-<dt>device (optional, str, None)</dt><dd><p>Specifies the device or directory that contains the images to install.</p>
-<p>The geninstall command searches for the images in the following paths /mount_point/installp/ppc (installp package), /mount_point/RPMS/ppc (RPM package), /mount_point/emgr/ppc (Interim fix packages for AIX), /mount_point/ISMP/ppc (ISMP packages for AIX).</p>
-<p>If the paths do not exist, it searches in the base directory of the specific device. If the image names are not preceded by a prefix that indicates the image type, it identifies a type for the image.</p>
-<p>If the paths exist and the image is not found in any path, and if the image does not contain any prefix, the image is treated as an RPM-formatted image.</p>
-</dd>
-<dt>install_list (optional, list, [])</dt><dd><p>List of products to install</p>
-<p><code class="docutils literal notranslate"><span class="pre">all</span></code> installs all products</p>
-<p><code class="docutils literal notranslate"><span class="pre">update_all</span></code> updates all products</p>
-</dd>
-<dt>force (optional, bool, False)</dt><dd><p>Force the operation allowing to reinstall a package that is already installed, or to install a package that is older than the currently installed version.</p>
-</dd>
-<dt>agree_licenses (optional, bool, False)</dt><dd><p>Agrees to required software license agreements for software to be installed.</p>
-</dd>
-<dt>installp_flags (optional, str, None)</dt><dd><p>Specifies the installp flags to use when calling the installp command.</p>
+<dt>parent (optional, str, None)</dt><dd><p>Indicates the logical device name of the parent device whose paths are to be returned.</p>
 </dd>
 </dl>
 </div></blockquote>
 </div>
-<div class="section" id="notes">
-<h2><a class="toc-backref" href="#id4">Notes</a><a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<ul class="simple">
-<li><p>You can refer to the IBM documentation for additional information on the geninstall command at <a class="reference external" href="https://www.ibm.com/support/knowledgecenter/ssw_aix_72/g_commands/geninstall.html">https://www.ibm.com/support/knowledgecenter/ssw_aix_72/g_commands/geninstall.html</a></p></li>
-</ul>
-</div>
-</div>
 <div class="section" id="examples">
-<h2><a class="toc-backref" href="#id5">Examples</a><a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-yaml+jinja notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Install all the products on a CD media</span>
-  <span class="nt">geninstall</span><span class="p">:</span>
-    <span class="nt">device</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/dev/cd0</span>
-    <span class="nt">install_list</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">all</span>
-
-<span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Install an interim fix located in /images/emgr/ppc directory</span>
-  <span class="nt">geninstall</span><span class="p">:</span>
-    <span class="nt">device</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/images</span>
-    <span class="nt">install_list</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">IV12345.160101.epkg.Z</span>
+<h2><a class="toc-backref" href="#id4">Examples</a><a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-yaml+jinja notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Gather paths to all MultiPath I/O capable devices</span>
+  <span class="nt">mpio</span><span class="p">:</span>
+<span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Print the paths</span>
+  <span class="nt">debug</span><span class="p">:</span>
+    <span class="nt">var</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ansible_facts.mpio.paths</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="return-values">
-<h2><a class="toc-backref" href="#id6">Return Values</a><a class="headerlink" href="#return-values" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id5">Return Values</a><a class="headerlink" href="#return-values" title="Permalink to this headline">¶</a></h2>
+<dl>
+<dt>ansible_facts (always, complex, )</dt><dd><p>Facts to add to ansible_facts about paths to MultiPath I/O capable devices.</p>
+<dl>
+<dt>mpio (, dict, )</dt><dd><p>Contains information about drivers and paths.</p>
+<dl>
+<dt>drivers (always, dict, {‘drivers’: {‘IBMFlash’: {‘option’: ‘NO_OVERRIDE’, ‘options’: [‘NO_OVERRIDE’, ‘AIX_AAPCM’, ‘AIX_non_MPIO’]}}})</dt><dd><p>Maps driver name to driver supported and selected options.</p>
 <dl class="simple">
-<dt>msg (always, str, Invalid parameter: install_list cannot be empty)</dt><dd><p>The execution message.</p>
+<dt>option (always, str, )</dt><dd><p>Option currently selected.</p>
 </dd>
-<dt>cmd (always, str, )</dt><dd><p>The command executed.</p>
+<dt>options (always, list, )</dt><dd><p>Supported driver options.</p>
 </dd>
-<dt>rc (When the command is executed., int, )</dt><dd><p>The command return code.</p>
+</dl>
 </dd>
-<dt>stdout (always, str, bin:bin:::J:::::::bin Product::::nsbin:sbin:::J:::::::sbin Product::::)</dt><dd><p>The standard output of the command.</p>
+<dt>paths (always, dict, {‘paths’: {‘hdisk0’: {‘fscsi1’: {‘500507680b215660,0’: {‘path_id’: 0, ‘path_status’: ‘Available’, ‘status’: ‘Enabled’}, ‘500507680b215661,0’: {‘path_id’: 1, ‘path_status’: ‘Available’, ‘status’: ‘Enabled’}}}}})</dt><dd><p>Maps device name to parent devices and connections.</p>
 </dd>
-<dt>stderr (always, str, 0503-105 geninstall: The device or directory: /dev/cd0 does not exist.)</dt><dd><p>The standard error of the command.</p>
+</dl>
+</dd>
+</dl>
 </dd>
 </dl>
 </div>
 <div class="section" id="status">
-<h2><a class="toc-backref" href="#id7">Status</a><a class="headerlink" href="#status" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id6">Status</a><a class="headerlink" href="#status" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>This module is not guaranteed to have a backwards compatible interface. <em>[preview]</em></p></li>
 <li><p>This module is maintained by community.</p></li>
@@ -337,10 +313,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="group.html" class="btn btn-neutral float-right" title="group – Manage presence, attributes and member of AIX groups." accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="nim.html" class="btn btn-neutral float-right" title="nim – Performs NIM operations - server setup, install packages, update SP or TL." accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="flrtvc.html" class="btn btn-neutral float-left" title="flrtvc – Generate FLRTVC report, download and install security and HIPER fixes." accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="mount.html" class="btn btn-neutral float-left" title="mount – Mounts/unmounts a filesystem or device on AIX." accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
