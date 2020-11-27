@@ -249,6 +249,7 @@
 <ul class="simple">
 <li><p>AIX &gt;= 7.1 TL3</p></li>
 <li><p>Python &gt;= 2.7</p></li>
+<li><p>Privileged user with authorizations: <strong>aix.fs.manage.change,aix.system.install</strong></p></li>
 </ul>
 </div>
 <div class="section" id="parameters">
@@ -298,6 +299,7 @@
 <li><p>The FLRTVC ksh script is packaged as a ZIP file with the FLRTVC.ksh script and LICENSE.txt file. It is downloaded from <a class="reference external" href="https://www-304.ibm.com/webapp/set2/sas/f/flrt3/FLRTVC-latest.zip">https://www-304.ibm.com/webapp/set2/sas/f/flrt3/FLRTVC-latest.zip</a>.</p></li>
 <li><p>The script requires ksh93 to use.</p></li>
 <li><p><strong>v0.8.1</strong> is the current version of the script, depending on changes, this module might need to be updated.</p></li>
+<li><p>When the FLRTVC ksh script cannot execute the emgr command, it tries with <strong>sudo</strong>, so you can try installing <strong>sudo</strong> on the managed system.</p></li>
 </ul>
 </div>
 </div>
