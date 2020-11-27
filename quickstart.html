@@ -230,6 +230,7 @@ and <code class="docutils literal notranslate"><span class="pre">chpv</span></co
 <span class="gp">#</span> <span class="k">for</span> cmd in <span class="nv">$cmds</span><span class="p">;</span> <span class="k">do</span> lssecattr -c <span class="sb">`</span>which <span class="nv">$cmd</span><span class="sb">`</span><span class="p">;</span> <span class="k">done</span>
 <span class="gp">#</span> mkrole <span class="nv">authorizations</span><span class="o">=</span>aix.system.install,aix.lvm.manage.change <span class="nv">dfltmsg</span><span class="o">=</span><span class="s2">&quot;Ansible Role for bakcup&quot;</span> ansible_backup
 <span class="gp">#</span> mkuser <span class="nv">roles</span><span class="o">=</span>ansible_backup <span class="nv">default_roles</span><span class="o">=</span>ansible_backup ansible
+<span class="gp">#</span> setkst
 </pre></div>
 </div>
 <p>Note that the <code class="docutils literal notranslate"><span class="pre">mkrole</span></code> command is itself a privileged command. Hence you

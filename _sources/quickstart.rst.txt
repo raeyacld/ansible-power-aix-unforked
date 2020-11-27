@@ -71,6 +71,7 @@ Then on your managed node running AIX, you can use the following to define an
    # for cmd in $cmds; do lssecattr -c `which $cmd`; done
    # mkrole authorizations=aix.system.install,aix.lvm.manage.change dfltmsg="Ansible Role for bakcup" ansible_backup
    # mkuser roles=ansible_backup default_roles=ansible_backup ansible
+   # setkst
 
 Note that the ``mkrole`` command is itself a privileged command. Hence you
 must assume a role that has the ``aix.security.role.create`` authorization to
