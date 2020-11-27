@@ -51,18 +51,19 @@ authorized users can run privileged operations.
 It is recommended to create an ``ansible`` user with a the proper roles on the
 system.
 
-For example the ``alt_disk`` module runs the ``alt_disk_copy`` and
-``alt_rootvg_op`` commands that requires ``aix.system.install`` and the
-``chpv`` command that requires ``aix.lvm.manage.change`` authorizations.
+For example the ``alt_disk`` module runs ``alt_disk_copy`` and
+``alt_rootvg_op`` commands that require ``aix.system.install`` authorization,
+and ``chpv`` command that requires ``aix.lvm.manage.change`` authorization.
 
-You can get the list of commands run as part of the `alt_disk`` module with:
+You can get the list of commands run as part of the ``alt_disk`` module with:
 
 .. code-block:: shell-session
 
    # awk -F\' '/cmd =/ {print $2}' .ansible/collections/ansible_collections/ibm/power_aix/plugins/modules/alt_disk.py | sort -u
 
-Then on an AIX node you can use the following to define an ``ansible_backup``
-role with the proper authorizations and create an ``ansible`` with this role:
+Then on your managed node running AIX, you can use the following to define an
+``ansible_backup`` role with the proper authorizations and create an
+``ansible`` user owning this role:
 
 .. code-block:: shell-session
 
@@ -71,9 +72,9 @@ role with the proper authorizations and create an ``ansible`` with this role:
    # mkrole authorizations=aix.system.install,aix.lvm.manage.change dfltmsg="Ansible Role for bakcup" ansible_backup
    # mkuser roles=ansible_backup default_roles=ansible_backup ansible
 
-Note that ``mkrole`` command is itself a privileged command. You must assume a
-role that has the ``aix.security.role.create`` authorization to run the command
-successfully. 
+Note that the ``mkrole`` command is itself a privileged command. Hence you
+must assume a role that has the ``aix.security.role.create`` authorization to
+run the command successfully. 
 
 To connect to the VIOS using this ``ansible`` user, specify
 ``user: ansible`` in the playbook or ``ansible_user=ansible`` in the

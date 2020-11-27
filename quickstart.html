@@ -216,24 +216,25 @@ to refer to the collection repeatedly. For example, you can use the
 authorized users can run privileged operations.
 It is recommended to create an <code class="docutils literal notranslate"><span class="pre">ansible</span></code> user with a the proper roles on the
 system.</p>
-<p>For example the <code class="docutils literal notranslate"><span class="pre">alt_disk</span></code> module runs the <code class="docutils literal notranslate"><span class="pre">alt_disk_copy</span></code> and
-<code class="docutils literal notranslate"><span class="pre">alt_rootvg_op</span></code> commands that requires <code class="docutils literal notranslate"><span class="pre">aix.system.install</span></code> and the
-<code class="docutils literal notranslate"><span class="pre">chpv</span></code> command that requires <code class="docutils literal notranslate"><span class="pre">aix.lvm.manage.change</span></code> authorizations.</p>
-<p>You can get the list of commands run as part of the <cite>alt_disk`</cite> module with:</p>
+<p>For example the <code class="docutils literal notranslate"><span class="pre">alt_disk</span></code> module runs <code class="docutils literal notranslate"><span class="pre">alt_disk_copy</span></code> and
+<code class="docutils literal notranslate"><span class="pre">alt_rootvg_op</span></code> commands that require <code class="docutils literal notranslate"><span class="pre">aix.system.install</span></code> authorization,
+and <code class="docutils literal notranslate"><span class="pre">chpv</span></code> command that requires <code class="docutils literal notranslate"><span class="pre">aix.lvm.manage.change</span></code> authorization.</p>
+<p>You can get the list of commands run as part of the <code class="docutils literal notranslate"><span class="pre">alt_disk</span></code> module with:</p>
 <div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> awk -F<span class="se">\&#39;</span> <span class="s1">&#39;/cmd =/ {print $2}&#39;</span> .ansible/collections/ansible_collections/ibm/power_aix/plugins/modules/alt_disk.py <span class="p">|</span> sort -u
 </pre></div>
 </div>
-<p>Then on an AIX node you can use the following to define an <code class="docutils literal notranslate"><span class="pre">ansible_backup</span></code>
-role with the proper authorizations and create an <code class="docutils literal notranslate"><span class="pre">ansible</span></code> with this role:</p>
+<p>Then on your managed node running AIX, you can use the following to define an
+<code class="docutils literal notranslate"><span class="pre">ansible_backup</span></code> role with the proper authorizations and create an
+<code class="docutils literal notranslate"><span class="pre">ansible</span></code> user owning this role:</p>
 <div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> <span class="nv">cmds</span><span class="o">=</span><span class="s2">&quot;alt_disk_copy getconf lquerypv lspv lsvg /usr/sbin/alt_rootvg_op /usr/sbin/chpv&quot;</span>
 <span class="gp">#</span> <span class="k">for</span> cmd in <span class="nv">$cmds</span><span class="p">;</span> <span class="k">do</span> lssecattr -c <span class="sb">`</span>which <span class="nv">$cmd</span><span class="sb">`</span><span class="p">;</span> <span class="k">done</span>
 <span class="gp">#</span> mkrole <span class="nv">authorizations</span><span class="o">=</span>aix.system.install,aix.lvm.manage.change <span class="nv">dfltmsg</span><span class="o">=</span><span class="s2">&quot;Ansible Role for bakcup&quot;</span> ansible_backup
 <span class="gp">#</span> mkuser <span class="nv">roles</span><span class="o">=</span>ansible_backup <span class="nv">default_roles</span><span class="o">=</span>ansible_backup ansible
 </pre></div>
 </div>
-<p>Note that <code class="docutils literal notranslate"><span class="pre">mkrole</span></code> command is itself a privileged command. You must assume a
-role that has the <code class="docutils literal notranslate"><span class="pre">aix.security.role.create</span></code> authorization to run the command
-successfully.</p>
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">mkrole</span></code> command is itself a privileged command. Hence you
+must assume a role that has the <code class="docutils literal notranslate"><span class="pre">aix.security.role.create</span></code> authorization to
+run the command successfully.</p>
 <p>To connect to the VIOS using this <code class="docutils literal notranslate"><span class="pre">ansible</span></code> user, specify
 <code class="docutils literal notranslate"><span class="pre">user:</span> <span class="pre">ansible</span></code> in the playbook or <code class="docutils literal notranslate"><span class="pre">ansible_user=ansible</span></code> in the
 inventory.</p>
