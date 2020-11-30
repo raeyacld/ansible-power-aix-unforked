@@ -47,7 +47,7 @@ ansible user
 ------------
 
 Some modules included in this collection perform privileged operations. Only
-authorized users can run privileged operations. 
+authorized users can run privileged operations.
 It is recommended to create an ``ansible`` user with a the proper roles on the
 system.
 
@@ -75,7 +75,7 @@ Then on your managed node running AIX, you can use the following to define an
 
 Note that the ``mkrole`` command is itself a privileged command. Hence you
 must assume a role that has the ``aix.security.role.create`` authorization to
-run the command successfully. 
+run the command successfully.
 
 To connect to the VIOS using this ``ansible`` user, specify
 ``user: ansible`` in the playbook or ``ansible_user=ansible`` in the
