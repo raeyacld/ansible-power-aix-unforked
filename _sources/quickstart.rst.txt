@@ -77,7 +77,7 @@ Note that the ``mkrole`` command is itself a privileged command. Hence you
 must assume a role that has the ``aix.security.role.create`` authorization to
 run the command successfully.
 
-To connect to the VIOS using this ``ansible`` user, specify
+To connect to the endpoint using this ``ansible`` user, specify
 ``user: ansible`` in the playbook or ``ansible_user=ansible`` in the
 inventory.
 
