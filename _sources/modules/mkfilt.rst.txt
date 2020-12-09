@@ -63,7 +63,7 @@ Parameters
       Sets the action of the default filter rule.
 
 
-    log (optional, bool, False)
+    log (optional, bool, None)
       Enable the log functionality of the filter rule module.
 
 
@@ -227,7 +227,7 @@ Parameters
       Sets the action of the default filter rule.
 
 
-    log (optional, bool, False)
+    log (optional, bool, None)
       Enable the log functionality of the filter rule module.
 
 
