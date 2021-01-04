@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 # Copyright: (c) 2020- IBM, Inc
@@ -24,6 +23,7 @@ class TimedOutException(Exception):
     pass
 
 
+# pylint: disable=super-with-arguments
 class ActionModule(ActionBase):
     TRANSFERS_FILES = False
     _VALID_ARGS = frozenset(('post_reboot_delay', 'pre_reboot_delay', 'test_command', 'reboot_timeout'))
