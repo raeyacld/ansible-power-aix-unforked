@@ -50,7 +50,6 @@ EXAMPLES = r'''
   reboot:
     pre_reboot_delay: 20
     post_reboot_delay: 20
-    connect_timeout: 10
     reboot_timeout: 300
 '''
 
