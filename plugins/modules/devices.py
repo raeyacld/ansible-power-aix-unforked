@@ -250,8 +250,8 @@ def rmdev(module, device, state):
 
     if state == 'removed':
         if device == 'all' or device == 'none':
-            msg = "Please provide the name of the device. cmd - '%s'" % (device, cmd)
-            module.fail_json(msg=msg, rc=rc, stdout=stdout, stderr=stderr)
+            msg = "Please provide the name of the device."
+            module.fail_json(msg=msg)
         else:
             opts = "-d -l %s" % device
             cmd = "rmdev %s" % opts
@@ -353,8 +353,8 @@ def main():
         changed, msg = rmdev(module, device, state)
 
     elif state == 'removed':
-      # removes the device definition in Customized Devices object class
-      changed, msg = rmdev(module, device, state)
+        # removes the device definition in Customized Devices object class
+        changed, msg = rmdev(module, device, state)
 
     else:
         changed = False
